@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Models\Question;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('questions');
+    return view('questions.index', ['questions' => Question::all()]);
+});
+
+Route::prefix('questions')->name('questions.')->group(function () {
+    Route::prefix('{id}')->group(function () {
+        Route::get('/', [\App\Http\Controllers\QuestionController::class, 'view'])
+        ->name('view');
+    });
 });
