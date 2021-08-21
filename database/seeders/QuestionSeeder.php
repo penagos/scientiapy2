@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comment;
+use App\Models\Post;
 use App\Models\Question;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +16,10 @@ class QuestionSeeder extends Seeder
      */
     public function run()
     {
-        $m = Question::factory(50)->create();
+        $m = Question::factory(20)->create()->each(function ($question) {
+            Post::factory(random_int(0, 5))->create(['question_id' => $question->id])->each(function ($answer) {
+                Comment::factory(random_int(0, 4))->create(['post_id' => $answer->id]);
+            });
+        });
     }
 }

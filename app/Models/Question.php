@@ -14,4 +14,19 @@ class Question extends Model
     {
         return $this->hasOne(Post::class, 'id', 'post_id');
     }
+
+    public function answers()
+    {
+        return $this->hasMany(Post::class, 'question_id', 'id');
+    }
+
+    public function asker()
+    {
+        return $this->post->user;
+    }
+
+    public function date()
+    {
+        return $this->post->date();
+    }
 }
