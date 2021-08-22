@@ -21,23 +21,19 @@
                 </div>
             </div>
 
-            <form>
-                <div class="row mt-4">
-                    <div class="col-lg-12">
-                        <div class="flex flex-col space-y-2">
-                            <div id="editor" class="block w-full rounded-md border-gray-300 shadow-sm"><div>
-                        </div>
-                    </div>
+            <div class="row mt-4">
+                <div class="col-lg-12">
+                    <div id="editor"></div>
                 </div>
-                <div class="row mt-2">
-                    <div class="col-lg-12">
-                        <input type="submit" class="btn btn-primary" value="Post Answer">
-                    </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-lg-12">
+                    <input type="submit" class="btn btn-primary" value="Post Answer">
                 </div>
-            </form>
+            </div>
         </div>
         <div class="col-lg-3">
-
+            <a href="{{ route('questions.ask') }}" class="btn btn-primary">Ask a Question</a>
         </div>
     </div>
 </div>

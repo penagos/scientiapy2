@@ -19,6 +19,7 @@ Route::get('/', [\App\Http\Controllers\QuestionController::class, 'index'])->nam
 
 Route::prefix('questions')->name('questions.')->group(function () {
     Route::get('/', [\App\Http\Controllers\QuestionController::class, 'index'])->name('index');
+    Route::get('ask', [\App\Http\Controllers\QuestionController::class, 'ask'])->name('ask');
 
     Route::prefix('{id}')->group(function () {
         Route::get('/', [\App\Http\Controllers\QuestionController::class, 'view'])->name('view');

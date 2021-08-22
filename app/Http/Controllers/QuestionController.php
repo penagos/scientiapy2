@@ -12,6 +12,11 @@ class QuestionController extends Controller
         return view('questions.index', ['questions' => Question::all()]);
     }
 
+    public function ask()
+    {
+        return view('questions.ask');
+    }
+
     public function view($id)
     {
         return view('questions.view', [
