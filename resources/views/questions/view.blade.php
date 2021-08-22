@@ -20,14 +20,21 @@
                     @endforeach
                 </div>
             </div>
-            <div class="row mt-4">
-                <div class="col-lg-12">
-                    <div class="flex flex-col space-y-2">
-                        <label for="editor" class="text-gray-600 font-semibold">Content</label>
-                        <div id="editor" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"><div>
+
+            <form>
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="flex flex-col space-y-2">
+                            <div id="editor" class="block w-full rounded-md border-gray-300 shadow-sm"><div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="row mt-2">
+                    <div class="col-lg-12">
+                        <input type="submit" class="btn btn-primary" value="Post Answer">
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="col-lg-3">
 

@@ -25873,7 +25873,6 @@ var editor = new _toast_ui_editor__WEBPACK_IMPORTED_MODULE_0__.default({
   el: document.querySelector('#editor'),
   height: '400px',
   initialEditType: 'markdown',
-  placeholder: 'Write something cool!',
   usageStatistics: false
 });
 
