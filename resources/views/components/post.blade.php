@@ -7,17 +7,28 @@
         <div class="col-lg-11">
             <p class="card-text"><small>{{ $post->content }}</small></p>
 
-            <div class="float-end col-lg-2 text-muted fs-6 lh-sm">
+            <div class="float-start pb-2">
+              <a href="#"><small>Edit</small></a>
+            </div>
+            <div class="float-end col-lg-2 text-muted fs-6 lh-sm pb-2">
                 <small>posted @date($post->created_at)</small><br>
                 <small><a href="#">{{ $post->user->name }}</a> - 7682</small>
             </div>
+
+            <div id="comments">
+              @if ($post->comments->count() > 0)
+                <div class="mt-2" style="clear: both;">
+                  <hr>
+                  @foreach ($post->comments as $comment)
+                    <p><small>{{ $comment->content }} <span class="text-muted">&mdash; <a href="#">{{ $comment->user->name }}</a> @date($comment->date())</span></small></p>
+                    <hr>
+                  @endforeach
+                </div>
+              @endif
+
+              <a href="#"><small>Add a comment</small></a>
+            </div>
         </div>
     </div>
-
-    @if ($post->comments->count() > 0)
-      @foreach ($post->comments as $comment)
-        comment here!
-      @endforeach
-    @endif
   </div>
 </div>

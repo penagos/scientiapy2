@@ -2,11 +2,13 @@
 
 namespace App\View\Components;
 
+use App\Models\Question;
 use Illuminate\View\Component;
 
 class Post extends Component
 {
     public $post;
+    public $tags = [];
 
     /**
      * Create a new component instance.
@@ -15,7 +17,12 @@ class Post extends Component
      */
     public function __construct($post)
     {
-        $this->post = $post;
+        if (is_a($post, Question::class)) {
+            $this->post = $post->post;
+            $this->tags = $post->tags;
+        } else {
+            $this->post = $post;
+        }
     }
 
     /**

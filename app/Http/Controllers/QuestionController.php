@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+    public function index()
+    {
+        return view('questions.index', ['questions' => Question::all()]);
+    }
+
     public function view($id)
     {
         return view('questions.view', [

@@ -21,5 +21,8 @@ class QuestionSeeder extends Seeder
                 Comment::factory(random_int(0, 4))->create(['post_id' => $answer->id]);
             });
         });
+
+        // Update caches
+        // TODO
     }
 }

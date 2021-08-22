@@ -15,13 +15,12 @@ use App\Models\Question;
 |
 */
 
-Route::get('/', function () {
-    return view('questions.index', ['questions' => Question::all()]);
-});
+Route::get('/', [\App\Http\Controllers\QuestionController::class, 'index'])->name('index');
 
 Route::prefix('questions')->name('questions.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\QuestionController::class, 'index'])->name('index');
+
     Route::prefix('{id}')->group(function () {
-        Route::get('/', [\App\Http\Controllers\QuestionController::class, 'view'])
-        ->name('view');
+        Route::get('/', [\App\Http\Controllers\QuestionController::class, 'view'])->name('view');
     });
 });
