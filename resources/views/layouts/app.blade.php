@@ -35,6 +35,24 @@
     <div class="container">
         @yield('content')
     </div>
+
+    <footer class="mt-6 bg-light pt-4 pb-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <h4 class="text-muted display-6">{{ config('app.name') }}</h4>
+            <p class="text-muted">
+              The open source Q&A website.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 text-center text-muted">
+            <small>&copy; @php echo date('Y', time()); @endphp <a href="https://www.github.com/penagos/" target="_blank">Luis Penagos</a>. Licensed as open source software under the <a href="https://www.github.com/penagos/scientiapy/LICENSE.md">MIT License</a>.</small>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 
   <script src="{{ asset('js/app.js') }}"></script>

@@ -2,6 +2,10 @@ a {
     text-decoration: none;
 }
 
+.mt-6 {
+    margin-top: 6em;
+}
+
 .bg-lightblue {
     background-color: #cae1eb;
 }
