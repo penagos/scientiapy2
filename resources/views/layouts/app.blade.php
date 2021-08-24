@@ -2,6 +2,7 @@
   <head>
     <title>Scientiapy - @yield('title')</title>
 
+    @livewireStyles
     <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
   </head>
@@ -55,5 +56,6 @@
     </footer>
   </body>
 
+  @livewireScripts
   <script src="{{ asset('js/app.js') }}"></script>
 </html>
