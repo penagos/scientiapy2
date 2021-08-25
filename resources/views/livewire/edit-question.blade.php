@@ -2,7 +2,7 @@
     <div class="mb-3">
         <label for="title" class="form-label">Question Title</label>
 
-        <input type="text" class="form-control typeahead" id="title" aria-describedby="titleHelp" wire:model.lazy="question.title">
+        <input type="text" class="form-control typeahead" id="title" aria-describedby="titleHelp"  wire:ignore>
 
         @error('question.title') <div>{{ $message }}</div> @enderror
         <div id="titleHelp" class="form-text">Limited to 255 characters.</div>

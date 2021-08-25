@@ -4,6 +4,7 @@
 
     @livewireStyles
     <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/typeahead.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
