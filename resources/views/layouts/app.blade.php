@@ -5,6 +5,8 @@
     @livewireStyles
     <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -58,4 +60,5 @@
 
   @livewireScripts
   <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/typeahead/typeahead.bundle.min.js') }}"></script>
 </html>
