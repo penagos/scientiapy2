@@ -22,24 +22,9 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            var questionsFetcher = new Bloodhound({
-                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-                queryTokenizer: Bloodhound.tokenizers.whitespace,
-                remote: {
-                    url: '{{ route("api.questions.search", ["query" => "%QUERY"]) }}',
-                    wildcard: '%QUERY'
-                }
-            });
 
-            $('.typeahead').typeahead({
-                    hint: true,
-                    highlight: true,
-                    minLength: 1
-                }, {
-                    name: 'states',
-                    source: questionsFetcher
-                }
-            );
+
+            //window.livewire.on('hydateTypeahead', () => setupTypeahead());
         });
     </script>
 </form>

@@ -28,10 +28,9 @@
               <a class="nav-link" href="#">Users</a>
             </li>
           </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+            <input class="form-control me-2 w-100 typeahead" type="search" placeholder="Search" aria-label="Search">
+            <a href="#" class="btn">Login</a>
+            <a href="#" class="btn btn-primary">Join</a>
         </div>
       </div>
     </nav>
@@ -62,4 +61,27 @@
   @livewireScripts
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/typeahead/typeahead.bundle.min.js') }}"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var questionsFetcher = new Bloodhound({
+          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+          queryTokenizer: Bloodhound.tokenizers.whitespace,
+          remote: {
+              url: '{{ route("api.questions.search", ["query" => "%QUERY"]) }}',
+              wildcard: '%QUERY'
+          }
+      });
+
+      $('.typeahead').typeahead({
+              hint: true,
+              highlight: true,
+              minLength: 1
+          }, {
+              name: 'questions',
+              source: questionsFetcher
+          }
+      );
+    });
+  </script>
 </html>

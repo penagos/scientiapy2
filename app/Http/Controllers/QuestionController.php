@@ -19,6 +19,7 @@ class QuestionController extends Controller
 
     public function search($query)
     {
+        // TODO: some fuzzy search capability would be preferred
         return response()->json(Question::where('title', 'LIKE', '%'.$query.'%')->get()->map(function ($question) {
             return $question->title;
         }));
