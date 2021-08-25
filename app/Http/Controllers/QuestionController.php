@@ -17,6 +17,13 @@ class QuestionController extends Controller
         return view('questions.ask');
     }
 
+    public function search($query)
+    {
+        return response()->json(Question::where('title', 'LIKE', '%'.$query.'%')->get()->map(function ($question) {
+            return $question->title;
+        }));
+    }
+
     public function view($id)
     {
         return view('questions.view', [

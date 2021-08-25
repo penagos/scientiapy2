@@ -1,8 +1,7 @@
 <?php
 
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
-
-use App\Models\Question;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +14,13 @@ use App\Models\Question;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\QuestionController::class, 'index'])->name('index');
+Route::get('/', [QuestionController::class, 'index'])->name('index');
 
 Route::prefix('questions')->name('questions.')->group(function () {
-    Route::get('/', [\App\Http\Controllers\QuestionController::class, 'index'])->name('index');
-    Route::get('ask', [\App\Http\Controllers\QuestionController::class, 'ask'])->name('ask');
+    Route::get('/', [QuestionController::class, 'index'])->name('index');
+    Route::get('ask', [QuestionController::class, 'ask'])->name('ask');
 
     Route::prefix('{id}')->group(function () {
-        Route::get('/', [\App\Http\Controllers\QuestionController::class, 'view'])->name('view');
+        Route::get('/', [QuestionController::class, 'view'])->name('view');
     });
 });
