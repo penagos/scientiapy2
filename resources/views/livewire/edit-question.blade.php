@@ -12,19 +12,11 @@
 
     <div class="mt-3">
         <label for="tags" class="form-label">Tags</label>
-        <input type="email" class="form-control" id="tags" aria-describedby="tagsHelp">
-        <div id="tagsHelp" class="form-text">Limited to 5 tags, ENTER or TAB to add more.</div>
+        <input type="email" class="form-control post-tags" id="tags" aria-describedby="tagsHelp">
+        <div id="tagsHelp" class="form-text">Limited to 5 tags, ENTER to confirm / add more.</div>
     </div>
 
     <div class="mt-3 text-center">
         <input type="submit" value="Post" class="btn btn-primary">
     </div>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-
-            //window.livewire.on('hydateTypeahead', () => setupTypeahead());
-        });
-    </script>
 </form>

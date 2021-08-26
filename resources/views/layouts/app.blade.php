@@ -4,6 +4,7 @@
 
     @livewireStyles
     <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-tagsinput.css') }}" rel="stylesheet">
     <link href="{{ asset('css/typeahead.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
@@ -60,6 +61,7 @@
 
   @livewireScripts
   <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/bootstrap-tags/bootstrap-tagsinput.min.js') }}"></script>
   <script src="{{ asset('js/typeahead/typeahead.bundle.min.js') }}"></script>
 
   <script type="text/javascript">
@@ -74,14 +76,39 @@
       });
 
       $('.typeahead').typeahead({
-              hint: true,
-              highlight: true,
-              minLength: 1
-          }, {
-              name: 'questions',
-              source: questionsFetcher
-          }
-      );
+          hint: true,
+          highlight: true,
+          minLength: 1
+        }, {
+          name: 'questions',
+          source: questionsFetcher
+        });
+
+        var tags = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                url: '{{ route("api.tags.search", ["query" => "%QUERY"]) }}',
+                wildcard: '%QUERY',
+                filter: function(list) {
+                    
+                return $.map(list, function(name) {
+                        return { 'name': name };
+                    });
+                }
+            }
+        });
+        tags.initialize();
+
+        $('.post-tags').tagsinput({
+            typeaheadjs: {
+              name: 'tags',
+              displayKey: 'name',
+              source: tags.ttAdapter(),
+            },
+            tagClass: 'bg-primary p-1 mt-2 mb-2 rounded',
+            cancelConfirmKeysOnEmpty: false
+        });
     });
   </script>
 </html>
