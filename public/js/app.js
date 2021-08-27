@@ -25876,6 +25876,11 @@ var editor = new _toast_ui_editor__WEBPACK_IMPORTED_MODULE_0__.default({
   usageStatistics: false
 });
 
+window.syncEditorContents = function syncEditorContents() {
+  $("#editorContents").val(editor.getMarkdown());
+  document.getElementById("editorContents").dispatchEvent(new Event('input'));
+};
+
 var substringMatcher = function substringMatcher(strs) {
   return function findMatches(q, cb) {
     var matches, substringRegex; // an array that will be populated with substring matches

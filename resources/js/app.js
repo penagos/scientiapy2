@@ -8,7 +8,12 @@ const editor = new Editor({
   height: '400px',
   initialEditType: 'markdown',
   usageStatistics: false
-})
+});
+
+window.syncEditorContents = function syncEditorContents() {
+  $("#editorContents").val(editor.getMarkdown());
+  document.getElementById("editorContents").dispatchEvent(new Event('input'));
+};
 
 var substringMatcher = function(strs) {
   return function findMatches(q, cb) {
@@ -31,3 +36,4 @@ var substringMatcher = function(strs) {
     cb(matches);
   };
 };
+

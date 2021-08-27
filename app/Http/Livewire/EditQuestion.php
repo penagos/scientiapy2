@@ -2,20 +2,24 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Post;
+use App\Models\Question;
 use Livewire\Component;
 
 class EditQuestion extends Component
 {
     public $question;
+    public $post;
 
     protected $rules = [
         'question.title' => 'required|min:12|max:255',
-        'question.post.content' => 'required'
+        'post.content' => 'required'
     ];
 
     protected $messages = [
-        'question.title.min|question.title.required' => 'Please enter a question title longer than 12 characters.',
-        'question.post.content.required' => 'Please enter a valid question.'
+        'question.title.required' => 'Please enter a question title longer than 12 characters.',
+        'question.title.min' => 'Please enter a question title longer than 12 characters.',
+        'post.content.required' => 'Please enter a valid question.'
     ];
 
     public function updated()
@@ -31,9 +35,10 @@ class EditQuestion extends Component
     public function submit()
     {
         $this->validate();
-        $this->question->save();
 
-        // Redirect user to new question
+        $q = new Question($this->question);
+        $q->post()->create($this->post);
+        $q->save();
 
     }
 

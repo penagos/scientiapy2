@@ -10,6 +10,11 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'post'
+    ];
+
     public function post()
     {
         return $this->hasOne(Post::class, 'id', 'post_id');

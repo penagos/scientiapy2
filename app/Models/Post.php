@@ -10,6 +10,15 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'content'
+    ];
+
+    // TODO: make logged in user
+    protected $attributes = [
+        'user_id' => 1
+    ];
+
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
