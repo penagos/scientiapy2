@@ -36,10 +36,18 @@ class EditQuestion extends Component
     {
         $this->validate();
 
-        $q = new Question($this->question);
-        $q->post()->create($this->post);
-        $q->save();
-
+        /*
+        $post = Post::create($this->post);
+        $question = $post->question()->create($this->question);
+        */
+        
+        
+        $question = Question::create($this->question);
+        $post = Post::create($this->post);
+        $question->post_id = $post->id;
+        $question->save();
+        
+        return redirect()->to(route('questions.view', $question->id));
     }
 
     public function render()

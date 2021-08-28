@@ -16,7 +16,7 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('post_id')->references('id')->on('posts');
+            $table->foreignId('post_id')->nullable()->references('id')->on('posts');
             $table->string('title', 255);
         });
     }
