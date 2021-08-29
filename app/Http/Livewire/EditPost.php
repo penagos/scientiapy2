@@ -66,15 +66,20 @@ class EditPost extends Component
 
     public function cancelEdit()
     {
-        $this->showPostEditor = false;
+        $this->hideEditor();
     }
 
     public function save()
     {
         $this->validate();
         $this->post->save();
+        $this->hideEditor();
+    }
+
+    public function hideEditor()
+    {
         $this->showPostEditor = false;
-        $this->emit('postSaved', $this->post->id);
+        $this->emit('renderPost', $this->post->id);
     }
 
     /**

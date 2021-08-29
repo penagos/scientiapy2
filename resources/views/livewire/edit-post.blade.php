@@ -2,19 +2,19 @@
   <div class="card-body">
     <div class="row">
         <div class="col-lg-1 text-center">
-            <h1><a href="#" class="text-muted"><i class="bi bi-caret-up-fill"></i></a></h1>
-            <h2><span class="badge bg-success">0</span></h2>
-            <h1><a href="#" class="text-muted"><i class="bi bi-caret-down-fill"></i></a></h1>
+            <h1><a href="#" class="text-lightgray"><i class="bi bi-caret-up-fill"></i></a></h1>
+            <h2><span class="badge bg-success fw-light">0</span></h2>
+            <h1><a href="#" class="text-lightgray"><i class="bi bi-caret-down-fill"></i></a></h1>
         </div>
         <div class="col-lg-11">
             @if ($showPostEditor)
                 <form wire:submit.prevent="save">
                   <div id="{{ $editorID }}"></div>
                   <input id="{{ $editorContents }}" type="hidden" wire:model="post.content">
-                  <div class="float-start pb-2">
+                  <div class="float-start mt-2 pb-2">
                       <input type="submit" class="btn btn-primary" onclick="window.syncEditorContents('{{ $editorID }}', '{{ $editorContents }}');" value="Save">
-                      <a href="{{ $editLink }}"><small>Use full editor</small></a>
-                      <a href="#" wire:click.prevent="cancelEdit"><small>Cancel</small></a>
+                      <a class="btn btn-light" href="{{ $editLink }}"><small>Use full editor</small></a>
+                      <a class="btn btn-light" href="#" wire:click.prevent="cancelEdit"><small>Cancel</small></a>
                   </div>
                 </form>
             @else
@@ -50,7 +50,7 @@
 
               @if ($showCommentPoster)
                 <form>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" placeholder="Enter to post comment">
                 </form>
               @else
                 <a a href="#" wire:click.prevent="comment"><small>Add a comment</small></a>

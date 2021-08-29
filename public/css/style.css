@@ -2,6 +2,13 @@ a {
     text-decoration: none;
 }
 
+blockquote {
+    background: #fafafa;
+    color: #444444;
+    border-left: 5px solid #cacaca;
+    padding: 0.75em;
+}
+
 .mt-6 {
     margin-top: 6em;
 }
@@ -11,7 +18,7 @@ a {
 }
 
 .text-lightgray {
-    color: #f7f9fc;
+    color: #cccccc;
 }
 
 .twitter-typeahead, .bootstrap-tagsinput { width: 100%; } 

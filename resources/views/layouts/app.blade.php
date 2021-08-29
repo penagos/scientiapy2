@@ -118,10 +118,8 @@
         editor.setMarkdown(content);
       });
 
-      Livewire.on('postSaved', (scrollTarget) => {
+      Livewire.on('renderPost', (scrollTarget) => {
         hljs.highlightAll();
-        var tgt = $(`#post${scrollTarget}`);
-        $('html,body').animate({scrollTop: tgt.offset().top},'slow');
       });
 
       hljs.highlightAll();

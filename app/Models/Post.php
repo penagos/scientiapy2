@@ -29,7 +29,7 @@ class Post extends Model
 
     public function preview()
     {
-        return nl2br(substr(strip_tags($this->content), 0, 250));
+        return substr(strip_tags($this->content), 0, 250);
     }
 
     public function date()
@@ -50,6 +50,11 @@ class Post extends Model
     public function isEdited()
     {
         return $this->updated_at != $this->created_at;
+    }
+
+    public function lastEditDate()
+    {
+        return $this->isEdited() ? $this->modified_at : null;
     }
 
     public function editLink()
