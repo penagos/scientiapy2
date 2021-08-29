@@ -2,17 +2,27 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Post;
 use App\Models\Question;
 use Livewire\Component;
 
-class Post extends Component
+class EditPost extends Component
 {
-    public $post;
+    public Post $post;
     public $editLink;
     public $tags = [];
     public $showCommentPoster;
     public $showPostEditor;
     public $editorID;
+    public $editorContents;
+
+    protected $rules = [
+        'post.content' => 'required'
+    ];
+
+    protected $listeners = [
+        'save' => '$refresh'
+    ];
 
     /**
      * Create a new component instance.
@@ -21,14 +31,8 @@ class Post extends Component
      */
     public function mount($post)
     {
-        if (is_a($post, Question::class)) {
-            $this->post = $post->post;
-            $this->tags = $post->tags;
-        } else {
-            $this->post = $post;
-        }
-
         $this->editorID = 'postEditor'.$this->post->id;
+        $this->editorContents = $this->editorID . '-contents';
         $this->showCommentPoster = false;
         $this->showPostEditor = false;
         $this->editLink = $this->post->editLink();
@@ -45,8 +49,30 @@ class Post extends Component
         $this->emit('createEditor', $this->editorID, $this->post->content);
     }
 
+    public function upvote()
+    {
+        // ...
+    }
+
+    public function downvote()
+    {
+        // ...
+    }
+
+    public function delete()
+    {
+        // ..
+    }
+
     public function cancelEdit()
     {
+        $this->showPostEditor = false;
+    }
+
+    public function save()
+    {
+        $this->validate();
+        $this->post->save();
         $this->showPostEditor = false;
     }
 
@@ -57,6 +83,6 @@ class Post extends Component
      */
     public function render()
     {
-        return view('livewire.post');
+        return view('livewire.edit-post');
     }
 }

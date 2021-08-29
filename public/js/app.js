@@ -25869,19 +25869,22 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
+var editors = new Map();
 
 window.createToastEditor = function createToastEditor(id) {
-  return new _toast_ui_editor__WEBPACK_IMPORTED_MODULE_0__.default({
+  var editor = new _toast_ui_editor__WEBPACK_IMPORTED_MODULE_0__.default({
     el: document.getElementById(id),
     height: '400px',
     initialEditType: 'markdown',
     usageStatistics: false
   });
+  editors[id] = editor;
+  return editor;
 };
 
-window.syncEditorContents = function syncEditorContents() {
-  $("#editorContents").val(editor.getMarkdown());
-  document.getElementById("editorContents").dispatchEvent(new Event('input'));
+window.syncEditorContents = function syncEditorContents(id, dst) {
+  $("#".concat(dst)).val(editors[id].getMarkdown());
+  document.getElementById(dst).dispatchEvent(new Event('input'));
 };
 
 var substringMatcher = function substringMatcher(strs) {

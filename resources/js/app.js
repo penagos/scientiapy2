@@ -3,18 +3,23 @@ import Editor from '@toast-ui/editor'
 import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
+let editors = new Map();
+
 window.createToastEditor = function createToastEditor(id) {
-  return new Editor({
+  const editor = new Editor({
     el: document.getElementById(id),
     height: '400px',
     initialEditType: 'markdown',
     usageStatistics: false
   });
+
+  editors[id] = editor;
+  return editor;
 };
 
-window.syncEditorContents = function syncEditorContents() {
-  $("#editorContents").val(editor.getMarkdown());
-  document.getElementById("editorContents").dispatchEvent(new Event('input'));
+window.syncEditorContents = function syncEditorContents(id, dst) {
+  $(`#${dst}`).val(editors[id].getMarkdown());
+  document.getElementById(dst).dispatchEvent(new Event('input'));
 };
 
 var substringMatcher = function(strs) {

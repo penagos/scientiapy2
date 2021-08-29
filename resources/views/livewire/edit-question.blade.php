@@ -7,7 +7,7 @@
         @error('question.title') <div>{{ $message }}</div> @enderror
         <div id="titleHelp" class="form-text">Limited to 255 characters.</div>
     </div>
-    <div wire:ignore id="editor"></div>
+    <div id="editor"></div>
     <input id="editorContents" type="hidden" wire:model="post.content">
     @error('post.content') <span class="error">{{ $message }}</span> @enderror
 
@@ -18,10 +18,12 @@
     </div>
 
     <div class="mt-3 text-center">
-        <input type="submit" value="Post" class="btn btn-primary" onclick="window.syncEditorContents();">
+        <input type="submit" value="Post" class="btn btn-primary" onclick="window.syncEditorContents('editor', 'editorContents');">
     </div>
 
     <script type="text/javascript">
-        window.createToastEditor('#editor');
+        $(document).ready(function () {
+            window.createToastEditor('editor');
+        });
     </script>
 </form>

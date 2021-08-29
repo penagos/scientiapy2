@@ -47,6 +47,11 @@ class Post extends Model
         return $this->belongsTo(Question::class);
     }
 
+    public function isEdited()
+    {
+        return $this->updated_at != $this->created_at;
+    }
+
     public function editLink()
     {
         if ($this->question) {

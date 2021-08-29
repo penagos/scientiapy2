@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('edit_user_id')->nullable()->references('id')->on('users');
             $table->foreignId('question_id')->nullable()->references('id')->on('posts');
             $table->text('content');
         });

@@ -8,23 +8,36 @@
         </div>
         <div class="col-lg-11">
             @if ($showPostEditor)
-                <div id="{{ $editorID }}"></div>
-                <div class="float-start pb-2">
-                    <a href="{{ $editLink }}"><small>Use full editor</small></a>
-                    <a href="#" wire:click.prevent="cancelEdit"><small>Cancel</small></a>
-                </div>
-                
+                <form wire:submit.prevent="save">
+                  <div id="{{ $editorID }}"></div>
+                  <input id="{{ $editorContents }}" type="hidden" wire:model="post.content">
+                  <div class="float-start pb-2">
+                      <input type="submit" class="btn btn-primary" onclick="window.syncEditorContents('{{ $editorID }}', '{{ $editorContents }}');" value="Save">
+                      <a href="{{ $editLink }}"><small>Use full editor</small></a>
+                      <a href="#" wire:click.prevent="cancelEdit"><small>Cancel</small></a>
+                  </div>
+                </form>
             @else
-                <p class="card-text"><small>{{ $post->content }}</small></p>
+                <div class="card-text">
+                  <small>
+                    {{ $post->content }}
+                  </small>
+
+                  @if ($post->isEdited())
+                  <div class="text-muted">
+                    <small>Last edited on XXX by <a href="#">XXX</a>.</small>
+                  </div>
+                  @endif
+                </div>
                 <div class="float-start pb-2">
                     <a href="#" wire:click.prevent="edit"><small>Edit</small></a>
                 </div>
+                <div class="float-end col-lg-2 text-muted fs-6 lh-sm pb-2">
+                    <small>posted @date($post->created_at)</small><br>
+                    <small><a href="#">{{ $post->user->name }}</a> - 7682</small>
+                </div>
             @endif
 
-            <div class="float-end col-lg-2 text-muted fs-6 lh-sm pb-2">
-                <small>posted @date($post->created_at)</small><br>
-                <small><a href="#">{{ $post->user->name }}</a> - 7682</small>
-            </div>
             <div class="clearfix"></div>
             <div id="comments">
               @if ($post->comments->count() > 0)

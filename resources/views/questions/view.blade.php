@@ -9,14 +9,14 @@
                     <h3 class="fw-normal">{{ $question->title }}</h3>
                     <h6 class="text-muted fw-normal">Asked by <a href="">{{ $question->asker()->name }}</a> on @date($question->date())</h6>
                     <hr>
-                    <livewire:post :post="$question"/>
+                    <livewire:edit-post :post="$question->post"/>
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-lg-12">
                     <h4 class="text-secondary">{{ $question->answers->count() }} answers</h4>
                     @foreach ($question->answers as $answer)
-                        <livewire:post :post="$answer"/>
+                        <livewire:edit-post :post="$answer"/>
                     @endforeach
                 </div>
             </div>
