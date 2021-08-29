@@ -3,12 +3,14 @@ import Editor from '@toast-ui/editor'
 import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
-const editor = new Editor({
-  el: document.querySelector('#editor'),
-  height: '400px',
-  initialEditType: 'markdown',
-  usageStatistics: false
-});
+window.createToastEditor = function createToastEditor(id) {
+  return new Editor({
+    el: document.getElementById(id),
+    height: '400px',
+    initialEditType: 'markdown',
+    usageStatistics: false
+  });
+};
 
 window.syncEditorContents = function syncEditorContents() {
   $("#editorContents").val(editor.getMarkdown());

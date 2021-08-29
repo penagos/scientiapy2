@@ -25869,12 +25869,15 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-var editor = new _toast_ui_editor__WEBPACK_IMPORTED_MODULE_0__.default({
-  el: document.querySelector('#editor'),
-  height: '400px',
-  initialEditType: 'markdown',
-  usageStatistics: false
-});
+
+window.createToastEditor = function createToastEditor(id) {
+  return new _toast_ui_editor__WEBPACK_IMPORTED_MODULE_0__.default({
+    el: document.getElementById(id),
+    height: '400px',
+    initialEditType: 'markdown',
+    usageStatistics: false
+  });
+};
 
 window.syncEditorContents = function syncEditorContents() {
   $("#editorContents").val(editor.getMarkdown());

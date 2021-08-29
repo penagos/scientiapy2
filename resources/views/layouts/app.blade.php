@@ -110,6 +110,11 @@
             tagClass: 'bg-primary p-1 mt-2 mb-2 rounded',
             cancelConfirmKeysOnEmpty: false
         });
+
+      Livewire.on('createEditor', (editorID, content) => {
+        const editor = window.createToastEditor(editorID);
+        editor.setMarkdown(content);
+      });
     });
   </script>
 </html>

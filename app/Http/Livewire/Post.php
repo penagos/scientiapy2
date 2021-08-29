@@ -10,6 +10,9 @@ class Post extends Component
     public $post;
     public $editLink;
     public $tags = [];
+    public $showCommentPoster;
+    public $showPostEditor;
+    public $editorID;
 
     /**
      * Create a new component instance.
@@ -25,7 +28,26 @@ class Post extends Component
             $this->post = $post;
         }
 
-        $this->editLink = ''; //$this->post->editLink();
+        $this->editorID = 'postEditor'.$this->post->id;
+        $this->showCommentPoster = false;
+        $this->showPostEditor = false;
+        $this->editLink = $this->post->editLink();
+    }
+
+    public function comment()
+    {
+        $this->showCommentPoster = true;
+    }
+
+    public function edit()
+    {
+        $this->showPostEditor = true;
+        $this->emit('createEditor', $this->editorID, $this->post->content);
+    }
+
+    public function cancelEdit()
+    {
+        $this->showPostEditor = false;
     }
 
     /**

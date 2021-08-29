@@ -7,11 +7,20 @@
             <h1><a href="#" class="text-muted"><i class="bi bi-caret-down-fill"></i></a></h1>
         </div>
         <div class="col-lg-11">
-            <p class="card-text"><small>{{ $post->content }}</small></p>
+            @if ($showPostEditor)
+                <div id="{{ $editorID }}"></div>
+                <div class="float-start pb-2">
+                    <a href="{{ $editLink }}"><small>Use full editor</small></a>
+                    <a href="#" wire:click.prevent="cancelEdit"><small>Cancel</small></a>
+                </div>
+                
+            @else
+                <p class="card-text"><small>{{ $post->content }}</small></p>
+                <div class="float-start pb-2">
+                    <a href="#" wire:click.prevent="edit"><small>Edit</small></a>
+                </div>
+            @endif
 
-            <div class="float-start pb-2">
-              <a href="{{ $editLink }}"><small>Edit</small></a>
-            </div>
             <div class="float-end col-lg-2 text-muted fs-6 lh-sm pb-2">
                 <small>posted @date($post->created_at)</small><br>
                 <small><a href="#">{{ $post->user->name }}</a> - 7682</small>
@@ -28,7 +37,13 @@
                 </div>
               @endif
 
-              <a href="#"><small>Add a comment</small></a>
+              @if ($showCommentPoster)
+                <form>
+                    <input type="text" class="form-control">
+                </form>
+              @else
+                <a a href="#" wire:click.prevent="comment"><small>Add a comment</small></a>
+              @endif
             </div>
         </div>
     </div>

@@ -22,5 +22,6 @@
     </div>
 
     <script type="text/javascript">
+        window.createToastEditor('#editor');
     </script>
 </form>
