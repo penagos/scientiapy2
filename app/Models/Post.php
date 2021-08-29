@@ -46,4 +46,13 @@ class Post extends Model
     {
         return $this->belongsTo(Question::class);
     }
+
+    public function editLink()
+    {
+        if ($this->question) {
+            return route('answers.edit', $this->id);
+        } else {
+            return route('questions.edit', Question::findByPost($this));
+        }
+    }
 }

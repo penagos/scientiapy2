@@ -8,6 +8,7 @@ use Illuminate\View\Component;
 class Post extends Component
 {
     public $post;
+    public $editLink;
     public $tags = [];
 
     /**
@@ -23,6 +24,8 @@ class Post extends Component
         } else {
             $this->post = $post;
         }
+
+        $this->editLink = $this->post->editLink();
     }
 
     /**

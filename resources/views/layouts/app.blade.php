@@ -5,6 +5,7 @@
     @livewireStyles
     <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-tagsinput.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('css/typeahead.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 

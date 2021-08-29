@@ -34,4 +34,9 @@ class Question extends Model
     {
         return $this->post->date();
     }
+
+    public static function findByPost($post)
+    {
+        return Question::where('post_id', $post->id)->firstOrFail();
+    }
 }

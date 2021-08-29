@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,5 +23,12 @@ Route::prefix('questions')->name('questions.')->group(function () {
 
     Route::prefix('{id}')->group(function () {
         Route::get('/', [QuestionController::class, 'view'])->name('view');
+        Route::get('edit', [QuestionController::class, 'edit'])->name('edit');
+    });
+});
+
+Route::prefix('answers')->name('answers.')->group(function () {
+    Route::prefix('{id}')->group(function () {
+        Route::get('edit', [AnswerController::class, 'edit'])->name('edit');
     });
 });

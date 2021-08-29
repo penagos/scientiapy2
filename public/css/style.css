@@ -10,4 +10,8 @@ a {
     background-color: #cae1eb;
 }
 
+.text-lightgray {
+    color: #f7f9fc;
+}
+
 .twitter-typeahead, .bootstrap-tagsinput { width: 100%; } 
