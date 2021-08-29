@@ -1,4 +1,4 @@
-<div class="card mt-2">
+<div id="post{{ $post->id }}" class="card mt-2">
   <div class="card-body">
     <div class="row">
         <div class="col-lg-1 text-center">
@@ -19,9 +19,7 @@
                 </form>
             @else
                 <div class="card-text">
-                  <small>
-                    {{ $post->content }}
-                  </small>
+                  {{ Illuminate\Mail\Markdown::parse($post->content) }}
 
                   @if ($post->isEdited())
                   <div class="text-muted">

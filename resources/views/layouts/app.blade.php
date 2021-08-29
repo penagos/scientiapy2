@@ -7,6 +7,7 @@
     <link href="{{ asset('css/bootstrap-tagsinput.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('css/typeahead.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/highlight/atom-one-light.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
@@ -64,6 +65,7 @@
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/bootstrap-tags/bootstrap-tagsinput.min.js') }}"></script>
   <script src="{{ asset('js/typeahead/typeahead.bundle.min.js') }}"></script>
+  <script src="{{ asset('js/highlight.min.js') }}"></script>
 
   <script type="text/javascript">
     $(document).ready(function () {
@@ -115,6 +117,14 @@
         const editor = window.createToastEditor(editorID);
         editor.setMarkdown(content);
       });
+
+      Livewire.on('postSaved', (scrollTarget) => {
+        hljs.highlightAll();
+        var tgt = $(`#post${scrollTarget}`);
+        $('html,body').animate({scrollTop: tgt.offset().top},'slow');
+      });
+
+      hljs.highlightAll();
     });
   </script>
 </html>

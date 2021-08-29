@@ -74,6 +74,7 @@ class EditPost extends Component
         $this->validate();
         $this->post->save();
         $this->showPostEditor = false;
+        $this->emit('postSaved', $this->post->id);
     }
 
     /**

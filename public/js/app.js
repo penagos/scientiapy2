@@ -25874,7 +25874,7 @@ var editors = new Map();
 window.createToastEditor = function createToastEditor(id) {
   var editor = new _toast_ui_editor__WEBPACK_IMPORTED_MODULE_0__.default({
     el: document.getElementById(id),
-    height: '400px',
+    height: '600px',
     initialEditType: 'markdown',
     usageStatistics: false
   });
