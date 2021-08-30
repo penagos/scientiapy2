@@ -14,7 +14,7 @@ class QuestionController extends Controller
 
     public function ask()
     {
-        return view('questions.edit');
+        return view('questions.edit', ['question' => new Question()]);
     }
 
     public function search($query)
@@ -27,13 +27,11 @@ class QuestionController extends Controller
 
     public function view($id)
     {
-        return view('questions.view', [
-            'question' => Question::findOrFail($id)
-        ]);
+        return view('questions.view', ['question' => Question::findOrFail($id)]);
     }
 
     public function edit($id)
     {
-        return view('questions.edit', Question::findOrFail($id));
+        return view('questions.edit', ['question' => Question::findOrFail($id)]);
     }
 }

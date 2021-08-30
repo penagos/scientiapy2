@@ -8,18 +8,17 @@ use Livewire\Component;
 
 class EditQuestion extends Component
 {
-    public $question;
-    public $post;
+    public Question $question;
 
     protected $rules = [
         'question.title' => 'required|min:12|max:255',
-        'post.content' => 'required'
+        'question.post.content' => 'required'
     ];
 
     protected $messages = [
         'question.title.required' => 'Please enter a question title longer than 12 characters.',
         'question.title.min' => 'Please enter a question title longer than 12 characters.',
-        'post.content.required' => 'Please enter a valid question.'
+        'question.post.content.required' => 'Please enter a valid question.'
     ];
 
     public function updated()
@@ -36,14 +35,8 @@ class EditQuestion extends Component
     {
         $this->validate();
 
-        /*
-        $post = Post::create($this->post);
-        $question = $post->question()->create($this->question);
-        */
-        
-        
         $question = Question::create($this->question);
-        $post = Post::create($this->post);
+        $post = Post::create($this->question['post']);
         $question->post_id = $post->id;
         $question->save();
         

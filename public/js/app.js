@@ -25872,12 +25872,14 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 var editors = new Map();
 
 window.createToastEditor = function createToastEditor(id) {
+  var contents = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
   var editor = new _toast_ui_editor__WEBPACK_IMPORTED_MODULE_0__.default({
     el: document.getElementById(id),
     height: '600px',
     initialEditType: 'markdown',
     usageStatistics: false
   });
+  editor.setMarkdown(contents);
   editors[id] = editor;
   return editor;
 };

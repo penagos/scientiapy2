@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-lg-9">
-            @livewire('edit-question')
+            @livewire('edit-question', ['question' => $question])
         </div>
         <div class="col-lg-3 d-none d-lg-block d-xl-block">
             <div class="card">

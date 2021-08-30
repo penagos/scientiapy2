@@ -1,12 +1,12 @@
 <div id="post{{ $post->id }}" class="card mt-2">
   <div class="card-body">
     <div class="row">
-        <div class="col-lg-1 text-center">
+        <div class="col-xs-2 col-lg-1 text-center">
             <h1><a href="#" class="text-lightgray"><i class="bi bi-caret-up-fill"></i></a></h1>
             <h2><span class="badge bg-success fw-light">0</span></h2>
             <h1><a href="#" class="text-lightgray"><i class="bi bi-caret-down-fill"></i></a></h1>
         </div>
-        <div class="col-lg-11">
+        <div class="col-xs-10 col-lg-11">
             @if ($showPostEditor)
                 <form wire:submit.prevent="save">
                   <div id="{{ $editorID }}"></div>

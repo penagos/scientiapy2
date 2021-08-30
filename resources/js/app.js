@@ -5,7 +5,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 
 let editors = new Map();
 
-window.createToastEditor = function createToastEditor(id) {
+window.createToastEditor = function createToastEditor(id, contents = '') {
   const editor = new Editor({
     el: document.getElementById(id),
     height: '600px',
@@ -13,6 +13,7 @@ window.createToastEditor = function createToastEditor(id) {
     usageStatistics: false
   });
 
+  editor.setMarkdown(contents);
   editors[id] = editor;
   return editor;
 };

@@ -8,7 +8,7 @@
         <div id="titleHelp" class="form-text">Limited to 255 characters.</div>
     </div>
     <div id="editor"></div>
-    <input id="editorContents" type="hidden" wire:model="post.content">
+    <input id="editorContents" type="hidden" value="{{ $question->post->content }}">
     @error('post.content') <span class="error">{{ $message }}</span> @enderror
 
     <div class="mt-3">
@@ -23,7 +23,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            window.createToastEditor('editor');
+            console.log($('#editorContents').val());
+            const editor = window.createToastEditor('editor', $('#editorContents').val());
         });
     </script>
 </form>
