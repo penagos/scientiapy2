@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
+use App\Models\Tag;
 
 class Question extends Model
 {
@@ -28,6 +29,11 @@ class Question extends Model
     public function answers()
     {
         return $this->hasMany(Post::class, 'question_id', 'id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 
     public function asker()

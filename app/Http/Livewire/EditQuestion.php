@@ -12,7 +12,8 @@ class EditQuestion extends Component
 
     protected $rules = [
         'question.title' => 'required|min:12|max:255',
-        'question.post.content' => 'required'
+        'question.post.content' => 'required',
+        'question.tags' => 'optional'
     ];
 
     protected $messages = [
@@ -21,9 +22,9 @@ class EditQuestion extends Component
         'question.post.content.required' => 'Please enter a valid question.'
     ];
 
-    public function updated()
+    public function mount($question)
     {
-        // ...
+        $this->question->load('post');
     }
 
     public function hydrate()
