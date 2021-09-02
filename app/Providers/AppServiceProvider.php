@@ -29,5 +29,11 @@ class AppServiceProvider extends ServiceProvider
                 return "<?php echo ($date == '') ? '' : date('Y-m-d', strtotime($date)); ?>";
             }
         );
+
+        Blade::directive(
+            'edited', function ($edited) {
+                return "<?php echo ($edited) ? '<i class=\"bi bi-pencil\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Edited\"></i>' : ''; ?>";
+            }
+        );
     }
 }

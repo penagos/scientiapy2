@@ -20,18 +20,12 @@
             @else
                 <div class="card-text">
                   {{ Illuminate\Mail\Markdown::parse($post->content) }}
-
-                  @if ($post->isEdited())
-                  <div class="text-muted">
-                    <small>Last edited on XXX by <a href="#">XXX</a>.</small>
-                  </div>
-                  @endif
                 </div>
                 <div class="float-start pb-2">
                     <a href="#" wire:click.prevent="edit"><small>Edit</small></a>
                 </div>
-                <div class="float-end col-lg-2 text-muted fs-6 lh-sm pb-2">
-                    <small>posted @date($post->created_at)</small><br>
+                <div class="float-end text-muted fs-6 lh-sm pb-2">
+                    <small>posted @date($post->created_at) @edited($post->isEdited())</small><br>
                     <small><a href="#">{{ $post->user->name }}</a> - 7682</small>
                 </div>
             @endif

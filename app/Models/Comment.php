@@ -18,4 +18,9 @@ class Comment extends Model
     {
         return $this->created_at;
     }
+
+    public function isEdited()
+    {
+        return $this->updated_at != $this->created_at;
+    }
 }

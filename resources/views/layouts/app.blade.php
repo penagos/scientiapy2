@@ -63,6 +63,7 @@
 
   @livewireScripts
   <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('js/bootstrap-tags/bootstrap-tagsinput.min.js') }}"></script>
   <script src="{{ asset('js/typeahead/typeahead.bundle.min.js') }}"></script>
   <script src="{{ asset('js/highlight.min.js') }}"></script>
@@ -123,6 +124,10 @@
       });
 
       hljs.highlightAll();
+
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      })
     });
   </script>
 </html>
