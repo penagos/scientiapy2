@@ -43,13 +43,7 @@
                 </div>
               @endif
 
-              @if ($showCommentPoster)
-                <form>
-                    <input type="text" class="form-control" placeholder="Enter to post comment">
-                </form>
-              @else
-                <a a href="#" wire:click.prevent="comment"><small>Add a comment</small></a>
-              @endif
+              <livewire:edit-comment :post="$post" :key="'newcomment'.$post->id"/>
             </div>
         </div>
     </div>

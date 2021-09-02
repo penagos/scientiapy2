@@ -22,9 +22,7 @@ class Post extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class, 'id', 'user_id')->withDefault([
-            'user_id' => 1
-        ]);
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     public function preview()

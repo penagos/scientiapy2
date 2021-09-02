@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Post;
-use App\Models\Question;
+use App\Models\Comment;
 use Livewire\Component;
 
 class EditPost extends Component
@@ -15,6 +15,7 @@ class EditPost extends Component
     public $showPostEditor;
     public $editorID;
     public $editorContents;
+    public $newComment;
 
     protected $rules = [
         'post.content' => 'required'
@@ -36,11 +37,6 @@ class EditPost extends Component
         $this->showCommentPoster = false;
         $this->showPostEditor = false;
         $this->editLink = $this->post->editLink();
-    }
-
-    public function comment()
-    {
-        $this->showCommentPoster = true;
     }
 
     public function edit()

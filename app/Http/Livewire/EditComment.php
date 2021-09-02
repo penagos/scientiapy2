@@ -3,38 +3,47 @@
 namespace App\Http\Livewire;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Livewire\Component;
 
 class EditComment extends Component
 {
+    public Post $post;
     public Comment $comment;
-    public $showCommentEditor;
+    public $edit = false;
 
     protected $rules = [
-        'comment.content' => 'required'
+        'comment.content' => 'required',
+        'comment.post_id' => 'required'
     ];
 
-    public function mount($comment)
+
+    public function comment($pid)
     {
-        $this->showCommentEditor = false;
+        $this->comment = new Comment(['post_id' => $pid]);
+        $this->edit();
     }
 
     public function edit()
     {
-        $this->showCommentEditor = true;
+        $this->edit = true;
     }
 
     public function cancelEdit()
     {
-        $this->showCommentEditor = false;
+        $this->edit = false;
     }
 
     public function save()
     {
         $this->validate();
-        $this->comment->edited_at = now();
+
+        if ($this->comment->id) {
+            $this->comment->edited_at = now();
+        }
+
         $this->comment->save();
-        $this->showCommentEditor = false;
+        $this->edit = false;
     }
 
     public function render()
