@@ -18,6 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->timestamps();
             $table->foreignId('post_id')->nullable()->references('id')->on('posts');
             $table->foreignId('accepted_post_id')->nullable()->references('id')->on('posts');
+            $table->integer('views')->default(0);
             $table->string('title', 255);
         });
     }

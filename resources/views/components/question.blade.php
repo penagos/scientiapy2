@@ -2,8 +2,8 @@
   <div class="card-body">
     <div class="row">
         <div class="col-lg-1">
-            <h2><span class="badge bg-success">0</span></h2>
-            <small>456 views</small>
+            <h2><span class="badge bg-success">{{ $question->post->reputation }}</span></h2>
+            <small>{{ $question->views }} views</small>
         </div>
         <div class="col-lg-11">
             <h6 class="card-title"><a href="{{ route('questions.view', $question->id) }} ">{{ $question->title }}</a></h6>
