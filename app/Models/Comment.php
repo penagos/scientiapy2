@@ -21,6 +21,6 @@ class Comment extends Model
 
     public function isEdited()
     {
-        return $this->updated_at != $this->created_at;
+        return $this->edited_at ? true : false;
     }
 }

@@ -49,12 +49,12 @@ class Post extends Model
 
     public function isEdited()
     {
-        return $this->updated_at != $this->created_at;
+        return $this->edited_at ? true : false;
     }
 
     public function lastEditDate()
     {
-        return $this->isEdited() ? $this->modified_at : null;
+        return this->edited_at;
     }
 
     public function editLink()

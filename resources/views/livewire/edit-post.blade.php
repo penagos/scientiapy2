@@ -2,9 +2,9 @@
   <div class="card-body">
     <div class="row">
         <div class="col-xs-2 col-lg-1 text-center">
-            <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-up-fill"></i></a></h1>
-            <h2><span class="badge bg-success fw-light">0</span></h2>
-            <h1><a href="#" class="text-lightgray" wire:click.prevent="upvote"><i class="bi bi-caret-down-fill"></i></a></h1>
+            <h1><a href="#" class="text-lightgray" wire:click.prevent="upvote"><i class="bi bi-caret-up-fill"></i></a></h1>
+            <h2><span class="badge bg-success fw-light">{{ $post->reputation }}</span></h2>
+            <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill"></i></a></h1>
         </div>
         <div class="col-xs-10 col-lg-11">
             @if ($showPostEditor)
@@ -26,7 +26,7 @@
                 </div>
                 <div class="float-end text-muted fs-6 lh-sm pb-2">
                     <small>posted @date($post->created_at) @edited($post->isEdited())</small><br>
-                    <small><a href="#">{{ $post->user->name }}</a> - 7682</small>
+                    <small><a href="#">{{ $post->user->name }}</a> - {{ $post->user->reputation }}</small>
                 </div>
             @endif
 

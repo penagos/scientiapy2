@@ -51,12 +51,14 @@ class EditPost extends Component
 
     public function upvote()
     {
-        // ...
+        ++$this->post->reputation;
+        $this->post->save();
     }
 
     public function downvote()
     {
-        // ...
+        --$this->post->reputation;
+        $this->post->save();
     }
 
     public function delete()
@@ -73,6 +75,7 @@ class EditPost extends Component
     {
         $this->validate();
         $this->post->save();
+        $this->post->edited_at = now();
         $this->hideEditor();
     }
 

@@ -32,6 +32,7 @@ class EditComment extends Component
     public function save()
     {
         $this->validate();
+        $this->comment->edited_at = now();
         $this->comment->save();
         $this->showCommentEditor = false;
     }
