@@ -42,8 +42,7 @@
                 <div class="mt-2" style="clear: both;">
                   <hr>
                   @foreach ($post->comments as $comment)
-                    <p><small>{{ $comment->content }} <span class="text-muted">&mdash; <a href="#">{{ $comment->user->name }}</a> @date($comment->date())</span></small></p>
-                    <hr>
+                    <livewire:edit-comment :comment="$comment"/>
                   @endforeach
                 </div>
               @endif
