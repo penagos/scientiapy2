@@ -25,10 +25,10 @@
               <a class="nav-link active" aria-current="page" href="{{ route('questions.index') }}">Questions</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Tags</a>
+              <a class="nav-link" href="{{ route('tags.index') }}">Tags</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Users</a>
+              <a class="nav-link" href="{{ route('users.index') }}">Users</a>
             </li>
           </ul>
             <input class="form-control me-2 w-100 typeahead" type="search" placeholder="Search" aria-label="Search">

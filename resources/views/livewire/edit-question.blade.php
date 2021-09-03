@@ -8,7 +8,7 @@
         <div id="titleHelp" class="form-text">Limited to 255 characters.</div>
     </div>
     <div id="editor"></div>
-    <input id="editorContents" type="hidden" value="{{ $question->post->content }}">
+    <input id="editorContents" type="hidden" value="{{ $question->post ?? '' }}">
     @error('post.content') <span class="error">{{ $message }}</span> @enderror
 
     <div class="mt-3">

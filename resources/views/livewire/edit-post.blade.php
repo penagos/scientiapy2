@@ -5,6 +5,7 @@
             <h1><a href="#" class="text-lightgray" wire:click.prevent="upvote"><i class="bi bi-caret-up-fill"></i></a></h1>
             <h2><span class="badge bg-success fw-light">{{ $post->reputation }}</span></h2>
             <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill"></i></a></h1>
+            <i class="bi bi-star"></i>
         </div>
         <div class="col-xs-10 col-lg-11">
             @if ($showPostEditor)

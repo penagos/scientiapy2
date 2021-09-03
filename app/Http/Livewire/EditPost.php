@@ -49,12 +49,14 @@ class EditPost extends Component
     {
         ++$this->post->reputation;
         $this->post->save();
+        $this->emit('renderPost', $this->post->id);
     }
 
     public function downvote()
     {
         --$this->post->reputation;
         $this->post->save();
+        $this->emit('renderPost', $this->post->id);
     }
 
     public function delete()

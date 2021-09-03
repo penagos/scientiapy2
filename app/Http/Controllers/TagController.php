@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    public function index()
+    {
+        return view('tags.index', ['tags' => Tag::all()]);
+    }
+
     public function search($query)
     {
         // TODO: some fuzzy search capability would be preferred

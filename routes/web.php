@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +33,12 @@ Route::prefix('answers')->name('answers.')->group(function () {
     Route::prefix('{id}')->group(function () {
         Route::get('edit', [AnswerController::class, 'edit'])->name('edit');
     });
+});
+
+Route::prefix('tags')->name('tags.')->group(function () {
+    Route::get('/', [TagController::class, 'index'])->name('index');
+});
+
+Route::prefix('users')->name('users.')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('index');
 });
