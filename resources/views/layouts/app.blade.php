@@ -3,6 +3,7 @@
     <title>Scientiapy - @yield('title')</title>
 
     @livewireStyles
+    <link href="{{ asset('css/tailwind.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-tagsinput.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap/bootstrap-icons.css') }}" rel="stylesheet">
@@ -11,6 +12,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script defer src="{{ asset('js/alpine.min.js') }}"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -32,7 +34,7 @@
             </li>
           </ul>
             <input class="form-control me-2 w-100 typeahead" type="search" placeholder="Search" aria-label="Search">
-            <a href="#" class="btn">Login</a>
+            <button onclick="Livewire.emit('openModal', 'login')" class="btn">Login</button>
             <a href="#" class="btn btn-primary">Join</a>
         </div>
       </div>
@@ -61,6 +63,7 @@
     </footer>
   </body>
 
+  @livewire('livewire-ui-modal')
   @livewireScripts
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
