@@ -2,10 +2,15 @@
   <div class="card-body">
     <div class="row">
         <div class="col-xs-2 col-lg-1 text-center">
+            @if (Auth::check())
             <h1><a href="#" class="text-lightgray" wire:click.prevent="upvote"><i class="bi bi-caret-up-fill"></i></a></h1>
+            @endif
             <h2><span class="badge bg-success fw-light">{{ $post->reputation }}</span></h2>
+
+            @if (Auth::check())
             <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill"></i></a></h1>
-            <i class="bi bi-star"></i>
+            <a href="#" class="text-lightgray" wire:click.prevent="favorite"><i class="bi bi-star"></i><</a>
+            @endif
         </div>
         <div class="col-xs-10 col-lg-11">
             @if ($showPostEditor)
@@ -30,7 +35,7 @@
                 @endif
                 <div class="float-end text-muted fs-6 lh-sm pb-2">
                     <small>posted @date($post->created_at) @edited($post->isEdited())</small><br>
-                    <small><a href="#">{{ $post->user->name }}</a> - {{ $post->user->reputation }}</small>
+                    <small><a href="#">{{ $post->user->username }}</a> - {{ $post->user->reputation }}</small>
                 </div>
             @endif
 

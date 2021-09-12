@@ -18,7 +18,7 @@
 
             <div class="float-end col-lg-2 text-muted fs-6 lh-sm">
                 <small>posted @date($question->post->created_at)</small><br>
-                <small><a href="#">{{ $question->post->user->name }}</a> - 7682</small>
+                <small><a href="#">{{ $question->post->user->username }}</a> - 7682</small>
             </div>
         </div>
     </div>
