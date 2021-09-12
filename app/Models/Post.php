@@ -50,9 +50,15 @@ class Post extends Model
         return $this->edited_at ? true : false;
     }
 
+    public function isFavorited()
+    {
+        // TODO
+        return false;
+    }
+
     public function lastEditDate()
     {
-        return this->edited_at;
+        return $this->edited_at;
     }
 
     public function editLink()

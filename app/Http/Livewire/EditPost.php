@@ -52,6 +52,12 @@ class EditPost extends Component
         $this->emit('renderPost', $this->post->id);
     }
 
+    public function favorite()
+    {
+        // If previously favorited, unfavorite post.
+        
+    }
+
     public function downvote()
     {
         --$this->post->reputation;

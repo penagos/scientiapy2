@@ -41,4 +41,44 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function favorites()
+    {
+        return [];
+    }
+
+    public function posts()
+    {
+        return [];
+    }
+
+    public function comments()
+    {
+        return [];
+    }
+
+    public function questions()
+    {
+        return [];
+    }
+
+    public function answers()
+    {
+        return [];
+    }
+
+    public function upvotes()
+    {
+        return [];
+    }
+
+    public function downvotes()
+    {
+        return [];
+    }
+
+    public function votes()
+    {
+        return [];
+    }
 }
