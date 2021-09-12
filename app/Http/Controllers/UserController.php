@@ -13,6 +13,21 @@ class UserController extends Controller
         return view('users.index', ['users' => User::all()]);
     }
 
+    public function teams()
+    {
+        return view('users.teams');
+    }
+
+    public function favorites()
+    {
+        return view('users.favorites');
+    }
+
+    public function settings()
+    {
+        return view('users.settings');
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();
