@@ -30,7 +30,11 @@
             </div>
             <div class="row mt-2">
                 <div class="col-lg-12">
-                    <input type="submit" class="btn btn-primary" value="Post Answer">
+                    @if (Auth::check())
+                        <input type="submit" class="btn btn-primary" value="Post Answer">
+                    @else
+                        <a href="#" onclick="Livewire.emit('openModal', 'login'); return false;">Login</a> or <a href="#" onclick="Livewire.emit('openModal', 'register'); return false;">create an account</a> to post an answer.
+                    @endif
                 </div>
             </div>
         </div>

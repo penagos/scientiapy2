@@ -41,4 +41,5 @@ Route::prefix('tags')->name('tags.')->group(function () {
 
 Route::prefix('users')->name('users.')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
+    Route::get('logout', [UserController::class, 'logout'])->name('logout');
 });

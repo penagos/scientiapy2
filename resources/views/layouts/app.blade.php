@@ -34,8 +34,20 @@
             </li>
           </ul>
             <input class="form-control me-2 w-100 typeahead" type="search" placeholder="Search" aria-label="Search">
-            <button onclick="Livewire.emit('openModal', 'login')" class="btn">Login</button>
-            <a href="#" class="btn btn-primary">Join</a>
+
+            @if (Auth::check())
+              <div class="btn-group pl-4">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ auth()->user()->username }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                  <li><a class="dropdown-item" href="{{ route('users.logout') }} ">Logout</a></li>
+                </ul>
+              </div>
+            @else
+              <button onclick="Livewire.emit('openModal', 'login')" class="btn">Login</button>
+              <button onclick="Livewire.emit('openModal', 'register')" class="btn btn-primary">Join</button>
+            @endif
         </div>
       </div>
     </nav>

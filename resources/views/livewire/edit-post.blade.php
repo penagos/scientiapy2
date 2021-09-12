@@ -22,9 +22,12 @@
                 <div class="card-text">
                   {{ Illuminate\Mail\Markdown::parse($post->content) }}
                 </div>
+
+                @if (Auth::check())
                 <div class="float-start pb-2">
                     <a href="#" wire:click.prevent="edit"><small>Edit</small></a>
                 </div>
+                @endif
                 <div class="float-end text-muted fs-6 lh-sm pb-2">
                     <small>posted @date($post->created_at) @edited($post->isEdited())</small><br>
                     <small><a href="#">{{ $post->user->name }}</a> - {{ $post->user->reputation }}</small>

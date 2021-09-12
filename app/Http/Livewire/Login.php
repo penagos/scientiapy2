@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use LivewireUI\Modal\ModalComponent;
 
 class Login extends ModalComponent
@@ -16,7 +17,13 @@ class Login extends ModalComponent
 
     public function authenticate()
     {
-        $this->validate();
+        $credentials = $this->validate();
+
+        if (Auth::attempt($credentials)) {
+            return redirect(request()->header('Referer'));
+        }
+
+        $this->addError('status', 'Invalid credentials entered. Please try again.');
     }
 
     public function render()

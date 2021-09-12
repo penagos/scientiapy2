@@ -12,9 +12,16 @@
         <p class="mb-0">
             <small>{{ $comment->content }} <span class="text-muted">&mdash; <a href="#">{{ $comment->user->name }}</a> @date($comment->date()) @edited($comment->isEdited())</span></small>
         </p>
+
+        @if (Auth::check())
         <small><a href="#" wire:click.prevent="edit">Edit</a></small>
+        @endif
     @elseif (!$edit)
-        <a a href="#" wire:click.prevent="comment({{ $post->id }})"><small>Add a comment</small></a>
+        @if (Auth::check())
+            <a a href="#" wire:click.prevent="comment({{ $post->id }})"><small>Add a comment</small></a>
+        @else
+            <a a href="#" onclick="Livewire.emit('openModal', 'login'); return false;"><small>Add a comment</small></a>
+        @endif
     @endif
     <hr>
 </div>
