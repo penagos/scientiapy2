@@ -137,6 +137,10 @@
         editor.setMarkdown(content);
       });
 
+      Livewire.on('focusInput', (editorID) => {
+        document.getElementById(editorID).focus();
+      });
+
       Livewire.on('renderPost', (scrollTarget) => {
         hljs.highlightAll();
       });
