@@ -60,7 +60,7 @@ class EditPost extends Component
     public function favorite()
     {
         // If previously favorited, unfavorite post.
-        
+        $this->post->favorite();
     }
 
     public function downvote()

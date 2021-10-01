@@ -9,8 +9,8 @@
 
             @if (Auth::check())
             <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill"></i></a></h1>
-            <a href="#" class="text-lightgray" wire:click.prevent="favorite"><i class="bi bi-star"></i></a>
-            @endif
+            <a href="#" class="text-lightgray" wire:click.prevent="favorite"><i class="bi @if ($post->isFavorited()) bi-star-fill text-warning @else bi-star @endif"></i></a>
+            @endif 
         </div>
         <div class="col-xs-10 col-lg-11">
             @if ($showPostEditor)
