@@ -15,10 +15,13 @@ class EditComment extends Component
     public $editorID;
 
     protected $rules = [
-        'comment.content' => 'required',
+        'comment.content' => 'required|min:12',
         'comment.post_id' => 'required'
     ];
 
+    protected $messages = [
+        'comment.content.min' => 'Please enter a comment longer than 12 characters.',
+    ];
 
     public function mount ()
     {
