@@ -9,14 +9,15 @@
 
             @if (Auth::check())
             <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill"></i></a></h1>
-            <a href="#" class="text-lightgray" wire:click.prevent="favorite"><i class="bi bi-star"></i><</a>
+            <a href="#" class="text-lightgray" wire:click.prevent="favorite"><i class="bi bi-star"></i></a>
             @endif
         </div>
         <div class="col-xs-10 col-lg-11">
             @if ($showPostEditor)
                 <form wire:submit.prevent="save">
-                  <div id="{{ $editorID }}"></div>
+                  <div id="{{ $editorID }}" wire:ignore></div>
                   <input id="{{ $editorContents }}" type="hidden" wire:model="post.content">
+                  @error('post.content') <div class="mt-2 text-danger error small">{{ $message }}</div>@enderror
                   <div class="float-start mt-2 pb-2">
                       <input type="submit" class="btn btn-primary" onclick="window.syncEditorContents('{{ $editorID }}', '{{ $editorContents }}');" value="Save">
                       <a class="btn btn-light" href="{{ $editLink }}"><small>Use full editor</small></a>

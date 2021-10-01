@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Post;
 use App\Models\Comment;
+use Illuminate\Http\Request;
 use Livewire\Component;
 
 class EditPost extends Component
@@ -18,7 +19,11 @@ class EditPost extends Component
     public $newComment;
 
     protected $rules = [
-        'post.content' => 'required'
+        'post.content' => 'required|min:12'
+    ];
+
+    protected $messages = [
+        'post.content.min' => 'Post must contain at least 12 characters.',
     ];
 
     protected $listeners = [
@@ -42,7 +47,7 @@ class EditPost extends Component
     public function edit()
     {
         $this->showPostEditor = true;
-        $this->emit('createEditor', $this->editorID, $this->post->content);
+        $this->showEditor($this->post->content);
     }
 
     public function upvote()
@@ -77,6 +82,7 @@ class EditPost extends Component
 
     public function save()
     {
+        $this->cachedPost = $this->post->content;
         $this->validate();
         $this->post->save();
         $this->post->edited_at = now();
@@ -97,5 +103,10 @@ class EditPost extends Component
     public function render()
     {
         return view('livewire.edit-post');
+    }
+
+    private function showEditor($contents)
+    {
+        $this->emit('createEditor', $this->editorID, $contents);
     }
 }
