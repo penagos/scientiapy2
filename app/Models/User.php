@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -49,12 +50,12 @@ class User extends Authenticatable
 
     public function posts()
     {
-        return [];
+        return $this->hasMany(Post::class);
     }
 
     public function comments()
     {
-        return [];
+        return $this->hasMany(Comment::class);
     }
 
     public function questions()

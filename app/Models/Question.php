@@ -16,6 +16,10 @@ class Question extends Model
         'post'
     ];
 
+    protected $with = [
+     //   'asker'
+    ];
+    
     public static function isa($post)
     {
         return is_a($post, Question::class);
@@ -23,7 +27,7 @@ class Question extends Model
 
     public function post()
     {
-        return $this->hasOne(Post::class, 'id', 'post_id');
+        return $this->hasOne(Post::class);
     }
 
     public function acceptedAnswer()
@@ -33,7 +37,7 @@ class Question extends Model
 
     public function answers()
     {
-        return $this->hasMany(Post::class, 'question_id', 'id');
+        return $this->hasMany(Post::class);
     }
 
     public function tags()
@@ -43,7 +47,9 @@ class Question extends Model
 
     public function asker()
     {
+        $s = $this->post;
         return $this->post->user;
+        //return $this->hasOneThrough(User::class, Post::class);
     }
 
     public function date()

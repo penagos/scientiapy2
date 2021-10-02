@@ -28,7 +28,7 @@
               @endif
             </h1>
 
-            @if ($post->question && $post->isAuthor())
+            @if (!$post->question_id && $post->isAuthor())
             <h3 class="pb-3">
               @if ($post->isAcceptedAnswer())
                 <i class="bi bi-check-lg text-success"></i>
@@ -37,7 +37,7 @@
               @endif
             </h3>
             @endif
-            <a href="#" class="text-lightgray" wire:click.prevent="favorite"><i class="bi @if ($post->isFavorited()) bi-star-fill text-warning @else bi-star @endif"></i></a>
+            <a href="#" class="text-lightgray" wire:click.prevent="favorite"><i class="bi @if ($post->favorited) bi-star-fill text-warning @else bi-star @endif"></i></a>
             @endif 
         </div>
         <div class="col-xs-10 col-lg-11">
@@ -72,7 +72,7 @@
                 </div>
               @endif
 
-              <livewire:edit-comment :post="$post" :key="'newcomment'.$post->id"/>
+              <livewire:edit-comment :post-id="$post->id" :key="'newcomment'.$post->id"/>
             </div>
         </div>
       @else

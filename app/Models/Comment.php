@@ -18,6 +18,7 @@ class Comment extends Model
         'user_id' => 1
     ];
 
+    protected $with = ['user'];
 
     public function user()
     {

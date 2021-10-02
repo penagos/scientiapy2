@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class EditComment extends Component
 {
-    public Post $post;
+    public $postID;
     public Comment $comment;
     public $edit = false;
     public $editorID;

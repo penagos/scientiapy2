@@ -11,7 +11,7 @@
         </form>
     @elseif ($comment && $comment->id)
         <p class="mb-0">
-            <small>{{ $comment->content }} <span class="text-muted">&mdash; <a href="#">{{ $comment->user->name }}</a> @date($comment->date()) @edited($comment->isEdited())</span></small>
+            <small>{{ $comment->content }} <span class="text-muted">&mdash; <a href="#">{{ $comment->user->username }}</a> @date($comment->date()) @edited($comment->isEdited())</span></small>
         </p>
 
         @if (Auth::check())
@@ -19,7 +19,7 @@
         @endif
     @elseif (!$edit)
         @if (Auth::check())
-            <a a href="#" wire:click.prevent="comment({{ $post->id }})"><small>Add a comment</small></a>
+            <a a href="#" wire:click.prevent="comment({{ $postID }})"><small>Add a comment</small></a>
         @else
             <a a href="#" onclick="Livewire.emit('openModal', 'login'); return false;"><small>Add a comment</small></a>
         @endif

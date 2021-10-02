@@ -24,9 +24,11 @@ class Post extends Model
         'user_id' => 1
     ];
 
+    protected $with = ['comments', 'question', 'user', 'vote', 'favorited'];
+
     public function user()
     {
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     public function preview()
@@ -78,21 +80,15 @@ class Post extends Model
         return $this->user_id == Auth::user()->id;
     }
 
-    public function isFavoritedBy(User $user)
+    public function favorited()
     {
-        return Favorite::where('user_id', $user->id)
-            ->where('post_id', $this->id)
-            ->first();
-    }
-
-    public function isFavorited()
-    {
-        return $this->isFavoritedBy(Auth::user());
+        return $this->hasOne(Favorite::class)->where('user_id', Auth::user()->id ?? 0);
     }
 
     public function favorite()
     {
         Auth::user()->favorites()->toggle($this->id);
+        $this->load('favorited');
     }
 
     public function votes()
@@ -112,6 +108,8 @@ class Post extends Model
             ['post_id' => $this->id, 'user_id' => Auth::user()->id],
             ['amount' => 1]
         );
+
+        $this->load('vote');
     }
 
     public function downvote()
@@ -121,22 +119,23 @@ class Post extends Model
             ['post_id' => $this->id, 'user_id' => Auth::user()->id],
             ['amount' => -1]
         );
+
+        $this->load('vote');
     }
 
     public function upvoted()
     {
-        return Vote::where('user_id', Auth::user()->id)
-            ->where('post_id', $this->id)
-            ->where('amount', '>', 0)
-            ->first();
+        return $this->vote && $this->vote->amount > 0;
     }
 
     public function downvoted()
     {
-        return Vote::where('user_id', Auth::user()->id)
-            ->where('post_id', $this->id)
-            ->where('amount', '<', 0)
-            ->first();
+        return $this->vote && $this->vote->amount < 0;
+    }
+
+    public function vote()
+    {
+        return $this->hasOne(Vote::class)->where('user_id', Auth::user()->id ?? 0);
     }
 
     public function lastEditDate()

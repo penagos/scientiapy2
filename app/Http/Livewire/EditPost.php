@@ -43,7 +43,6 @@ class EditPost extends Component
             $this->editorContents = $this->editorID . '-contents';
             $this->showCommentPoster = false;
             $this->showPostEditor = false;
-            $this->editLink = $this->post->editLink();
             $this->editorID = 'postEditor' . $this->post->id;
         } else {
             $this->post = new Post(['content' => '']);
@@ -55,6 +54,7 @@ class EditPost extends Component
     public function edit()
     {
         $this->showPostEditor = true;
+        $this->editLink = $this->post->editLink();
         $this->showEditor($this->post->content ?? '');
     }
 
