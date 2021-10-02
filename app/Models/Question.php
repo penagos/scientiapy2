@@ -17,7 +17,7 @@ class Question extends Model
     ];
 
     protected $with = [
-     //   'asker'
+        
     ];
     
     public static function isa($post)
@@ -27,7 +27,7 @@ class Question extends Model
 
     public function post()
     {
-        return $this->hasOne(Post::class);
+        return $this->hasOne(Post::class, 'id', 'post_id');
     }
 
     public function acceptedAnswer()
