@@ -16,12 +16,12 @@ class EditPost extends Component
     public $showCommentPoster;
     public $showPostEditor;
     public $editorID;
-    public $questionID;
     public $editorContents;
     public $newComment;
 
     protected $rules = [
-        'post.content' => 'required|min:12'
+        'post.content' => 'required|min:12',
+        'post.question_id' => 'required'
     ];
 
     protected $messages = [
@@ -44,11 +44,10 @@ class EditPost extends Component
             $this->editorContents = $this->editorID . '-contents';
             $this->showCommentPoster = false;
             $this->showPostEditor = false;
-            $this->questionID = $post->question_id;
             $this->editorID = 'postEditor' . $this->post->id;
         } else {
             $this->post = new Post(['content' => '']);
-            $this->questionID = $qid;
+            $this->post->question_id = $qid;
             $this->editorID = 'answerPoster';
         }
     }
@@ -95,10 +94,6 @@ class EditPost extends Component
     {
         $this->cachedPost = $this->post->content;
         $this->validate();
-
-        if ($this->post->question_id) {
-            $this->post->question_id = $this->questionID;
-        }
 
         $this->post->save();
         $this->post->edited_at = now();
