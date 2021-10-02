@@ -41,10 +41,11 @@
                   {{ auth()->user()->username }}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                  <li><a class="dropdown-item" href="{{ route('users.favorites') }} ">Favorites</a></li>
-                  <li><a class="dropdown-item" href="{{ route('users.teams') }} ">Teams</a></li>
+                  <li><a class="dropdown-item" href="{{ route('users.favorites') }}">Favorites</a></li>
+                  <li><a class="dropdown-item" href="{{ route('users.teams') }}">Teams</a></li>
                   <li><a class="dropdown-item" href="{{ route('users.settings') }} ">Settings</a></li>
-                  <li><a class="dropdown-item" href="{{ route('users.logout') }} ">Logout</a></li>
+                  <li><a class="dropdown-item" href="#">Dark Mode <i class="pl-2 bi bi-moon-fill"></i></a></li>
+                  <li><a class="dropdown-item" href="{{ route('users.logout') }}">Logout</a></li>
                 </ul>
               </div>
             @else
@@ -87,6 +88,20 @@
   <script src="{{ asset('js/highlight.min.js') }}"></script>
 
   <script type="text/javascript">
+    Livewire.on('createEditor', (editorID, content) => {
+      console.log(`Creating editor with ID ${editorID}`);
+      const editor = window.createToastEditor(editorID);
+      editor.setMarkdown(content);
+    });
+
+    Livewire.on('focusInput', (editorID) => {
+      document.getElementById(editorID).focus();
+    });
+
+    Livewire.on('renderPost', (scrollTarget) => {
+      hljs.highlightAll();
+    });
+
     $(document).ready(function () {
       var questionsFetcher = new Bloodhound({
           datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
@@ -131,19 +146,6 @@
             tagClass: 'bg-primary p-1 mt-2 mb-2 rounded',
             cancelConfirmKeysOnEmpty: false
         });
-
-      Livewire.on('createEditor', (editorID, content) => {
-        const editor = window.createToastEditor(editorID);
-        editor.setMarkdown(content);
-      });
-
-      Livewire.on('focusInput', (editorID) => {
-        document.getElementById(editorID).focus();
-      });
-
-      Livewire.on('renderPost', (scrollTarget) => {
-        hljs.highlightAll();
-      });
 
       hljs.highlightAll();
 

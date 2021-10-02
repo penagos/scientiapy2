@@ -1,6 +1,7 @@
-<div id="post{{ $post->id }}" class="card mt-2">
+<div id="post{{ $post->id ?? 'new' }}" class="card mt-2" style="background: #fcfcfc;">
   <div class="card-body">
     <div class="row">
+      @if ($post->id)
         <div class="col-xs-2 col-lg-1 text-center">
             @if (Auth::check())
             <h1>
@@ -41,16 +42,7 @@
         </div>
         <div class="col-xs-10 col-lg-11">
             @if ($showPostEditor)
-                <form wire:submit.prevent="save">
-                  <div id="{{ $editorID }}" wire:ignore></div>
-                  <input id="{{ $editorContents }}" type="hidden" wire:model="post.content">
-                  @error('post.content') @errorMessage($message) @enderror
-                  <div class="float-start mt-2 pb-2">
-                      <input type="submit" class="btn btn-primary" onclick="window.syncEditorContents('{{ $editorID }}', '{{ $editorContents }}');" value="Save">
-                      <a class="btn btn-light" href="{{ $editLink }}"><small>Use full editor</small></a>
-                      <a class="btn btn-light" href="#" wire:click.prevent="cancelEdit"><small>Cancel</small></a>
-                  </div>
-                </form>
+              <x-inline-post-editor :id="$editorID" :contents="$editorContents" :full-editor-link="$editLink" />
             @else
                 <div class="card-text">
                   {{ Illuminate\Mail\Markdown::parse($post->content) }}
@@ -83,6 +75,15 @@
               <livewire:edit-comment :post="$post" :key="'newcomment'.$post->id"/>
             </div>
         </div>
+      @else
+        <x-inline-post-editor :id="$editorID" contents="" full-editor-link="" />
+        <script>
+            $(document).ready(() => {
+              // We cannot create the toast editor until a full DOM load
+              Livewire.emit('createEditor', '{{ $editorID }}', '');
+            });
+        </script>
+      @endif
     </div>
   </div>
 </div>

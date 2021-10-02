@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
@@ -36,19 +37,25 @@ class EditPost extends Component
      *
      * @return void
      */
-    public function mount($post)
+    public function mount($post = null, $qid = 0)
     {
-        $this->editorID = 'postEditor'.$this->post->id;
-        $this->editorContents = $this->editorID . '-contents';
-        $this->showCommentPoster = false;
-        $this->showPostEditor = false;
-        $this->editLink = $this->post->editLink();
+        if ($post) {
+            $this->editorContents = $this->editorID . '-contents';
+            $this->showCommentPoster = false;
+            $this->showPostEditor = false;
+            $this->editLink = $this->post->editLink();
+            $this->editorID = 'postEditor' . $this->post->id;
+        } else {
+            $this->post = new Post(['content' => '']);
+            $this->post->question_id = $qid;
+            $this->editorID = 'answerPoster';
+        }
     }
 
     public function edit()
     {
         $this->showPostEditor = true;
-        $this->showEditor($this->post->content);
+        $this->showEditor($this->post->content ?? '');
     }
 
     public function upvote()
@@ -98,7 +105,9 @@ class EditPost extends Component
 
     public function hydrate()
     {
-        $this->emit('renderPost', $this->post->id);
+        if ($this->post) {
+            $this->emit('renderPost', $this->post->id);
+        }
     }
 
     /**
