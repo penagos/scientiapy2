@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->foreignId('edit_user_id')->nullable()->references('id')->on('users');
             $table->foreignId('question_id')->nullable()->references('id')->on('posts');
             $table->timestamp('edited_at')->nullable();
-            $table->text('content');
+            $table->mediumText('content');
         });
     }
 
