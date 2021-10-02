@@ -21,4 +21,11 @@ blockquote {
     color: #cccccc;
 }
 
+.rounded {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+}
+
 .twitter-typeahead, .bootstrap-tagsinput { width: 100%; } 

@@ -58,7 +58,7 @@
 
                 @if (Auth::check())
                 <div class="float-start pb-2">
-                    <a href="#" wire:click.prevent="edit"><small>Edit</small></a>
+                    <a href="#" wire:click.prevent="edit" class="small"><i class="bi bi-pencil"></i> Edit</a>
                 </div>
                 @endif
                 <div class="float-end text-muted fs-6 lh-sm bg-light rounded p-2">
@@ -68,7 +68,7 @@
             @endif
 
             <div class="clearfix"></div>
-            <div id="comments">
+            <div id="comments" class="mt-3">
               @if ($post->comments->count() > 0)
                 <div class="mt-2" style="clear: both;">
                   <hr>
