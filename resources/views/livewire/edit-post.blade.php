@@ -11,8 +11,13 @@
               @endif
             </h1>
             @endif
-            <h2><span class="badge bg-success fw-light">{{ $post->voteCount() }}</span></h2>
-
+            <h2>
+              @if ($post->isAcceptedAnswer())  
+                <span class="badge bg-success fw-light">{{ $post->voteCount() }}</span>
+              @else
+                {{ $post->voteCount() }}
+              @endif
+            </h2>
             @if (Auth::check())
             <h1>
               @if (!$post->downvoted())  
@@ -21,6 +26,16 @@
                 <i class="bi bi-caret-down-fill text-primary"></i>
               @endif
             </h1>
+
+            @if ($post->question && $post->isAuthor())
+            <h3 class="pb-3">
+              @if ($post->isAcceptedAnswer())
+                <i class="bi bi-check-lg text-success"></i>
+              @else
+                <a href="#" wire:click.prevent="accept"><i class="bi bi-check-lg text-lightgray"></i></a>
+              @endif
+            </h3>
+            @endif
             <a href="#" class="text-lightgray" wire:click.prevent="favorite"><i class="bi @if ($post->isFavorited()) bi-star-fill text-warning @else bi-star @endif"></i></a>
             @endif 
         </div>
@@ -46,7 +61,7 @@
                     <a href="#" wire:click.prevent="edit"><small>Edit</small></a>
                 </div>
                 @endif
-                <div class="float-end text-muted fs-6 lh-sm pb-2">
+                <div class="float-end text-muted fs-6 lh-sm bg-light rounded p-2">
                     <small>posted @date($post->created_at) @edited($post->isEdited())</small><br>
                     <small><a href="#">{{ $post->user->username }}</a> - {{ $post->user->reputation }}</small>
                 </div>

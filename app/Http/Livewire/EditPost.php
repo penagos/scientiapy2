@@ -66,6 +66,11 @@ class EditPost extends Component
         $this->post->downvote();
     }
 
+    public function accept()
+    {
+        $this->post->accept();
+    }
+
     public function delete()
     {
         // ..
@@ -88,6 +93,10 @@ class EditPost extends Component
     public function hideEditor()
     {
         $this->showPostEditor = false;
+    }
+
+    public function hydrate()
+    {
         $this->emit('renderPost', $this->post->id);
     }
 

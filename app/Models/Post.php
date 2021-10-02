@@ -55,9 +55,27 @@ class Post extends Model
         return Favorite::where(['post_id' => $this->id])->all();
     }
 
+    public function accept()
+    {
+        if ($this->question) {
+            $this->question->accepted_post_id = $this->id;
+            $this->question->save();
+        }
+    }
+
     public function isEdited()
     {
         return $this->edited_at ? true : false;
+    }
+
+    public function isAcceptedAnswer()
+    {
+        return $this->question && $this->question->accepted_post_id == $this->id;
+    }
+
+    public function isAuthor()
+    {
+        return $this->user_id == Auth::user()->id;
     }
 
     public function isFavoritedBy(User $user)

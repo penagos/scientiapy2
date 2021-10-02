@@ -26,6 +26,11 @@ class Question extends Model
         return $this->hasOne(Post::class, 'id', 'post_id');
     }
 
+    public function acceptedAnswer()
+    {
+        return $this->hasOne(Post::class, 'id', 'accepted_post_id');
+    }
+
     public function answers()
     {
         return $this->hasMany(Post::class, 'question_id', 'id');
@@ -44,6 +49,11 @@ class Question extends Model
     public function date()
     {
         return $this->post->date();
+    }
+
+    public function isAcceptedAnswer(Post $post)
+    {
+        return $post == $this->acceptedAnswer();
     }
 
     public static function findByPost($post)
