@@ -23,7 +23,8 @@ class EditPost extends Component
     ];
 
     protected $messages = [
-        'post.content.min' => 'Post must contain at least 12 characters.',
+        'post.content.required' => 'Post must contain at least 12 characters.',
+        'post.content.min' => 'Post must contain at least 12 characters.'
     ];
 
     protected $listeners = [

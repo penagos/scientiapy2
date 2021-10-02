@@ -3,7 +3,7 @@
         <form wire:submit.prevent="save">
             <input type="hidden" wire:model="comment.post_id">
             <input type="text" id="{{ $this->editorID }}" class="form-control" wire:model="comment.content">
-            @error('comment.content') <div class="mt-2 text-danger error small">{{ $message }}</div>@enderror
+            @error('comment.content') @errorMessage($message) @enderror
             <div class="mt-2 pb-2">
                 <input type="submit" class="btn btn-primary" value="Save">
                 <a class="btn btn-light" href="#" wire:click.prevent="cancelEdit"><small>Cancel</small></a>

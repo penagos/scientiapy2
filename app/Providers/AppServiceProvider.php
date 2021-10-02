@@ -35,5 +35,11 @@ class AppServiceProvider extends ServiceProvider
                 return "<?php echo ($edited) ? '<i class=\"bi bi-pencil\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Edited\"></i>' : ''; ?>";
             }
         );
+
+        Blade::directive(
+            'errorMessage', function ($message) {
+                return "<div class=\"alert alert-danger small mt-2 p-1\" role=\"alert\"><?php echo $message; ?></div>";
+            }
+        );
     }
 }

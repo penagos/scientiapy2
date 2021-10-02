@@ -20,7 +20,8 @@ class EditComment extends Component
     ];
 
     protected $messages = [
-        'comment.content.min' => 'Please enter a comment longer than 12 characters.',
+        'comment.content.required' => 'Please enter a comment longer than 12 characters.',
+        'comment.content.min' => 'Please enter a comment longer than 12 characters.'
     ];
 
     public function mount ()

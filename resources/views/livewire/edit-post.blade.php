@@ -44,7 +44,7 @@
                 <form wire:submit.prevent="save">
                   <div id="{{ $editorID }}" wire:ignore></div>
                   <input id="{{ $editorContents }}" type="hidden" wire:model="post.content">
-                  @error('post.content') <div class="mt-2 text-danger error small">{{ $message }}</div>@enderror
+                  @error('post.content') @errorMessage($message) @enderror
                   <div class="float-start mt-2 pb-2">
                       <input type="submit" class="btn btn-primary" onclick="window.syncEditorContents('{{ $editorID }}', '{{ $editorContents }}');" value="Save">
                       <a class="btn btn-light" href="{{ $editLink }}"><small>Use full editor</small></a>
