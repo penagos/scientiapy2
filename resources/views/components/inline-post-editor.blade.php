@@ -1,5 +1,6 @@
 <form wire:submit.prevent="save">
   <div id="{{ $id }}" wire:ignore></div>
+  <input type="hidden" wire:model="questionID">
   <input id="{{ $id }}-contents" type="hidden" wire:model="post.content">
   @error('post.content') @errorMessage($message) @enderror
   <div class="float-start mt-2 pb-2">
