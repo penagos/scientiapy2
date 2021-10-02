@@ -2,7 +2,7 @@
     @if ($edit)
         <form wire:submit.prevent="save">
             <input type="hidden" wire:model="comment.post_id">
-            <input type="text" id="{{ $this->editorID }}" class="form-control" wire:model="comment.content">
+            <input type="text" id="{{ $this->editorID }}" class="form-control @error('comment.content') is-invalid @endif" wire:model="comment.content">
             @error('comment.content') @errorMessage($message) @enderror
             <div class="mt-2 pb-2">
                 <input type="submit" class="btn btn-primary" value="Save">
