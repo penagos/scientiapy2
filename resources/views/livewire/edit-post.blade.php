@@ -3,12 +3,24 @@
     <div class="row">
         <div class="col-xs-2 col-lg-1 text-center">
             @if (Auth::check())
-            <h1><a href="#" class="text-lightgray" wire:click.prevent="upvote"><i class="bi bi-caret-up-fill"></i></a></h1>
+            <h1>
+              @if (!$post->upvoted())  
+                <a href="#" class="text-lightgray" wire:click.prevent="upvote"><i class="bi bi-caret-up-fill"></i></a>
+              @else
+                <i class="bi bi-caret-up-fill text-primary"></i>
+              @endif
+            </h1>
             @endif
-            <h2><span class="badge bg-success fw-light">{{ $post->reputation }}</span></h2>
+            <h2><span class="badge bg-success fw-light">{{ $post->voteCount() }}</span></h2>
 
             @if (Auth::check())
-            <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill"></i></a></h1>
+            <h1>
+              @if (!$post->downvoted())  
+                <a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill"></i></a>
+              @else
+                <i class="bi bi-caret-down-fill text-primary"></i>
+              @endif
+            </h1>
             <a href="#" class="text-lightgray" wire:click.prevent="favorite"><i class="bi @if ($post->isFavorited()) bi-star-fill text-warning @else bi-star @endif"></i></a>
             @endif 
         </div>

@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\Favorite;
 use App\Models\Question;
 use App\Models\User;
+use App\Models\Vote;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -61,19 +62,63 @@ class Post extends Model
 
     public function isFavoritedBy(User $user)
     {
-
+        return Favorite::where('user_id', $user->id)
+            ->where('post_id', $this->id)
+            ->first();
     }
 
     public function isFavorited()
     {
-        return Favorite::where('user_id', Auth::id())
-            ->where('post_id', $this->id)
-            ->first();
+        return $this->isFavoritedBy(Auth::user());
     }
 
     public function favorite()
     {
         Auth::user()->favorites()->toggle($this->id);
+    }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
+
+    public function voteCount()
+    {
+        return $this->votes()->sum('amount');
+    }
+
+    public function upvote()
+    {
+        // If previously down voted, reset to 0, otherwise increment by 1
+        Vote::updateOrCreate(
+            ['post_id' => $this->id, 'user_id' => Auth::user()->id],
+            ['amount' => 1]
+        );
+    }
+
+    public function downvote()
+    {
+        // If previously up voted, reset to 0, otherwise decrement by 1
+        Vote::updateOrCreate(
+            ['post_id' => $this->id, 'user_id' => Auth::user()->id],
+            ['amount' => -1]
+        );
+    }
+
+    public function upvoted()
+    {
+        return Vote::where('user_id', Auth::user()->id)
+            ->where('post_id', $this->id)
+            ->where('amount', '>', 0)
+            ->first();
+    }
+
+    public function downvoted()
+    {
+        return Vote::where('user_id', Auth::user()->id)
+            ->where('post_id', $this->id)
+            ->where('amount', '<', 0)
+            ->first();
     }
 
     public function lastEditDate()

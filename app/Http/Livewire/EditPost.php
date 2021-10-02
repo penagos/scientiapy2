@@ -52,9 +52,7 @@ class EditPost extends Component
 
     public function upvote()
     {
-        ++$this->post->reputation;
-        $this->post->save();
-        $this->emit('renderPost', $this->post->id);
+        $this->post->upvote();
     }
 
     public function favorite()
@@ -65,9 +63,7 @@ class EditPost extends Component
 
     public function downvote()
     {
-        --$this->post->reputation;
-        $this->post->save();
-        $this->emit('renderPost', $this->post->id);
+        $this->post->downvote();
     }
 
     public function delete()
