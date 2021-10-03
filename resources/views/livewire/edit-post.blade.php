@@ -14,9 +14,9 @@
             @endif
             <h2>
               @if ($post->isAcceptedAnswer())  
-                <span class="badge bg-success fw-light">{{ $post->voteCount() }}</span>
+                <span class="badge bg-success fw-light">{{ $post->score }}</span>
               @else
-                {{ $post->voteCount() }}
+                {{ $post->score }}
               @endif
             </h2>
             @if (Auth::check())

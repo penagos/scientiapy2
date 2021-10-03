@@ -96,11 +96,6 @@ class Post extends Model
         return $this->hasMany(Vote::class);
     }
 
-    public function voteCount()
-    {
-        return $this->votes()->sum('amount');
-    }
-
     public function upvote()
     {
         // If previously down voted, reset to 0, otherwise increment by 1
@@ -109,6 +104,7 @@ class Post extends Model
             ['amount' => 1]
         );
 
+        $this->increment('score');
         $this->load('vote');
     }
 
@@ -120,6 +116,7 @@ class Post extends Model
             ['amount' => -1]
         );
 
+        $this->decrement('score');
         $this->load('vote');
     }
 
