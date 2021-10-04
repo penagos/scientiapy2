@@ -17,7 +17,7 @@ class Question extends Model
     ];
 
     protected $with = [
-        
+        'post'
     ];
     
     public static function isa($post)
@@ -37,7 +37,7 @@ class Question extends Model
 
     public function answers()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class)->with(['comments', 'vote', 'favorited']);
     }
 
     public function tags()

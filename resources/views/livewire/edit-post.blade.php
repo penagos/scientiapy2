@@ -72,7 +72,7 @@
                 </div>
               @endif
 
-              <livewire:edit-comment :post-id="$post->id" :key="'newcomment'.$post->id"/>
+              <livewire:edit-comment :postID="$post->id" :key="'newcomment'.$post->id"/>
             </div>
         </div>
       @else

@@ -24,7 +24,7 @@ class Post extends Model
         'user_id' => 1
     ];
 
-    protected $with = ['comments', 'question', 'user', 'vote', 'favorited'];
+    protected $with = ['question', 'user'];
 
     public function user()
     {
