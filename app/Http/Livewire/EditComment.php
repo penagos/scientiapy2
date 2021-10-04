@@ -24,16 +24,16 @@ class EditComment extends Component
         'comment.content.min' => 'Please enter a comment longer than 12 characters.'
     ];
 
-    public function mount ()
+    public function mount()
     {
         // The odds of this colliding with an existing editor on the page are quite small
         // If such a collision occurs, we'll just focus the wrong input
         $this->editorID = 'commentEditor'.Str::random();
     }
 
-    public function comment($pid)
+    public function comment()
     {
-        $this->comment = new Comment(['post_id' => $pid]);
+        $this->comment = new Comment(['post_id' => $this->postID]);
         $this->edit();
     }
 

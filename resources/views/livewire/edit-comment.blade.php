@@ -19,7 +19,7 @@
         @endif
     @elseif (!$edit)
         @if (Auth::check())
-            <a a href="#" wire:click.prevent="comment({{ $postID }})"><small>Add a comment</small></a>
+            <a a href="#" wire:click.prevent="comment"><small>Add a comment</small></a>
         @else
             <a a href="#" onclick="Livewire.emit('openModal', 'login'); return false;"><small>Add a comment</small></a>
         @endif
