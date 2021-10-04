@@ -2,10 +2,12 @@
 
 namespace App\View\Components;
 
+use App\Models\Post;
 use Illuminate\View\Component;
 
 class InlinePostEditor extends Component
 {
+    public $post;
     public $contents;
     public $id;
     public $fullEditorLink;
@@ -15,11 +17,12 @@ class InlinePostEditor extends Component
      *
      * @return void
      */
-    public function __construct($id, $contents, $fullEditorLink)
+    public function __construct($id, $contents, $fullEditorLink, $post)
     {
         $this->id = $id;
         $this->contents = $contents;
         $this->fullEditorLink = $fullEditorLink;
+        $this->post = $post;
     }
 
     /**

@@ -12,7 +12,7 @@ class EditPost extends Component
 {
     public Post $post;
     public $editLink;
-    public $tags = [];
+    public $tags;
     public $showCommentPoster;
     public $showPostEditor;
     public $editorID;
@@ -21,7 +21,8 @@ class EditPost extends Component
 
     protected $rules = [
         'post.content' => 'required|min:12',
-        'post.question_id' => 'required'
+        'post.question_id' => 'required',
+        'tags' => 'nullable'
     ];
 
     protected $messages = [

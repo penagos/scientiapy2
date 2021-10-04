@@ -9,7 +9,7 @@
                     <h3 class="fw-normal">{{ $question->title }}</h3>
                     <h6 class="text-muted fw-normal">Asked by <a href="">{{ $question->asker()->username }}</a> on @date($question->date())</h6>
                     <hr>
-                    <livewire:edit-post :post="$question->post" :wire:key="'p'.$question->post->id"/>
+                    <livewire:edit-post :post="$question->post" :qid="$question->id" :wire:key="'p'.$question->post->id"/>
                 </div>
             </div>
             <div class="row mt-4">

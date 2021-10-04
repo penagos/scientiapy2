@@ -4,13 +4,7 @@
       @if ($post->id)
         <div class="col-xs-2 col-lg-1 text-center">
             @if (Auth::check())
-            <h1>
-              @if (!$post->upvoted())  
-                <a href="#" class="text-lightgray" wire:click.prevent="upvote"><i class="bi bi-caret-up-fill"></i></a>
-              @else
-                <i class="bi bi-caret-up-fill text-primary"></i>
-              @endif
-            </h1>
+            <h1><a href="#" class="text-lightgray" wire:click.prevent="upvote"><i class="bi bi-caret-up-fill @if ($post->upvoted()) text-primary @endif"></i></a></h1>
             @endif
             <h2>
               @if ($post->isAcceptedAnswer())  
@@ -20,13 +14,7 @@
               @endif
             </h2>
             @if (Auth::check())
-            <h1>
-              @if (!$post->downvoted())  
-                <a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill"></i></a>
-              @else
-                <i class="bi bi-caret-down-fill text-primary"></i>
-              @endif
-            </h1>
+            <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill @if ($post->downvoted()) text-primary @endif"></i></a></h1>
 
             @if (!$post->question_id && $post->isAuthor())
             <h3 class="pb-3">
@@ -42,7 +30,7 @@
         </div>
         <div class="col-xs-10 col-lg-11">
             @if ($showPostEditor)
-              <x-inline-post-editor :id="$editorID" :contents="$editorContents" :full-editor-link="$editLink" />
+              <x-inline-post-editor :post="$post" :id="$editorID" :contents="$editorContents" :full-editor-link="$editLink" />
             @else
                 <div class="card-text">
                   {{ Illuminate\Mail\Markdown::parse($post->content) }}
@@ -76,7 +64,7 @@
             </div>
         </div>
       @else
-        <x-inline-post-editor :id="$editorID" contents="" full-editor-link="" />
+        <x-inline-post-editor :post="null" :id="$editorID" contents="" full-editor-link="" />
         <script>
             $(document).ready(() => {
               // We cannot create the toast editor until a full DOM load

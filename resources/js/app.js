@@ -8,7 +8,7 @@ let editors = new Map();
 window.createToastEditor = function createToastEditor(id, contents = '') {
   const editor = new Editor({
     el: document.getElementById(id),
-    height: '600px',
+    height: '500px',
     initialEditType: 'markdown',
     usageStatistics: false
   });

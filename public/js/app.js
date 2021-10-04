@@ -25875,7 +25875,7 @@ window.createToastEditor = function createToastEditor(id) {
   var contents = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
   var editor = new _toast_ui_editor__WEBPACK_IMPORTED_MODULE_0__.default({
     el: document.getElementById(id),
-    height: '600px',
+    height: '500px',
     initialEditType: 'markdown',
     usageStatistics: false
   });

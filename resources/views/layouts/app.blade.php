@@ -102,52 +102,60 @@
       hljs.highlightAll();
     });
 
-    $(document).ready(function () {
+    Livewire.on('initializeTypeAhead', () => {
+      initializeTypeAhead();
+    });
+
+    function initializeTypeAhead() {
+      console.log('initializing tags');
       var questionsFetcher = new Bloodhound({
-          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-          queryTokenizer: Bloodhound.tokenizers.whitespace,
-          remote: {
-              url: '{{ route("api.questions.search", ["query" => "%QUERY"]) }}',
-              wildcard: '%QUERY'
-          }
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: '{{ route("api.questions.search", ["query" => "%QUERY"]) }}',
+            wildcard: '%QUERY'
+        }
       });
 
       $('.typeahead').typeahead({
-          hint: true,
-          highlight: true,
-          minLength: 1
-        }, {
-          name: 'questions',
-          source: questionsFetcher
-        });
+        hint: true,
+        highlight: true,
+        minLength: 1
+      }, {
+        name: 'questions',
+        source: questionsFetcher
+      });
 
-        var tags = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {
-                url: '{{ route("api.tags.search", ["query" => "%QUERY"]) }}',
-                wildcard: '%QUERY',
-                filter: function(list) {
-                    
-                return $.map(list, function(name) {
-                        return { 'name': name };
-                    });
-                }
-            }
-        });
-        tags.initialize();
+      var tags = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+          url: '{{ route("api.tags.search", ["query" => "%QUERY"]) }}',
+          wildcard: '%QUERY',
+          filter: function(list) {
+              
+          return $.map(list, function(name) {
+              return { 'name': name };
+            });
+          }
+        }
+      });
+      tags.initialize();
 
-        $('.post-tags').tagsinput({
-            typeaheadjs: {
-              name: 'tags',
-              displayKey: 'name',
-              source: tags.ttAdapter(),
-            },
-            tagClass: 'bg-primary p-1 mt-2 mb-2 rounded',
-            cancelConfirmKeysOnEmpty: false
-        });
+      $('.post-tags').tagsinput({
+        typeaheadjs: {
+          name: 'tags',
+          displayKey: 'name',
+          source: tags.ttAdapter(),
+        },
+        tagClass: 'bg-primary p-1 mt-2 mb-2 rounded',
+        cancelConfirmKeysOnEmpty: false
+      });
+    }
 
-      hljs.highlightAll();
+    $(document).ready(function () {
+        initializeTypeAhead();
+        hljs.highlightAll();
 
       $(function () {
         $('[data-toggle="tooltip"]').tooltip();

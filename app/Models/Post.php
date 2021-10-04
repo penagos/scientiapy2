@@ -98,25 +98,40 @@ class Post extends Model
 
     public function upvote()
     {
-        // If previously down voted, reset to 0, otherwise increment by 1
-        Vote::updateOrCreate(
-            ['post_id' => $this->id, 'user_id' => Auth::user()->id],
-            ['amount' => 1]
-        );
+        if ($this->vote) {
+            $amount = $this->resetVote();
+        } else {
+            $amount = -1;
+        }
 
-        $this->increment('score');
+        if ($amount < 0) {
+            $vote = Vote::updateOrCreate(
+                ['post_id' => $this->id, 'user_id' => Auth::user()->id],
+                ['amount' => 1]
+            );
+            $this->increment('score', $vote->amount);
+        }
+
         $this->load('vote');
     }
 
     public function downvote()
     {
-        // If previously up voted, reset to 0, otherwise decrement by 1
-        Vote::updateOrCreate(
-            ['post_id' => $this->id, 'user_id' => Auth::user()->id],
-            ['amount' => -1]
-        );
+        if ($this->vote) {
+            $amount = $this->resetVote();
+        } else {
+            $amount = 1;
+        }
 
-        $this->decrement('score');
+        if ($amount > 0) {
+            $vote = Vote::updateOrCreate(
+                ['post_id' => $this->id, 'user_id' => Auth::user()->id],
+                ['amount' => -1]
+            );
+
+            $this->decrement('score', abs($vote->amount));
+        }
+
         $this->load('vote');
     }
 
@@ -147,5 +162,19 @@ class Post extends Model
         } else {
             return route('questions.edit', Question::findByPost($this));
         }
+    }
+
+    private function resetVote()
+    {
+        $amount = $this->vote->amount;
+        $this->vote->delete();
+
+        if ($amount > 0) {
+            $this->decrement('score', abs($amount));
+        } else {
+            $this->increment('score', abs($amount));
+        }
+
+        return $amount;
     }
 }
