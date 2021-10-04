@@ -31,7 +31,8 @@ class EditPost extends Component
     ];
 
     protected $listeners = [
-        'save' => '$refresh'
+        'save' => '$refresh',
+        'acceptedAnswer' => 'acceptedAnswer'
     ];
 
     /**
@@ -78,7 +79,21 @@ class EditPost extends Component
 
     public function accept()
     {
+        // If there was a previously accepted answer, broadcast event to remove state
+        if ($this->post->question->acceptedAnswer()) {
+            // This will cause an incessant number of DB queries but this is not the common
+            // case. TODO: optimize duplicate queries away
+            $this->emit('acceptedAnswer', $this->post->question->acceptedAnswer->id);
+        }
+
         $this->post->accept();
+    }
+
+    public function acceptedAnswer($id)
+    {
+        if ($this->post->id == $id) {
+            $this->post->refresh();
+        }
     }
 
     public function delete()

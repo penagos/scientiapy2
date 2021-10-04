@@ -14,18 +14,18 @@
               @endif
             </h2>
             @if (Auth::check())
-            <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill @if ($post->downvoted()) text-primary @endif"></i></a></h1>
+              <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill @if ($post->downvoted()) text-primary @endif"></i></a></h1>
 
-            @if (!$post->question_id && $post->isAuthor())
-            <h3 class="pb-3">
-              @if ($post->isAcceptedAnswer())
-                <i class="bi bi-check-lg text-success"></i>
-              @else
-                <a href="#" wire:click.prevent="accept"><i class="bi bi-check-lg text-lightgray"></i></a>
+              @if ($post->question && $post->question->post->isAuthor())
+                <h3 class="pb-3">
+                  @if ($post->isAcceptedAnswer())
+                    <i class="bi bi-check-lg text-success"></i>
+                  @else
+                    <a href="#" wire:click.prevent="accept"><i class="bi bi-check-lg text-lightgray"></i></a>
+                  @endif
+                </h3>
               @endif
-            </h3>
-            @endif
-            <a href="#" class="text-lightgray" wire:click.prevent="favorite"><i class="bi @if ($post->favorited) bi-star-fill text-warning @else bi-star @endif"></i></a>
+              <a href="#" class="text-lightgray" wire:click.prevent="favorite"><i class="bi @if ($post->favorited) bi-star-fill text-warning @else bi-star @endif"></i></a>
             @endif 
         </div>
         <div class="col-xs-10 col-lg-11">
