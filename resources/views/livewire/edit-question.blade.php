@@ -23,7 +23,6 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            console.log($('#editorContents').val());
             const editor = window.createToastEditor('editor', $('#editorContents').val());
         });
     </script>

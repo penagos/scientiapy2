@@ -89,7 +89,6 @@
 
   <script type="text/javascript">
     Livewire.on('createEditor', (editorID, content) => {
-      console.log(`Creating editor with ID ${editorID}`);
       const editor = window.createToastEditor(editorID);
       editor.setMarkdown(content);
     });
@@ -109,7 +108,6 @@
     });
 
     function initializeTypeAhead() {
-      console.log('initializing tags');
       var questionsFetcher = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
