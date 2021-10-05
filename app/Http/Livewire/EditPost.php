@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Post;
-use App\Models\Comment;
+use App\Models\Tag;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Livewire\Component;
@@ -21,7 +21,6 @@ class EditPost extends Component
 
     protected $rules = [
         'post.content' => 'required|min:12',
-        'post.question_id' => 'required',
         'tags' => 'nullable'
     ];
 
@@ -47,6 +46,10 @@ class EditPost extends Component
             $this->showCommentPoster = false;
             $this->showPostEditor = false;
             $this->editorID = 'postEditor' . $this->post->id;
+
+            if ($post->isQuestion()) {
+                $this->tags = $post->getQuestion()->flattenTags();
+            }
         } else {
             $this->post = new Post(['content' => '']);
             $this->post->question_id = $qid;
@@ -109,10 +112,28 @@ class EditPost extends Component
     {
         $this->cachedPost = $this->post->content;
         $this->validate();
-
-        $this->post->save();
         $this->post->edited_at = now();
+        $this->post->save();
+    
+        if ($this->post->isQuestion()) {
+            $this->saveTags();
+        }
+
         $this->hideEditor();
+    }
+
+    public function saveTags()
+    {
+        $q = $this->post->getQuestion();
+        $tags = explode(',', strtolower($this->tags));
+
+        $getOrCreateTags = function ($tag) {
+            return Tag::firstOrCreate([
+                'tag' => $tag
+            ])->id;
+        };
+
+        $q->tags()->sync(array_map($getOrCreateTags, $tags));
     }
 
     public function hideEditor()

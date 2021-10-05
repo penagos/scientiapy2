@@ -13,7 +13,7 @@ class CreateQuestionTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('question_tags', function (Blueprint $table) {
+        Schema::create('question_tag', function (Blueprint $table) {
             $table->id();
             $table->foreignId('question_id')->references('id')->on('questions');
             $table->foreignId('tag_id')->references('id')->on('tags');
@@ -28,6 +28,6 @@ class CreateQuestionTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('question_tags');
+        Schema::dropIfExists('question_tag');
     }
 }

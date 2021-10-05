@@ -65,6 +65,16 @@ class Post extends Model
         }
     }
 
+    public function isQuestion()
+    {
+        return !$this->question;
+    }
+
+    public function getQuestion()
+    {
+        return Question::where('post_id', $this->id)->firstOrFail();
+    }
+
     public function isEdited()
     {
         return $this->edited_at ? true : false;

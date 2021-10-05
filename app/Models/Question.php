@@ -62,6 +62,13 @@ class Question extends Model
         return $post == $this->acceptedAnswer();
     }
 
+    public function flattenTags()
+    {
+        return implode(',', $this->tags->map(function ($item, $key) {
+            return $item->tag;
+        })->toArray());
+    }
+
     public static function findByPost($post)
     {
         return Question::where('post_id', $post->id)->firstOrFail();

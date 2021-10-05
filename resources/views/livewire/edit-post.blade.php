@@ -36,11 +36,18 @@
                   {{ Illuminate\Mail\Markdown::parse($post->content) }}
                 </div>
 
-                @if (Auth::check())
                 <div class="float-start pb-2">
+                  @if ($tags)
+                    <div class="pb-2">
+                      @foreach (explode(',', $tags) as $tag)
+                        <span class="badge bg-lightblue fw-normal mr-2"><a href="#">{{ $tag }}</a></span>
+                      @endforeach
+                    </div>
+                  @endif
+                  @if (Auth::check())
                     <a href="#" wire:click.prevent="edit" class="small"><i class="bi bi-pencil"></i> Edit</a>
+                  @endif
                 </div>
-                @endif
                 <div class="float-end text-muted fs-6 lh-sm bg-light rounded p-2">
                     <small>posted @date($post->created_at) @edited($post->isEdited())</small><br>
                     <small><a href="#">{{ $post->user->username }}</a> - {{ $post->user->reputation }}</small>
