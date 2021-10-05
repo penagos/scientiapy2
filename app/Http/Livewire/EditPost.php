@@ -68,7 +68,6 @@ class EditPost extends Component
 
     public function favorite()
     {
-        // If previously favorited, unfavorite post.
         $this->post->favorite();
     }
 
@@ -119,12 +118,8 @@ class EditPost extends Component
     public function hideEditor()
     {
         $this->showPostEditor = false;
-    }
-
-    public function hydrate()
-    {
         if ($this->post) {
-            $this->emit('renderPost', $this->post->id);
+            $this->emit('renderPost', 'postContainer'.$this->post->id);
         }
     }
 

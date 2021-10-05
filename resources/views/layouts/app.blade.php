@@ -98,8 +98,10 @@
       document.getElementById(editorID).focus();
     });
 
-    Livewire.on('renderPost', (scrollTarget) => {
-      hljs.highlightAll();
+    Livewire.on('renderPost', (postContainer) => {
+      document.querySelectorAll(`#${postContainer} code`).forEach((el) => {
+        hljs.highlightElement(el);
+      });
     });
 
     Livewire.on('initializeTypeAhead', () => {

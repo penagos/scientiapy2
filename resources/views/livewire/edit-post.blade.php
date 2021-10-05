@@ -32,7 +32,7 @@
             @if ($showPostEditor)
               <x-inline-post-editor :post="$post" :id="$editorID" :contents="$editorContents" :full-editor-link="$editLink" />
             @else
-                <div class="card-text">
+                <div id="postContainer{{ $post->id }}" class="card-text">
                   {{ Illuminate\Mail\Markdown::parse($post->content) }}
                 </div>
 
