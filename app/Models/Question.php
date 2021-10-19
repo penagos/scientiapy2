@@ -47,9 +47,8 @@ class Question extends Model
 
     public function asker()
     {
-        $s = $this->post;
         return $this->post->user;
-        //return $this->hasOneThrough(User::class, Post::class);
+        //return $this->hasOneThrough(User::class, Post::class, 'user_id');
     }
 
     public function date()

@@ -6,7 +6,7 @@ use Illuminate\View\Component;
 
 class Question extends Component
 {
-    public $question;
+    public Question $question;
 
     /**
      * Create a new component instance.
