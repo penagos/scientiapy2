@@ -28,4 +28,9 @@ blockquote {
     border-radius: 5px;
 }
 
+.badge-success {
+    color: #fff;
+    background-color: #28a745;
+}
+
 .twitter-typeahead, .bootstrap-tagsinput { width: 100%; } 
