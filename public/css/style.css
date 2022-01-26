@@ -34,3 +34,7 @@ blockquote {
 }
 
 .twitter-typeahead, .bootstrap-tagsinput { width: 100%; } 
+
+.hljs {
+    border: 1px solid #EDEDED;
+}

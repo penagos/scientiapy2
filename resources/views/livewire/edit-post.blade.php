@@ -1,17 +1,13 @@
-<div id="post{{ $post->id ?? 'new' }}" class="card mt-2" style="background: #fcfcfc;">
-  <div class="card-body">
+<div id="post{{ $post->id ?? 'new' }}" class="card mt-2 border-0">
+  <div class="card-body p-0 pt-4">
     <div class="row">
       @if ($post->id)
         <div class="col-xs-2 col-lg-1 text-center">
             @if (Auth::check())
-            <h1><a href="#" class="text-lightgray" wire:click.prevent="upvote"><i class="bi bi-caret-up-fill @if ($post->upvoted()) text-primary @endif"></i></a></h1>
+            <h1 class="mb-0"><a href="#" class="text-lightgray" wire:click.prevent="upvote"><i class="bi bi-caret-up-fill @if ($post->upvoted()) text-primary @endif"></i></a></h1>
             @endif
-            <h2>
-              @if ($post->isAcceptedAnswer())  
-                <span class="badge bg-success fw-light">{{ $post->score }}</span>
-              @else
-                {{ $post->score }}
-              @endif
+            <h2 class="mb-0">
+                <span class="@if ($post->isAcceptedAnswer()) badge bg-success fw-light @endif">{{ $post->score ?? 0 }}</span>
             </h2>
             @if (Auth::check())
               <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill @if ($post->downvoted()) text-primary @endif"></i></a></h1>
@@ -49,16 +45,22 @@
                   @endif
                 </div>
                 <div class="float-end text-muted fs-6 lh-sm bg-light rounded p-2">
-                    <small>posted @date($post->created_at) @edited($post->isEdited())</small><br>
-                    <small><a href="#">{{ $post->user->username }}</a> - {{ $post->user->reputation }}</small>
+                  <div class="d-flex">
+                    <div>
+                      <img src="{{ asset('img/avatar-placeholder.svg') }}" class="m-1" width="32" height="32" alt="{{ $post->user->username }}'s profile picture">
+                    </div>
+                    <div class="ml-2">
+                      <small>Posted @datetime($post->created_at) @edited($post->isEdited())</small><br>
+                      <small><a href="#">{{ $post->user->username }}</a> - {{ $post->user->reputation }}</small>
+                    </div>
+                  </div>
                 </div>
             @endif
 
             <div class="clearfix"></div>
-            <div id="comments" class="mt-3">
+            <div id="comments" class="mt-3 pl-4">
               @if ($post->comments->count() > 0)
                 <div class="mt-2" style="clear: both;">
-                  <hr>
                   <div>
                   @foreach ($post->comments as $comment)
                     <livewire:edit-comment :comment="$comment" :key="'c'.$comment->id"/>

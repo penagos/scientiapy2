@@ -46,9 +46,9 @@
                 <h5 class="fw-light">Related Questions</h5>
 
                 <ul class="list-unstyled">
-                    <li class="pt-2"><small><span class="badge badge-success">143</span></small> <a href="#">How to determine base type of a pointer in LLVM?</a></li>
-                    <li class="pt-2"><small><span class="badge badge-success">6</span></small> <a href="#">What does the ??? operator do in C++?</a></li>
-                    <li class="pt-2"><small><span class="badge badge-success">45</span></small> <a href="#">Difference between shared and static library linkage?</a></li>
+                    <li class="pt-2 small"><span class="badge badge-success" style="width: 36px;">143</span> <a href="#">How to determine base type of a pointer in LLVM?</a></li>
+                    <li class="pt-2 small"><span class="badge badge-success" style="width: 36px;">6</span> <a href="#">What does the ??? operator do in C++?</a></li>
+                    <li class="pt-2 small"><span class="badge badge-success" style="width: 36px;">45</span> <a href="#">Difference between shared and static library linkage?</a></li>
                 </ul>
             </div>
         </div>

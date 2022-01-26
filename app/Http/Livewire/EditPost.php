@@ -21,6 +21,7 @@ class EditPost extends Component
 
     protected $rules = [
         'post.content' => 'required|min:12',
+        'post.question_id' => 'required|exists:questions,id',
         'tags' => 'nullable'
     ];
 
