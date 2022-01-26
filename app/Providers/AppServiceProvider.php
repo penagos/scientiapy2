@@ -26,7 +26,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Blade::directive(
             'date', function ($date) {
-                return "<?php echo ($date == '') ? '' : date('Y-m-d', strtotime($date)); ?>";
+                return "<?php echo ($date == '') ? '' : date('m/d/Y', strtotime($date)); ?>";
+            }
+        );
+
+        Blade::directive(
+            'datetime', function ($date) {
+                return "<?php echo ($date == '') ? '' : date('m/d/Y H:i', strtotime($date)); ?>";
             }
         );
 
