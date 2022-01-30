@@ -1,6 +1,6 @@
 <div>
-    <hr class="bg-secondary">
     @if ($edit)
+        <hr class="bg-secondary">
         <form wire:submit.prevent="save">
             <input type="hidden" wire:model="comment.post_id">
             <textarea id="{{ $this->editorID }}" class="form-control @error('comment.content') is-invalid @endif" wire:model="comment.content" rows="5"></textarea>
@@ -11,6 +11,7 @@
             </div>
         </form>
     @elseif ($comment && $comment->id)
+        <hr class="bg-secondary">
         <p class="mb-0 small">
             {{ $comment->content }}
         <p>
@@ -22,6 +23,7 @@
             @endif
         </div>
     @elseif (!$edit)
+        <br>
         @if (Auth::check())
             <a a href="#" wire:click.prevent="comment"><small>Add a comment</small></a>
         @else

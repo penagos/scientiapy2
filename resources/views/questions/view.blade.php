@@ -7,7 +7,6 @@
             <div class="col-lg-9">
                 <h3 class="fw-normal">{{ $question->title }}</h3>
                 <h6 class="text-muted fw-normal">Asked by <a href="">{{ $question->asker()->username }}</a> on @date($question->date())</h6>
-                <hr>
             </div>
             <div class="col-lg-3">
                 <a href="{{ route('questions.ask') }}" class="btn btn-primary">Ask a Question</a>
@@ -21,6 +20,7 @@
 
                 <div class="row mt-4">
                     <h4 class="text-secondary">{{ $question->answers->count() }} answers</h4>
+                    <hr>
                     @foreach ($question->answers as $answer)
                         <livewire:edit-post :post="$answer" :wire:key="'p'.$answer->id"/>
                     @endforeach
