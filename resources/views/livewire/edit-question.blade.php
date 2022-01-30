@@ -12,8 +12,7 @@
     @error('post.content') <span class="error">{{ $message }}</span> @enderror
 
     <div class="mt-3">
-        <label for="tags" class="form-label">Tags</label>
-        <input type="text" class="form-control post-tags" id="tags" aria-describedby="tagsHelp" wire:model.defer="question.tags" wire:ignore>
+        <input type="text" class="form-control post-tags" id="tags" aria-describedby="tagsHelp" wire:model.defer="question.tags" placeholder="Tags" wire:ignore>
         <div id="tagsHelp" class="form-text">Limited to 5 tags, ENTER to confirm / add more.</div>
     </div>
 

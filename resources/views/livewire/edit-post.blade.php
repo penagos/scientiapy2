@@ -7,7 +7,7 @@
             <h1 class="mb-0"><a href="#" class="text-lightgray" wire:click.prevent="upvote"><i class="bi bi-caret-up-fill @if ($post->upvoted()) text-primary @endif"></i></a></h1>
             @endif
             <h2 class="mb-0">
-                <span class="@if ($post->isAcceptedAnswer()) badge bg-success fw-light @endif">{{ $post->score ?? 0 }}</span>
+                <span class="badge @if ($post->isAcceptedAnswer()) bg-success fw-light @else bg-light text-dark @endif">{{ $post->score ?? 0 }}</span>
             </h2>
             @if (Auth::check())
               <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill @if ($post->downvoted()) text-primary @endif"></i></a></h1>

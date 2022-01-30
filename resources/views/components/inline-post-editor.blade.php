@@ -5,8 +5,7 @@
   @error('post.content') @errorMessage($message) @enderror
   @if ($post && !$post->question)
     <div class="mt-3">
-        <label for="tags" class="form-label">Tags</label>
-        <input type="text" class="form-control post-tags" id="{{ $id }}-tags" wire:model.defer="tags" aria-describedby="tagsHelp" wire:ignore>
+        <input type="text" class="form-control post-tags" id="{{ $id }}-tags" wire:model.defer="tags" aria-describedby="tagsHelp" placeholder="Tags" wire:ignore>
         @error('tags') @errorMessage($message) @enderror
         <div id="tagsHelp" class="form-text">Limited to 5 tags, ENTER to confirm / add more.</div>
     </div>
