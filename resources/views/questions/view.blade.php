@@ -26,11 +26,6 @@
                     @endforeach
                 </div>
 
-                <div class="row mt-4">
-                    <div class="col-lg-12">
-                        <div id="editor"></div>
-                    </div>
-                </div>
                 <div class="row mt-2">
                     <div class="col-lg-12">
                         @if (Auth::check())

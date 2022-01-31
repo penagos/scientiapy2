@@ -1,4 +1,4 @@
-<div id="post{{ $post->id ?? 'new' }}" class="card mt-2 border-0">
+<div id="post{{ $post->id ?? 'new' }}" class="card mt-2">
   <div class="card-body p-0 pt-4">
     <div class="row">
       @if ($post->id)
@@ -58,7 +58,7 @@
             @endif
 
             <div class="clearfix"></div>
-            <div id="comments" class="mt-3 pl-4">
+            <div id="comments" class="mt-3 pl-4 pb-4">
               @if ($post->comments->count() > 0)
                 <div class="mt-2" style="clear: both;">
                   <div>
