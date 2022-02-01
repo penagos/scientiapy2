@@ -22,6 +22,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <input class="form-control me-2 w-100" type="search" placeholder="Search" aria-label="Search">
+
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{{ route('questions.index') }}">Questions</a>
@@ -33,25 +35,25 @@
               <a class="nav-link" href="{{ route('users.index') }}">Users</a>
             </li>
           </ul>
-            <input class="form-control me-2 w-100 typeahead" type="search" placeholder="Search" aria-label="Search">
 
-            @if (Auth::check())
-              <div class="btn-group pl-4">
-                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                  {{ auth()->user()->username }}
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                  <li><a class="dropdown-item" href="{{ route('users.favorites') }}">Favorites</a></li>
-                  <li><a class="dropdown-item" href="{{ route('users.teams') }}">Teams</a></li>
-                  <li><a class="dropdown-item" href="{{ route('users.settings') }} ">Settings</a></li>
-                  <li><a class="dropdown-item" href="#">Dark Mode <i class="pl-2 bi bi-moon-fill"></i></a></li>
-                  <li><a class="dropdown-item" href="{{ route('users.logout') }}">Logout</a></li>
-                </ul>
-              </div>
-            @else
-              <button onclick="Livewire.emit('openModal', 'login')" class="btn">Login</button>
-              <button onclick="Livewire.emit('openModal', 'register')" class="btn btn-primary">Join</button>
-            @endif
+          @if (Auth::check())
+            <div class="btn-group pl-4">
+              <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{{ asset('img/avatar-placeholder.svg') }}" width="32" height="32" class="rounded-circle d-inline mr-2" alt="{{ auth()->user()->username }}'s profile picture">
+                {{ auth()->user()->username }}
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="{{ route('users.favorites') }}">Favorites</a></li>
+                <li><a class="dropdown-item" href="{{ route('users.teams') }}">Teams</a></li>
+                <li><a class="dropdown-item" href="{{ route('users.settings') }} ">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Dark Mode <i class="pl-2 bi bi-moon-fill"></i></a></li>
+                <li><a class="dropdown-item" href="{{ route('users.logout') }}">Logout</a></li>
+              </ul>
+            </div>
+          @else
+            <button onclick="Livewire.emit('openModal', 'login')" class="btn">Login</button>
+            <button onclick="Livewire.emit('openModal', 'register')" class="btn btn-primary">Join</button>
+          @endif
         </div>
       </div>
     </nav>

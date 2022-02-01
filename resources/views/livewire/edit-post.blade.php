@@ -21,7 +21,7 @@
                   @endif
                 </h3>
               @endif
-              <a href="#" class="text-lightgray" wire:click.prevent="favorite"><i class="bi @if ($post->favorited) bi-star-fill text-warning @else bi-star @endif"></i></a>
+              <a href="#" class="text-lightgray" wire:click.prevent="favorite" title="Favorite post"><i class="bi @if ($post->favorited) bi-star-fill text-warning @else bi-star @endif"></i></a>
             @endif 
         </div>
         <div class="col-xs-10 col-lg-11">
@@ -47,7 +47,7 @@
                 <div class="float-end text-muted fs-6 lh-sm bg-light rounded p-2">
                   <div class="d-flex">
                     <div>
-                      <img src="{{ asset('img/avatar-placeholder.svg') }}" class="m-1" width="32" height="32" alt="{{ $post->user->username }}'s profile picture">
+                      <a href="#"><img src="{{ asset('img/avatar-placeholder.svg') }}" class="m-1" width="32" height="32" alt="{{ $post->user->username }}'s profile picture"></a>
                     </div>
                     <div class="ml-2">
                       <small>Posted @datetime($post->created_at) @edited($post->isEdited())</small><br>
