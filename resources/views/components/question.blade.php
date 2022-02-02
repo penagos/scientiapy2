@@ -1,8 +1,11 @@
-<div class="card mt-2">
+<div class="card mt-2 border-0">
   <div class="card-body">
     <div class="row">
         <div class="col-lg-1">
-            <h2><span class="badge bg-success">{{ $question->post->reputation }}</span></h2>
+            <h2 class="mb-0">
+                <span class="badge fw-normal @if ($question->acceptedAnswer) bg-success fw-light @else bg-light text-dark @endif">{{ $question->post->reputation ?? 0 }}</span>
+            </h2>
+
             <small>{{ $question->views }} views</small>
         </div>
         <div class="col-lg-11">

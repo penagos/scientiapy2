@@ -3,10 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Models\Post;
-use App\Models\Question;
+use App\Models;
 use Livewire\Component;
 
-class EditQuestion extends Component
+class Question extends Component
 {
     public Question $question;
 
@@ -36,7 +36,7 @@ class EditQuestion extends Component
     {
         $this->validate();
 
-        $question = Question::create($this->question);
+        $question = Models\Question::create($this->question);
         $post = Post::create($this->question['post']);
         $question->post_id = $post->id;
         $question->save();
@@ -46,6 +46,6 @@ class EditQuestion extends Component
 
     public function render()
     {
-        return view('livewire.edit-question');
+        return view('livewire.question');
     }
 }

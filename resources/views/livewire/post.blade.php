@@ -1,4 +1,4 @@
-<div id="post{{ $post->id ?? 'new' }}" class="card mt-2">
+<div id="post{{ $post->id ?? 'new' }}" class="card mt-2 border-0">
   <div class="card-body p-0 pt-4">
     <div class="row">
       @if ($post->id)
@@ -7,7 +7,7 @@
             <h1 class="mb-0"><a href="#" class="text-lightgray" wire:click.prevent="upvote"><i class="bi bi-caret-up-fill @if ($post->upvoted()) text-primary @endif"></i></a></h1>
             @endif
             <h2 class="mb-0">
-                <span class="badge @if ($post->isAcceptedAnswer()) bg-success fw-light @else bg-light text-dark @endif">{{ $post->score ?? 0 }}</span>
+                <span class="badge fw-normal @if ($post->isAcceptedAnswer()) bg-success fw-light @else bg-light text-dark @endif">{{ $post->score ?? 0 }}</span>
             </h2>
             @if (Auth::check())
               <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill @if ($post->downvoted()) text-primary @endif"></i></a></h1>
@@ -63,13 +63,13 @@
                 <div class="mt-2" style="clear: both;">
                   <div>
                   @foreach ($post->comments as $comment)
-                    <livewire:edit-comment :comment="$comment" :key="'c'.$comment->id"/>
+                    <livewire:comment :comment="$comment" :key="'c'.$comment->id"/>
                   @endforeach
                   </div>
                 </div>
               @endif
 
-              <livewire:edit-comment :postID="$post->id" :key="'newcomment'.$post->id"/>
+              <livewire:comment :postID="$post->id" :key="'newcomment'.$post->id"/>
             </div>
         </div>
       @else

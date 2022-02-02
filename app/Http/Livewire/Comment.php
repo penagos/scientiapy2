@@ -2,15 +2,14 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Comment;
-use App\Models\Post;
+use App\Models;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
-class EditComment extends Component
+class Comment extends Component
 {
     public $postID;
-    public Comment $comment;
+    public Models\Comment $comment;
     public $edit = false;
     public $editorID;
 
@@ -33,7 +32,7 @@ class EditComment extends Component
 
     public function comment()
     {
-        $this->comment = new Comment(['post_id' => $this->postID]);
+        $this->comment = new Models\Comment(['post_id' => $this->postID]);
         $this->edit();
     }
 
@@ -62,6 +61,6 @@ class EditComment extends Component
 
     public function render()
     {
-        return view('livewire.edit-comment');
+        return view('livewire.comment');
     }
 }

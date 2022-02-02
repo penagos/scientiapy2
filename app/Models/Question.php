@@ -16,10 +16,6 @@ class Question extends Model
         'post'
     ];
 
-    protected $with = [
-        'post'
-    ];
-    
     public static function isa($post)
     {
         return is_a($post, Question::class);
@@ -43,12 +39,6 @@ class Question extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
-    }
-
-    public function asker()
-    {
-        return $this->post->user;
-        //return $this->hasOneThrough(User::class, Post::class, 'user_id');
     }
 
     public function date()

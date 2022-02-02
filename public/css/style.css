@@ -1,5 +1,6 @@
 body {
-    background: #F7F7F7;
+    /*background: #F7F7F7;*/
+    background-color: rgb(247 248 253);
 }
 a {
     text-decoration: none;

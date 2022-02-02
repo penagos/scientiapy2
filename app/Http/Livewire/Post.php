@@ -2,15 +2,13 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Post;
+use App\Models;
 use App\Models\Tag;
-use App\Models\Question;
-use Illuminate\Http\Request;
 use Livewire\Component;
 
-class EditPost extends Component
+class Post extends Component
 {
-    public Post $post;
+    public Models\Post $post;
     public $editLink;
     public $tags;
     public $showCommentPoster;
@@ -52,7 +50,7 @@ class EditPost extends Component
                 $this->tags = $post->getQuestion()->flattenTags();
             }
         } else {
-            $this->post = new Post(['content' => '']);
+            $this->post = new Models\Post(['content' => '']);
             $this->post->question_id = $qid;
             $this->editorID = 'answerPoster';
         }
@@ -152,7 +150,7 @@ class EditPost extends Component
      */
     public function render()
     {
-        return view('livewire.edit-post');
+        return view('livewire.post');
     }
 
     private function showEditor($contents)

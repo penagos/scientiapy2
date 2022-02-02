@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-9">
                 <h3 class="fw-normal">{{ $question->title }}</h3>
-                <h6 class="text-muted fw-normal">Asked by <a href="">{{ $question->asker()->username }}</a> on @date($question->date())</h6>
+                <h6 class="text-muted fw-normal">Asked by <a href="">{{ $question->post->user->username }}</a> on @date($question->date())</h6>
             </div>
             <div class="col-lg-3">
                 <a href="{{ route('questions.ask') }}" class="btn btn-primary">Ask a Question</a>
@@ -15,21 +15,20 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="row">
-                    <livewire:edit-post :post="$question->post" :qid="$question->id" :wire:key="'p'.$question->post->id"/>
+                    <livewire:post :post="$question->post" :qid="$question->id" :wire:key="'p'.$question->post->id"/>
                 </div>
 
                 <div class="row mt-4">
                     <h4 class="text-secondary">{{ $question->answers->count() }} answers</h4>
-                    <hr>
                     @foreach ($question->answers as $answer)
-                        <livewire:edit-post :post="$answer" :wire:key="'p'.$answer->id"/>
+                        <livewire:post :post="$answer" :wire:key="'p'.$answer->id"/>
                     @endforeach
                 </div>
 
                 <div class="row mt-2">
                     <div class="col-lg-12">
                         @if (Auth::check())
-                            <livewire:edit-post :qid="$question->id" :wire:key="newanswer" />
+                            <livewire:post :qid="$question->id" :wire:key="newanswer" />
                         @else
                             <a href="#" onclick="Livewire.emit('openModal', 'login'); return false;">Login</a> or <a href="#" onclick="Livewire.emit('openModal', 'register'); return false;">create an account</a> to post an answer.
                         @endif
@@ -40,11 +39,32 @@
             <div class="col-lg-3">
                 <h5 class="fw-light">Related Questions</h5>
 
-                <ul class="list-unstyled">
-                    <li class="pt-2 small"><span class="badge badge-success" style="width: 36px;">143</span> <a href="#">How to determine base type of a pointer in LLVM?</a></li>
-                    <li class="pt-2 small"><span class="badge badge-success" style="width: 36px;">6</span> <a href="#">What does the ??? operator do in C++?</a></li>
-                    <li class="pt-2 small"><span class="badge badge-success" style="width: 36px;">45</span> <a href="#">Difference between shared and static library linkage?</a></li>
-                </ul>
+                <div class="d-flex pt-2">
+                    <div class="pr-2"><span class="badge badge-success" style="width: 36px;">143</span></div>
+                    <div class="small"><a href="#">How to determine base type of a pointer in LLVM?</a></div>
+                </div>
+                <div class="d-flex pt-2">
+                    <div class="pr-2"><span class="badge badge-success" style="width: 36px;">6</span></div>
+                    <div class="small"><a href="#">What does the ??? operator do in C++?</a></div>
+                </div>
+
+                <div class="d-flex pt-2">
+                    <div class="pr-2"><span class="badge badge-success" style="width: 36px;">143</span></div>
+                    <div class="small"><a href="#">How to determine base type of a pointer in LLVM?</a></div>
+                </div>
+                <div class="d-flex pt-2">
+                    <div class="pr-2"><span class="badge badge-success" style="width: 36px;">6</span></div>
+                    <div class="small"><a href="#">What does the ??? operator do in C++?</a></div>
+                </div>
+
+                <div class="d-flex pt-2">
+                    <div class="pr-2"><span class="badge badge-success" style="width: 36px;">143</span></div>
+                    <div class="small"><a href="#">How to determine base type of a pointer in LLVM?</a></div>
+                </div>
+                <div class="d-flex pt-2">
+                    <div class="pr-2"><span class="badge badge-success" style="width: 36px;">6</span></div>
+                    <div class="small"><a href="#">What does the ??? operator do in C++?</a></div>
+                </div>
             </div>
         </div>
     </div>
