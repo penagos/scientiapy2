@@ -134,12 +134,12 @@ class Post extends Model
 
     public function upvoted()
     {
-        return $this->vote && $this->vote->amount > 0;
+        return $this->vote_id && $this->vote->amount > 0;
     }
 
     public function downvoted()
     {
-        return $this->vote && $this->vote->amount < 0;
+        return $this->vote_id && $this->vote->amount < 0;
     }
 
     public function vote()

@@ -12,7 +12,7 @@
             @if (Auth::check())
               <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill @if ($post->downvoted()) text-primary @endif"></i></a></h1>
 
-              @if ($post != $question->post)
+              @if ($post->question_id)
                 <h3 class="pb-3">
                   @if ($question->isAcceptedAnswer($post))
                     <i class="bi bi-check-lg text-success"></i>
@@ -20,8 +20,9 @@
                     <a href="#" wire:click.prevent="accept"><i class="bi bi-check-lg text-lightgray"></i></a>
                   @endif
                 </h3>
+              @else
+                <a href="#" class="text-lightgray" wire:click.prevent="favorite" title="Favorite post"><i class="bi @if ($post->favorited) bi-star-fill text-warning @else bi-star @endif"></i></a>
               @endif
-              <a href="#" class="text-lightgray" wire:click.prevent="favorite" title="Favorite post"><i class="bi @if ($post->favorited) bi-star-fill text-warning @else bi-star @endif"></i></a>
             @endif 
         </div>
         <div class="col-xs-10 col-lg-11">
