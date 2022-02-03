@@ -33,7 +33,7 @@ class Question extends Model
 
     public function answers()
     {
-        return $this->hasMany(Post::class)->with(['comments', 'vote', 'favorited']);
+        return $this->hasMany(Post::class)->with(['comments']);
     }
 
     public function tags()

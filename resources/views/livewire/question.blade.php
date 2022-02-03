@@ -6,12 +6,12 @@
 
             <input type="text" class="form-control" id="title" aria-describedby="titleHelp" wire:model.defer="question.title" wire:ignore>
 
-            @error('question.title') <div>{{ $message }}</div> @enderror
+            @error('question.title') @errorMessage($message) @enderror
             <div id="titleHelp" class="form-text">Limited to 255 characters.</div>
         </div>
-        <div id="editor"></div>
+        <div id="editor" wire:ignore></div>
         <input id="editorContents" type="hidden" value="{{ $question->post ?? '' }}">
-        @error('post.content') <span class="error">{{ $message }}</span> @enderror
+        @error('post.content') @errorMessage($message) @enderror
 
         <div class="mt-3">
             <input type="text" class="form-control post-tags" id="tags" aria-describedby="tagsHelp" wire:model.defer="question.tags" placeholder="Tags" wire:ignore>

@@ -26,7 +26,7 @@ class QuestionController extends Controller
 
     public function view($id)
     {
-        return view('questions.view', ['question' => Question::with(['answers', 'post'])->findOrFail($id)]);
+        return view('questions.view', ['question' => Question::findOrFail($id)]);
     }
 
     public function edit($id)

@@ -72,19 +72,17 @@ class Post extends Model
 
     public function isAuthor()
     {
-        return $this->user == Auth::user();
+        return Auth::check() && $this->user == Auth::user();
     }
 
     public function favorited()
     {
-        $user = Auth::user();
-        return $user ? $this->hasOne(Favorite::class)->where('user_id', $user->id) : null;
+        return Auth::check() ? $this->hasOne(Favorite::class)->where('user_id', Auth::user()->id) : null;
     }
 
     public function favorite()
     {
         Auth::user()->favorites()->toggle($this->id);
-        $this->load('favorited');
     }
 
     /*
@@ -109,7 +107,7 @@ class Post extends Model
             $this->increment('score', $vote->amount);
         }
 
-        $this->load('vote');
+        //$this->load('vote');
     }
 
     public function downvote()
@@ -129,7 +127,7 @@ class Post extends Model
             $this->decrement('score', abs($vote->amount));
         }
 
-        $this->load('vote');
+        //$this->load('vote');
     }
 
     public function upvoted()
@@ -144,7 +142,7 @@ class Post extends Model
 
     public function vote()
     {
-        return $this->hasOne(Vote::class)->where('user_id', Auth::user()->id ?? 0);
+        return Auth::check() ? $this->hasOne(Vote::class)->where('user_id', Auth::user()->id) : null;
     }
 
     public function lastEditDate()

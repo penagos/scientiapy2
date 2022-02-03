@@ -45,7 +45,7 @@
                     <a href="#" wire:click.prevent="edit" class="small"><i class="bi bi-pencil"></i> Edit</a>
                   @endif
                 </div>
-                <div class="float-end text-muted fs-6 lh-sm bg-light rounded p-2">
+                <div class="float-end text-muted fs-6 lh-sm bg-light rounded p-2" wire:ignore>
                   <div class="d-flex">
                     <div>
                       <a href="#"><img src="{{ asset('img/avatar-placeholder.svg') }}" class="m-1" width="32" height="32" alt="{{ $post->user->username }}'s profile picture"></a>
