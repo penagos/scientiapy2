@@ -15,20 +15,20 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="row">
-                    <livewire:post :post="$question->post" :qid="$question->id" :wire:key="'p'.$question->post->id"/>
+                    <livewire:post :post="$question->post" :question="$question" :wire:key="'p'.$question->post->id"/>
                 </div>
 
                 <div class="row mt-4">
                     <h4 class="text-secondary">{{ $question->answers->count() }} answers</h4>
                     @foreach ($question->answers as $answer)
-                        <livewire:post :post="$answer" :wire:key="'p'.$answer->id"/>
+                        <livewire:post :post="$answer" :question="$question" :wire:key="'p'.$answer->id"/>
                     @endforeach
                 </div>
 
                 <div class="row mt-2">
                     <div class="col-lg-12">
                         @if (Auth::check())
-                            <livewire:post :qid="$question->id" :wire:key="newanswer" />
+                            <livewire:post :question="$question" :wire:key="newanswer" />
                         @else
                             <a href="#" onclick="Livewire.emit('openModal', 'login'); return false;">Login</a> or <a href="#" onclick="Livewire.emit('openModal', 'register'); return false;">create an account</a> to post an answer.
                         @endif

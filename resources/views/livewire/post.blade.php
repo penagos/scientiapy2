@@ -7,14 +7,14 @@
             <h1 class="mb-0"><a href="#" class="text-lightgray" wire:click.prevent="upvote"><i class="bi bi-caret-up-fill @if ($post->upvoted()) text-primary @endif"></i></a></h1>
             @endif
             <h2 class="mb-0">
-                <span class="badge fw-normal @if ($post->isAcceptedAnswer()) bg-success fw-light @else bg-light text-dark @endif">{{ $post->score ?? 0 }}</span>
+                <span class="badge fw-normal @if ($question->isAcceptedAnswer($post)) bg-success fw-light @else bg-light text-dark @endif">{{ $post->score ?? 0 }}</span>
             </h2>
             @if (Auth::check())
               <h1><a href="#" class="text-lightgray" wire:click.prevent="downvote"><i class="bi bi-caret-down-fill @if ($post->downvoted()) text-primary @endif"></i></a></h1>
 
-              @if ($post->question && $post->question->post->isAuthor())
+              @if ($post != $question->post)
                 <h3 class="pb-3">
-                  @if ($post->isAcceptedAnswer())
+                  @if ($question->isAcceptedAnswer($post))
                     <i class="bi bi-check-lg text-success"></i>
                   @else
                     <a href="#" wire:click.prevent="accept"><i class="bi bi-check-lg text-lightgray"></i></a>

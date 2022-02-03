@@ -19,12 +19,7 @@ class Post extends Model
         'content'
     ];
 
-    // TODO: make logged in user
-    protected $attributes = [
-        'user_id' => 1
-    ];
-
-    protected $with = ['question', 'user'];
+    protected $with = ['user'];
 
     public function user()
     {
@@ -70,29 +65,20 @@ class Post extends Model
         return !$this->question;
     }
 
-    public function getQuestion()
-    {
-        return Question::where('post_id', $this->id)->firstOrFail();
-    }
-
     public function isEdited()
     {
         return $this->edited_at ? true : false;
     }
 
-    public function isAcceptedAnswer()
-    {
-        return $this->question && $this->question->accepted_post_id == $this->id;
-    }
-
     public function isAuthor()
     {
-        return $this->user_id == Auth::user()->id;
+        return $this->user == Auth::user();
     }
 
     public function favorited()
     {
-        return $this->hasOne(Favorite::class)->where('user_id', Auth::user()->id ?? 0);
+        $user = Auth::user();
+        return $user ? $this->hasOne(Favorite::class)->where('user_id', $user->id) : null;
     }
 
     public function favorite()
@@ -101,10 +87,11 @@ class Post extends Model
         $this->load('favorited');
     }
 
+    /*
     public function votes()
     {
         return $this->hasMany(Vote::class);
-    }
+    }*/
 
     public function upvote()
     {

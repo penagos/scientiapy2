@@ -4,11 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Post extends Component
 {
     public Models\Post $post;
+    public Models\Question $question;
     public $editLink;
     public $tags;
     public $showCommentPoster;
@@ -38,20 +40,16 @@ class Post extends Component
      *
      * @return void
      */
-    public function mount($post = null, $qid = 0)
+    public function mount($post = null)
     {
         if ($post) {
             $this->editorContents = $this->editorID . '-contents';
             $this->showCommentPoster = false;
             $this->showPostEditor = false;
             $this->editorID = 'postEditor' . $this->post->id;
-
-            if ($post->isQuestion()) {
-                $this->tags = $post->getQuestion()->flattenTags();
-            }
         } else {
             $this->post = new Models\Post(['content' => '']);
-            $this->post->question_id = $qid;
+            $this->post->question_id = $this->question->id;
             $this->editorID = 'answerPoster';
         }
     }
@@ -81,7 +79,7 @@ class Post extends Component
     public function accept()
     {
         // If there was a previously accepted answer, broadcast event to remove state
-        if ($this->post->question->acceptedAnswer()) {
+        if ($this->post->question->acceptedAnswer) {
             // This will cause an incessant number of DB queries but this is not the common
             // case. TODO: optimize duplicate queries away
             $this->emit('acceptedAnswer', $this->post->question->acceptedAnswer->id);
@@ -112,6 +110,7 @@ class Post extends Component
         $this->cachedPost = $this->post->content;
         $this->validate();
         $this->post->edited_at = now();
+        $this->post->user_id = $this->post->user_id || Auth::user()->id;
         $this->post->save();
     
         if ($this->post->isQuestion()) {

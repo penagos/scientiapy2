@@ -1,6 +1,6 @@
 <div class="card border-0">
     <div class="card-body">
-    <form id="askQuestion" wire:submit.prevent="submit">
+    <form id="askQuestion" wire:submit.prevent="create">
         <div class="mb-3">
             <label for="title" class="form-label">Question Title</label><br>
 

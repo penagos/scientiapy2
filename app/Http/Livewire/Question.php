@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class Question extends Component
 {
-    public Question $question;
+    public Models\Question $question;
 
     protected $rules = [
         'question.title' => 'required|min:12|max:255',
@@ -22,17 +22,7 @@ class Question extends Component
         'question.post.content.required' => 'Please enter a valid question.'
     ];
 
-    public function mount($question)
-    {
-        $this->question->load('post');
-    }
-
-    public function hydrate()
-    {
-        $this->emit('hydrateTypeahead');
-    }
-
-    public function submit()
+    public function create()
     {
         $this->validate();
 

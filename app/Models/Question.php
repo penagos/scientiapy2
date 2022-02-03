@@ -48,7 +48,7 @@ class Question extends Model
 
     public function isAcceptedAnswer(Post $post)
     {
-        return $post == $this->acceptedAnswer();
+        return $this->acceptedAnswer && $post->id == $this->acceptedAnswer->id;
     }
 
     public function flattenTags()
