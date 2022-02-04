@@ -22,6 +22,7 @@ Route::get('/', [QuestionController::class, 'index'])->name('index');
 Route::prefix('questions')->name('questions.')->group(function () {
     Route::get('/', [QuestionController::class, 'index'])->name('index');
     Route::get('ask', [QuestionController::class, 'ask'])->name('ask');
+    Route::get('search', [QuestionController::class, 'search'])->name('search');
 
     Route::prefix('{id}')->group(function () {
         Route::get('/', [QuestionController::class, 'view'])->name('view');

@@ -106,8 +106,6 @@ class Post extends Model
             );
             $this->increment('score', $vote->amount);
         }
-
-        //$this->load('vote');
     }
 
     public function downvote()
@@ -126,8 +124,6 @@ class Post extends Model
 
             $this->decrement('score', abs($vote->amount));
         }
-
-        //$this->load('vote');
     }
 
     public function upvoted()

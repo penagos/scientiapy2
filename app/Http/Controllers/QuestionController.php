@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
-
+use Illuminate\Http\Request;
 class QuestionController extends Controller
 {
+    const PAGINATION_FACTOR = 2;
+
     public function index()
     {
-        return view('questions.index', ['questions' => Question::with('post')->get()]);
+        return view('questions.index', ['questions' => Question::with('post')->paginate(self::PAGINATION_FACTOR)]);
     }
 
     public function ask()
@@ -16,12 +18,11 @@ class QuestionController extends Controller
         return view('questions.edit', ['question' => new Question()]);
     }
 
-    public function search($query)
+    public function search(Request $request)
     {
         // TODO: some fuzzy search capability would be preferred
-        return response()->json(Question::where('title', 'LIKE', '%'.$query.'%')->get()->map(function ($question) {
-            return $question->title;
-        }));
+        $query = $request->input('q');
+        return view('questions.index', ['questions' => Question::where('title', 'LIKE', '%'.$query.'%')->paginate(self::PAGINATION_FACTOR)]);
     }
 
     public function view($id)
