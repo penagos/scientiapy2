@@ -22,7 +22,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form method="GET" action="{{ route('questions.search') }}" class="w-100">
+          <form method="GET" action="{{ route('questions.search') }}" class="w-100 mb-0">
             <input class="form-control me-2" type="search" placeholder="Search" name="q" value="{{ Request::input('q') ?? '' }}" aria-label="Search">
           </form>
 

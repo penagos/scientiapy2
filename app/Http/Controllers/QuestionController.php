@@ -10,7 +10,7 @@ class QuestionController extends Controller
 
     public function index()
     {
-        return view('questions.index', ['questions' => Question::with('post')->paginate(self::PAGINATION_FACTOR)]);
+        return view('questions.index', ['questions' => Question::with('post')->orderBy('created_at')->paginate(self::PAGINATION_FACTOR)]);
     }
 
     public function ask()
