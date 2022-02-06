@@ -46,4 +46,8 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('favorites', [UserController::class, 'favorites'])->name('favorites');
     Route::get('settings', [UserController::class, 'settings'])->name('settings');
     Route::get('logout', [UserController::class, 'logout'])->name('logout');
+
+    Route::prefix('{id}')->group(function () {
+        Route::get('/', [UserController::class, 'view'])->name('view');
+    });
 });

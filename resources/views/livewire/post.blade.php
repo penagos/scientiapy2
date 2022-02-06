@@ -45,16 +45,8 @@
                     <a href="#" wire:click.prevent="edit" class="small"><i class="bi bi-pencil"></i> Edit</a>
                   @endif
                 </div>
-                <div class="float-end text-muted fs-6 lh-sm bg-light rounded p-2" wire:ignore>
-                  <div class="d-flex">
-                    <div>
-                      <a href="#"><img src="{{ asset('img/avatar-placeholder.svg') }}" class="m-1" width="32" height="32" alt="{{ $post->user->username }}'s profile picture"></a>
-                    </div>
-                    <div class="ml-2">
-                      <small>Posted @datetime($post->created_at) @edited($post->isEdited())</small><br>
-                      <small><a href="#">{{ $post->user->username }}</a> - {{ $post->user->reputation }}</small>
-                    </div>
-                  </div>
+                <div wire:ignore>
+                  <x-post-author :post="$post" />
                 </div>
             @endif
 

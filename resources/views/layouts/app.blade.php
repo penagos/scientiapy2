@@ -39,6 +39,7 @@
           </ul>
 
           @if (Auth::check())
+            <a href="{{ route('questions.ask') }}" class="btn btn-sm btn-primary"><nobr>Ask Question</nobr></a>
             <div class="btn-group pl-4">
               <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="{{ asset('img/avatar-placeholder.svg') }}" width="32" height="32" class="rounded-circle d-inline mr-2" alt="{{ auth()->user()->username }}'s profile picture">

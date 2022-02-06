@@ -13,6 +13,11 @@ class UserController extends Controller
         return view('users.index', ['users' => User::all()]);
     }
 
+    public function view($id)
+    {
+
+    }
+
     public function teams()
     {
         return view('users.teams');

@@ -13,16 +13,13 @@
             <p class="card-text"><small>{{ $question->post->preview() }}</small></p>
 
             <div class="float-start">
-                <span class="badge bg-lightblue fw-normal mr-2"><a href="#">Light</a></span>
-                <span class="badge bg-lightblue fw-normal mr-2"><a href="#">Light</a></span>
-                <span class="badge bg-lightblue fw-normal mr-2"><a href="#">Light</a></span>
-                <span class="badge bg-lightblue fw-normal mr-2"><a href="#">Light</a></span>
+                <span class="badge bg-lightblue fw-normal mr-1"><a href="#">Light</a></span>
+                <span class="badge bg-lightblue fw-normal mr-1"><a href="#">Light</a></span>
+                <span class="badge bg-lightblue fw-normal mr-1"><a href="#">Light</a></span>
+                <span class="badge bg-lightblue fw-normal mr-1"><a href="#">Light</a></span>
             </div>
 
-            <div class="float-end col-lg-2 text-muted fs-6 lh-sm">
-                <small>posted @date($question->post->created_at)</small><br>
-                <small><a href="#">{{ $question->post->user->username }}</a> - 7682</small>
-            </div>
+            <x-post-author :post="$question->post" />
         </div>
     </div>
   </div>

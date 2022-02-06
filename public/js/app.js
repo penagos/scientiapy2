@@ -25877,7 +25877,16 @@ window.createToastEditor = function createToastEditor(id) {
     el: document.getElementById(id),
     height: '500px',
     initialEditType: 'markdown',
-    usageStatistics: false
+    usageStatistics: false,
+    hooks: {
+      addImageBlobHook: function addImageBlobHook(blob, callback) {
+        console.log(blob);
+        alert('hello world!');
+        var uploadedImageURL = uploadImage(blob);
+        callback(uploadedImageURL, "alt text");
+        return false;
+      }
+    }
   });
   editor.setMarkdown(contents);
   editors[id] = editor;

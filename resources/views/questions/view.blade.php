@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', $question->title)
 
 @section('content')
 <div class="container">
@@ -6,10 +7,7 @@
         <div class="row">
             <div class="col-lg-9">
                 <h3 class="fw-normal">{{ $question->title }}</h3>
-                <h6 class="text-muted fw-normal">Asked by <a href="">{{ $question->post->user->username }}</a> on @date($question->date())</h6>
-            </div>
-            <div class="col-lg-3">
-                <a href="{{ route('questions.ask') }}" class="btn btn-primary">Ask a Question</a>
+                <h6 class="text-muted fw-normal">Asked by <a href="{{ route('users.view', $question->post->user->id) }}">{{ $question->post->user->username }}</a> on @date($question->date())</h6>
             </div>
         </div>
         <div class="row">
@@ -37,34 +35,9 @@
             </div>
 
             <div class="col-lg-3">
-                <h5 class="fw-light">Related Questions</h5>
-
-                <div class="d-flex pt-2">
-                    <div class="pr-2"><span class="badge badge-success" style="width: 36px;">143</span></div>
-                    <div class="small"><a href="#">How to determine base type of a pointer in LLVM?</a></div>
-                </div>
-                <div class="d-flex pt-2">
-                    <div class="pr-2"><span class="badge badge-success" style="width: 36px;">6</span></div>
-                    <div class="small"><a href="#">What does the ??? operator do in C++?</a></div>
-                </div>
-
-                <div class="d-flex pt-2">
-                    <div class="pr-2"><span class="badge badge-success" style="width: 36px;">143</span></div>
-                    <div class="small"><a href="#">How to determine base type of a pointer in LLVM?</a></div>
-                </div>
-                <div class="d-flex pt-2">
-                    <div class="pr-2"><span class="badge badge-success" style="width: 36px;">6</span></div>
-                    <div class="small"><a href="#">What does the ??? operator do in C++?</a></div>
-                </div>
-
-                <div class="d-flex pt-2">
-                    <div class="pr-2"><span class="badge badge-success" style="width: 36px;">143</span></div>
-                    <div class="small"><a href="#">How to determine base type of a pointer in LLVM?</a></div>
-                </div>
-                <div class="d-flex pt-2">
-                    <div class="pr-2"><span class="badge badge-success" style="width: 36px;">6</span></div>
-                    <div class="small"><a href="#">What does the ??? operator do in C++?</a></div>
-                </div>
+                <x-related-questions/>
+                <div class="mt-5"></div>
+                <x-hot-questions/>
             </div>
         </div>
     </div>

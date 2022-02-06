@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Post;
 use App\Models;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class Question extends Component
 {
@@ -12,8 +13,7 @@ class Question extends Component
 
     protected $rules = [
         'question.title' => 'required|min:12|max:255',
-        'question.post.content' => 'required',
-        'question.tags' => 'optional'
+        'question.post.content' => 'required'
     ];
 
     protected $messages = [
@@ -25,13 +25,10 @@ class Question extends Component
     public function create()
     {
         $this->validate();
-
-        $question = Models\Question::create($this->question);
-        $post = Post::create($this->question['post']);
-        $question->post_id = $post->id;
-        $question->save();
+        $this->question->post()->sync(['user_id' => Auth::user()->id, 'content' => $this->question->post['content']]);
+        $this->question->save();
         
-        return redirect()->to(route('questions.view', $question->id));
+        return redirect()->to(route('questions.view', $this->question->id));
     }
 
     public function render()

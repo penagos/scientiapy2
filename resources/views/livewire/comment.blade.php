@@ -16,7 +16,7 @@
             {{ $comment->content }}
         <p>
         <div class="d-flex justify-content-between">
-            <div class="small text-muted">Posted @datetime($comment->date()) by <a href="#">{{ $comment->user->username }}</a> @edited($comment->isEdited())</div>
+            <div class="small text-muted">Posted @datetime($comment->date()) by <a href="{{ route('users.view', $comment->user->id) }}">{{ $comment->user->username }}</a> @edited($comment->isEdited())</div>
             
             @if (Auth::check())
             <div class="small"><a href="#" wire:click.prevent="edit"><i class="bi bi-pencil"></i> Edit</a></div>
