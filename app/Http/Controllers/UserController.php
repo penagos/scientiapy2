@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +17,12 @@ class UserController extends Controller
 
     public function view($id)
     {
-
+        return view('users.view', [
+            'user' => User::findOrFail($id),
+            'questions' => Question::whereHas('post', function (Builder $query) use ($id) {
+                $query->where('user_id', $id);
+            })->paginate(10)
+        ]);
     }
 
     public function teams()

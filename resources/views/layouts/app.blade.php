@@ -46,6 +46,7 @@
                 {{ auth()->user()->username }}
               </button>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="{{ route('users.view', Auth::user()->id) }}">Profile</a></li>
                 <li><a class="dropdown-item" href="{{ route('users.favorites') }}">Favorites</a></li>
                 <li><a class="dropdown-item" href="{{ route('users.teams') }}">Teams</a></li>
                 <li><a class="dropdown-item" href="{{ route('users.settings') }} ">Settings</a></li>
