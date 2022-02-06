@@ -10,8 +10,8 @@
             <div id="titleHelp" class="form-text">Limited to 255 characters.</div>
         </div>
         <div id="editor" wire:ignore></div>
-        <input id="editorContents" type="hidden" wire:model.defer="question.post.content">
-        @error('question.post.content') @errorMessage($message) @enderror
+        <input id="editorContents" type="hidden" wire:model.defer="post.content">
+        @error('post.content') @errorMessage($message) @enderror
 
         <div class="mt-3">
             <input type="text" class="form-control post-tags" id="tags" aria-describedby="tagsHelp" wire:model.defer="question.tags" placeholder="Tags" wire:ignore>
