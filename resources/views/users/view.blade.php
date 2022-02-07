@@ -16,7 +16,7 @@
         </div>
         <div class="col-lg-9">
             <div class="row">
-                <h5 class="fw-light">Questions asked by {{ $user->username }}</h5>
+                <h5 class="fw-light">{{ $questions->total() }} Questions asked by {{ $user->username }}</h5>
 
                 @foreach ($questions as $question)
                     <x-question type="simple" :question="$question"/>

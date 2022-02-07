@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="row mt-2">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 p-0">
                         @if (Auth::check())
                             <livewire:post :question="$question" :wire:key="newanswer" />
                         @else

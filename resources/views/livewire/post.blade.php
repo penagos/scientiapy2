@@ -1,5 +1,5 @@
 <div id="post{{ $post->id ?? 'new' }}" class="card mt-2 border-0">
-  <div class="card-body p-0 pt-4">
+  <div class="card-body @if ($post->id) p-0 @else p-3 @endif pt-4">
     <div class="row">
       @if ($post->id)
         <div class="col-xs-2 col-lg-1 text-center">
