@@ -23,6 +23,11 @@ class Question extends Component
         'post.content.required' => 'Please enter a valid question.'
     ];
 
+    public function mount() {
+        if ($this->question->id) {
+            $this->post = $this->question->post;
+        }
+    }
     public function create()
     {
         $this->validate();
