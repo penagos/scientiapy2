@@ -32,7 +32,9 @@ class UserController extends Controller
 
     public function favorites()
     {
-        return view('users.favorites');
+        // TODO: why does pagination not work on this relation?
+        $favorites = Auth::user()->favoriteQuestions;
+        return view('users.favorites', ['questions' => $favorites, 'user' => Auth::user()]);
     }
 
     public function settings()
