@@ -6,7 +6,7 @@ use App\Models\Question;
 use Illuminate\Http\Request;
 class QuestionController extends Controller
 {
-    const PAGINATION_FACTOR = 2;
+    const PAGINATION_FACTOR = 15;
 
     public function index()
     {
