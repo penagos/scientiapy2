@@ -48,6 +48,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Post::class, 'favorites', 'user_id', 'post_id')->withTimeStamps();
     }
 
+    public function favoriteQuestions()
+    {
+        return $this->hasManyThrough(Question::class, Favorite::class, 'user_id', 'post_id', 'id', 'post_id');
+    }
+
     public function posts()
     {
         return $this->hasMany(Post::class);
