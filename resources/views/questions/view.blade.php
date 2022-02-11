@@ -17,7 +17,28 @@
                 </div>
 
                 <div class="row mt-4">
-                    <h4 class="text-secondary">{{ $question->answers->count() }} answers</h4>
+                    <div class="d-flex p-0 justify-content-between">
+                        <div>
+                            <h4 class="text-secondary">{{ $question->answers->count() }} answers</h4>
+                        </div>
+
+                        @if ($question->answers->count())
+                        <div>
+                            <ul class="nav nav-pills bg-white border-1">
+                                <li class="nav-item">
+                                    <small><a class="nav-link active pt-1 pb-1" href="?sort=new">Votes</a></small>
+                                </li>
+                                <li class="nav-item">
+                                    <small><a class="nav-link pt-1 pb-1" href="?sort=hot">New</a></small>
+                                </li>
+                                <li class="nav-item">
+                                    <small><a class="nav-link pt-1 pb-1" href="?sort=unanswered">Old</a></small>
+                                </li>
+                            </ul>
+                        </div>
+                        @endif
+                    </div>
+
                     @foreach ($question->answers as $answer)
                         <livewire:post :post="$answer" :question="$question" :wire:key="'p'.$answer->id"/>
                     @endforeach
