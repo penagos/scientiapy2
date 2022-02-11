@@ -2,10 +2,13 @@
 
 namespace App\View\Components;
 
+use App\Models\Question;
 use Illuminate\View\Component;
 
 class HotQuestions extends Component
 {
+    public $questions;
+
     /**
      * Create a new component instance.
      *
@@ -13,7 +16,8 @@ class HotQuestions extends Component
      */
     public function __construct()
     {
-        //
+        // TODO: Placeholder
+        $this->questions = Question::all()->random(5);
     }
 
     /**

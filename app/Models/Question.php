@@ -16,6 +16,10 @@ class Question extends Model
         'post'
     ];
 
+    protected $with = [
+        'post'
+    ];
+
     public static function isa($post)
     {
         return is_a($post, Question::class);

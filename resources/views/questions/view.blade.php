@@ -35,8 +35,7 @@
             </div>
 
             <div class="col-lg-3">
-                <x-related-questions/>
-                <div class="mt-5"></div>
+                <x-related-questions :question="$question" />
                 <x-hot-questions/>
             </div>
         </div>

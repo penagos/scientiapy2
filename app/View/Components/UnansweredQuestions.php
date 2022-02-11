@@ -2,10 +2,13 @@
 
 namespace App\View\Components;
 
+use App\Models\Question;
 use Illuminate\View\Component;
 
 class UnansweredQuestions extends Component
 {
+    public $questions;
+
     /**
      * Create a new component instance.
      *
@@ -13,7 +16,7 @@ class UnansweredQuestions extends Component
      */
     public function __construct()
     {
-        //
+        $this->questions = Question::all()->random(5)->whereNull('accepted_post_id');
     }
 
     /**

@@ -20,6 +20,8 @@ class QuestionSeeder extends Seeder
             Post::factory(random_int(0, 5))->create(['question_id' => $question->id])->each(function ($answer) {
                 Comment::factory(random_int(0, 4))->create(['post_id' => $answer->id]);
             });
+
+            // Randomly accept an answer for some questions
         });
 
         // Update caches

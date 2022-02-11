@@ -6,7 +6,6 @@ use App\Models;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Illuminate\Support\Facades\DB;
 class Post extends Component
 {
     public Models\Post $post;
