@@ -14,12 +14,14 @@ class Question extends Component
 
     protected $rules = [
         'question.title' => 'required|min:12|max:255',
+        'question.tags' => 'required',
         'post.content' => 'required'
     ];
 
     protected $messages = [
         'question.title.required' => 'Please enter a question title longer than 12 characters.',
         'question.title.min' => 'Please enter a question title longer than 12 characters.',
+        'question.tags.required' => 'Please enter at least 1 tag.',
         'post.content.required' => 'Please enter a valid question.'
     ];
 

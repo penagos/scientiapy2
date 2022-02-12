@@ -14,8 +14,11 @@
         @error('post.content') @errorMessage($message) @enderror
 
         <div class="mt-3">
-            <input type="text" class="form-control post-tags" id="tags" aria-describedby="tagsHelp" wire:model.defer="question.tags" placeholder="Tags" wire:ignore>
+            <div wire:ignore>
+                <input type="text" class="form-control post-tags" id="tags" aria-describedby="tagsHelp" wire:model.defer="question.tags" placeholder="Tags">
+            </div>
             <div id="tagsHelp" class="form-text">Limited to 5 tags, ENTER to confirm / add more.</div>
+            @error('question.tags') @errorMessage($message) @enderror
         </div>
 
         <div class="mt-3 text-center">
