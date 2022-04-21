@@ -26,13 +26,13 @@
                         <div>
                             <ul class="nav nav-pills bg-white border-1">
                                 <li class="nav-item">
-                                    <small><a class="nav-link active pt-1 pb-1" href="?sort=new">Votes</a></small>
+                                    <small><a class="nav-link @if ((request()->get('sort') ?? 'hot') == 'hot') active @endif pt-1 pb-1" href="?sort=hot">Votes</a></small>
                                 </li>
                                 <li class="nav-item">
-                                    <small><a class="nav-link pt-1 pb-1" href="?sort=hot">New</a></small>
+                                    <small><a class="nav-link @if (request()->get('sort') == 'new') active @endif pt-1 pb-1" href="?sort=new">New</a></small>
                                 </li>
                                 <li class="nav-item">
-                                    <small><a class="nav-link pt-1 pb-1" href="?sort=unanswered">Old</a></small>
+                                    <small><a class="nav-link @if (request()->get('sort') == 'old') active @endif pt-1 pb-1" href="?sort=old">Old</a></small>
                                 </li>
                             </ul>
                         </div>

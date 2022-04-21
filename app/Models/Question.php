@@ -37,6 +37,7 @@ class Question extends Model
 
     public function answers()
     {
+        // Bubble accepted answer to top first
         return $this->hasMany(Post::class)->with(['comments']);
     }
 
@@ -60,6 +61,17 @@ class Question extends Model
         return implode(',', $this->tags->map(function ($item, $key) {
             return $item->tag;
         })->toArray());
+    }
+
+    public function sortAnswers($type)
+    {
+        if ($type == 'hot') {
+            $this->answers = $this->answers->sortByDesc('score');
+        } elseif ($type == 'new') {
+            $this->answers = $this->answers->sortByDesc('created_at');
+        } elseif ($type == 'old') {
+            $this->answers = $this->answers->sortBy('created_at');
+        }
     }
 
     public static function findByPost($post)

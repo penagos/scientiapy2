@@ -15,7 +15,7 @@
 
         <div class="mt-3">
             <div wire:ignore>
-                <input type="text" class="form-control post-tags" id="tags" aria-describedby="tagsHelp" wire:model.defer="question.tags" placeholder="Tags">
+                <input type="text" class="form-control" id="tags" aria-describedby="tagsHelp" wire:model.defer="question.tags" placeholder="Tags">
             </div>
             <div id="tagsHelp" class="form-text">Limited to 5 tags, ENTER to confirm / add more.</div>
             @error('question.tags') @errorMessage($message) @enderror

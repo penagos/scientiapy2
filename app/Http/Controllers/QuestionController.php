@@ -8,9 +8,22 @@ class QuestionController extends Controller
 {
     const PAGINATION_FACTOR = 15;
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('questions.index', ['questions' => Question::with('post')->orderByDesc('created_at')->paginate(self::PAGINATION_FACTOR)]);
+        $orderBy = 'created_at';
+
+        if ($order = $request->get('sort')) {
+            if ($order == 'new') {
+                $orderBy = 'created_at';
+            } elseif ($order == 'hot') {
+                $orderBy = 'created_at';
+            } elseif ($order == 'unanswered') {
+                $orderBy = 'accepted_post_id';
+            }
+        }
+
+        $questions = Question::with('post')->orderByDesc($orderBy)->paginate(self::PAGINATION_FACTOR);
+        return view('questions.index', ['questions' => $questions]);
     }
 
     public function ask()
@@ -25,9 +38,15 @@ class QuestionController extends Controller
         return view('questions.index', ['questions' => Question::where('title', 'LIKE', '%'.$query.'%')->paginate(self::PAGINATION_FACTOR)]);
     }
 
-    public function view($id)
+    public function view(Request $request, $id)
     {
-        return view('questions.view', ['question' => Question::findOrFail($id)]);
+        $question = Question::findOrFail($id);
+
+        if ($request->has('sort')) {
+            $question->sortAnswers($request->get('sort'));
+        }
+
+        return view('questions.view', ['question' => $question]);
     }
 
     public function edit($id)
