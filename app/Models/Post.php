@@ -59,6 +59,15 @@ class Post extends Model
         }
     }
 
+    public function getQuestion()
+    {
+        if ($this->isQuestion()) {
+            return Question::where('post_id', $this->id)->firstOrFail();
+        } else {
+            return $this->question;
+        }
+    }
+
     public function isQuestion()
     {
         return !$this->question;
