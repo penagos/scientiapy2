@@ -2,7 +2,7 @@
   <div class="card-body @if ($post->id) p-0 @else p-3 @endif pt-4">
     <div class="row">
       @if ($post->id)
-        <div class="col-xs-2 col-lg-1 text-center">
+        <div class="col-2 col-lg-1 text-center">
             @if (Auth::check())
             <h1 class="mb-0"><a href="#" class="text-lightgray" wire:click.prevent="upvote"><i class="bi bi-caret-up-fill @if ($post->upvoted()) text-primary @endif"></i></a></h1>
             @endif
@@ -25,7 +25,7 @@
               @endif
             @endif 
         </div>
-        <div class="col-xs-10 col-lg-11">
+        <div class="col-10 col-sm-10 col-lg-11">
             @if ($showPostEditor)
               <x-inline-post-editor :post="$post" :id="$editorID" :contents="$editorContents" :full-editor-link="$editLink" />
             @else
@@ -36,8 +36,8 @@
                 <div class="float-start pb-2">
                   @if ($tags)
                     <div class="pb-2">
-                      @foreach (explode(',', $tags) as $tag)
-                        <span class="badge bg-lightblue fw-normal mr-2"><a href="#">{{ $tag }}</a></span>
+                      @foreach ($tags as $tag)
+                        <span class="badge bg-lightblue fw-normal mr-2"><a href="{{ route('tags.search', $tag) }}">{{ $tag }}</a></span>
                       @endforeach
                     </div>
                   @endif

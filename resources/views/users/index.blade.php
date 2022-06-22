@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <div class="col-lg-9 d-flex justify-content-center">
         @foreach ($users as $user)
-            <div class="card" style="width: 14rem;">
+            <div class="card">
                 <div class="card-header d-flex justify-content-center">
                 <a href="{{ route('users.view', $user->id) }}"><img src="{{ asset('img/avatar-placeholder.svg') }}" width="64" height="64" class="rounded-circle d-inline mr-2" alt="{{ $user->username }}'s profile picture"></a>
                 </div>

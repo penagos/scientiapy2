@@ -38,6 +38,10 @@ Route::prefix('answers')->name('answers.')->group(function () {
 
 Route::prefix('tags')->name('tags.')->group(function () {
     Route::get('/', [TagController::class, 'index'])->name('index');
+
+    Route::prefix('{tag}')->group(function () {
+        Route::get('/', [TagController::class, 'search'])->name('search');
+    });
 });
 
 Route::prefix('users')->name('users.')->group(function () {

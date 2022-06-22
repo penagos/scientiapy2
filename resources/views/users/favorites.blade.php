@@ -10,9 +10,13 @@
             <div class="row">
                 <h5 class="fw-light">Your favorited questions</h5>
 
-                @foreach ($questions as $question)
-                    <x-question type="simple" :question="$question"/>
-                @endforeach
+                @if ($questions->count())
+                    @foreach ($questions as $question)
+                        <x-question type="simple" :question="$question"/>
+                    @endforeach
+                @else
+                    <p class="text-secondary">Such empty! Go and favorite a question!</p>
+                @endif
             </div>
         </div>
     </div>

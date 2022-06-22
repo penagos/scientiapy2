@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models;
+use App\Models\Question;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -20,7 +21,7 @@ class Post extends Component
 
     protected $rules = [
         'post.content' => 'required|min:12',
-        'post.question_id' => 'required|exists:questions,id',
+        'post.question_id' => 'nullable',
         'tags' => 'nullable'
     ];
 
@@ -46,6 +47,15 @@ class Post extends Component
             $this->showCommentPoster = false;
             $this->showPostEditor = false;
             $this->editorID = 'postEditor' . $this->post->id;
+
+            if ($post->isQuestion()) {
+                $this->tags = [];
+                $tagsDB = $post->getQuestion()->tags;
+
+                foreach($tagsDB as $tag) {
+                    array_push($this->tags, $tag->tag);
+                }
+            }
         } else {
             $this->post = new Models\Post(['content' => '']);
             $this->post->question_id = $this->question->id;
@@ -122,7 +132,7 @@ class Post extends Component
     public function saveTags()
     {
         $q = $this->post->getQuestion();
-        $tags = explode(',', strtolower($this->tags));
+        $this->tags = explode(',', strtolower($this->tags));
 
         $getOrCreateTags = function ($tag) {
             return Tag::firstOrCreate([
@@ -130,7 +140,7 @@ class Post extends Component
             ])->id;
         };
 
-        $q->tags()->sync(array_map($getOrCreateTags, $tags));
+        $q->tags()->sync(array_map($getOrCreateTags, $this->tags));
     }
 
     public function hideEditor()

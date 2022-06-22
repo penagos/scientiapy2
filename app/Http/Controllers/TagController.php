@@ -12,10 +12,10 @@ class TagController extends Controller
         return view('tags.index', ['tags' => Tag::all()]);
     }
 
-    public function search($query)
+    public function search($tag)
     {
         // TODO: some fuzzy search capability would be preferred
-        return response()->json(Tag::where('tag', 'LIKE', '%'.$query.'%')->get()->map(function ($tag) {
+        return response()->json(Tag::where('tag', $tag)->get()->map(function ($tag) {
             return $tag->tag;
         }));
     }

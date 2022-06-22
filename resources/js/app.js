@@ -10,7 +10,8 @@ window.createToastEditor = function createToastEditor(id, contents = '') {
     el: document.getElementById(id),
     height: '500px',
     initialEditType: 'markdown',
-    usageStatistics: false,
+    usageStatistics: false
+    /*
     hooks: {
       addImageBlobHook: (blob, callback) => {
         console.log(blob);
@@ -20,6 +21,7 @@ window.createToastEditor = function createToastEditor(id, contents = '') {
           return false;
       }
     }
+    */
   });
 
   editor.setMarkdown(contents);

@@ -13,10 +13,9 @@
             <p class="card-text"><small>{{ $question->post->preview() }}</small></p>
 
             <div class="float-start">
-                <span class="badge bg-lightblue fw-normal mr-1"><a href="#">Light</a></span>
-                <span class="badge bg-lightblue fw-normal mr-1"><a href="#">Light</a></span>
-                <span class="badge bg-lightblue fw-normal mr-1"><a href="#">Light</a></span>
-                <span class="badge bg-lightblue fw-normal mr-1"><a href="#">Light</a></span>
+                @foreach($question->tags as $tag)
+                    <span class="badge bg-lightblue fw-normal mr-1"><a href="{{ route('tags.search', $tag->tag) }}">{{ $tag->tag }}</a></span>
+                @endforeach
             </div>
 
             <x-post-author :post="$question->post" />

@@ -17,7 +17,7 @@ class HotQuestions extends Component
     public function __construct()
     {
         // TODO: Placeholder
-        $this->questions = Question::all()->random(5);
+        $this->questions = Question::inRandomOrder()->with('post')->limit(5)->get();
     }
 
     /**

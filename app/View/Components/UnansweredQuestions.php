@@ -16,7 +16,7 @@ class UnansweredQuestions extends Component
      */
     public function __construct()
     {
-        $this->questions = Question::all()->random(5)->whereNull('accepted_post_id');
+        $this->questions = Question::inRandomOrder()->with('post')->limit(5)->whereNull('accepted_post_id')->get();
     }
 
     /**

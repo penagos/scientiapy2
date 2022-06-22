@@ -22,7 +22,7 @@ class QuestionController extends Controller
             }
         }
 
-        $questions = Question::with('post')->orderByDesc($orderBy)->paginate(self::PAGINATION_FACTOR);
+        $questions = Question::with(['post', 'tags'])->orderByDesc($orderBy)->paginate(self::PAGINATION_FACTOR);
         return view('questions.index', ['questions' => $questions]);
     }
 

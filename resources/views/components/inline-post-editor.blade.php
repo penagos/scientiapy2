@@ -15,7 +15,10 @@
   @endif
   <div class="float-start mt-2 pb-2">
       <input type="submit" class="btn btn-primary" onclick="window.syncEditorContents('{{ $id }}', '{{ $id }}-contents'); @if ($post && !$post->question) document.getElementById('{{ $id }}-tags').dispatchEvent(new Event('input')); @endif" value="Save">
-      <a class="btn btn-light" href="{{ $fullEditorLink }}"><small>Use full editor</small></a>
+
+      @if ($post && $post->isQuestion())
+        <a class="btn btn-light" href="{{ $fullEditorLink }}"><small>Use full editor</small></a>
+      @endif
 
       @if ($contents != '')
         <a class="btn btn-light" href="#" wire:click.prevent="cancelEdit"><small>Cancel</small></a>

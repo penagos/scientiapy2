@@ -15,14 +15,15 @@
 
         <div class="mt-3">
             <div wire:ignore>
-                <input type="text" class="form-control" id="tags" aria-describedby="tagsHelp" wire:model.defer="question.tags" placeholder="Tags">
+                <input type="text" data-provide="typeahead" autocomplete="off" class="form-control post-tags " id="tags" aria-describedby="tagsHelp" wire:model.defer="tags" placeholder="Tags" onchange="this.dispatchEvent(new InputEvent('input'))">
             </div>
             <div id="tagsHelp" class="form-text">Limited to 5 tags, ENTER to confirm / add more.</div>
             @error('question.tags') @errorMessage($message) @enderror
         </div>
 
         <div class="mt-3 text-center">
-            <input type="submit" value="Post" class="btn btn-primary" onclick="window.syncEditorContents('editor', 'editorContents');">
+            <input type="submit" value="{{ $post && $post->id ? 'Save' : 'Post' }}" class="btn btn-primary" onclick="window.syncEditorContents('editor', 'editorContents');">
+            <a class="btn btn-light" href="{{ url()->previous() }}">Cancel</a>
         </div>
 
         <script type="text/javascript">

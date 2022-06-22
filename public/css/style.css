@@ -37,6 +37,11 @@ blockquote {
     background-color: #28a745;
 }
 
+.badge-error {
+    color: #fff;
+    background-color: #dc3545;
+}
+
 .bootstrap-tagsinput {
     line-height: 2em;
     width: 100%;

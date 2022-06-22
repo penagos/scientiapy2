@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Question;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
 class QuestionSeeder extends Seeder
@@ -18,6 +19,12 @@ class QuestionSeeder extends Seeder
     {
         $m = Question::factory(20)->create()->each(function ($question) {
             $accepted = false;
+
+            Tag::all()->random(random_int(1, 5))->each(function ($tag) use ($question) {
+                $question->tags()->attach($tag, [
+                    'created_at' => now()
+                ]);
+            });
 
             Post::factory(random_int(0, 5))->create(['question_id' => $question->id])->each(function ($answer) use ($accepted, $question) {
                 Comment::factory(random_int(0, 4))->create(['post_id' => $answer->id]);
