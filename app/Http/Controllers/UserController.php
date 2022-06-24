@@ -49,4 +49,13 @@ class UserController extends Controller
         $request->session()->regenerateToken();
         return redirect(request()->header('Referer'));
     }
+
+    public function search($query)
+    {
+        // API request
+        // TODO: some fuzzy search capability would be preferred
+        return response()->json(User::where('username', 'LIKE', '%'.$query.'%')->get()->map(function ($user) {
+            return $user->username;
+        }));
+    }
 }

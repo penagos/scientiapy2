@@ -132,7 +132,7 @@
         source: questionsFetcher
       });
 
-      var tags = new Bloodhound({
+      const tags = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
@@ -146,7 +146,23 @@
           }
         }
       });
+
+      const users = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+          url: '{{ route("api.users.search", ["query" => "%QUERY"]) }}',
+          wildcard: '%QUERY',
+          filter: function(list) {  
+            return $.map(list, function(name) {
+              return { 'name': name };
+            });
+          }
+        }
+      });
+
       tags.initialize();
+      users.initialize();
 
       $('.post-tags').tagsinput({
         typeaheadjs: {
@@ -155,6 +171,16 @@
           source: tags.ttAdapter(),
         },
         tagClass: 'bg-primary p-1 mt-2 mb-2 rounded',
+        cancelConfirmKeysOnEmpty: false
+      });
+
+      $('.post-users').tagsinput({
+        typeaheadjs: {
+          name: 'users',
+          displayKey: 'name',
+          source: users.ttAdapter(),
+        },
+        tagClass: 'bg-success p-1 mt-2 mb-2 rounded',
         cancelConfirmKeysOnEmpty: false
       });
     }

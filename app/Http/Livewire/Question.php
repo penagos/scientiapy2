@@ -14,10 +14,12 @@ class Question extends Component
     public Models\Question $question;
     public $post;
     public $tags;
+    public $users;
 
     protected $rules = [
         'question.title' => 'required|min:12|max:255',
         'tags' => 'required',
+        'users' => 'nullable',
         'post.content' => 'required'
     ];
 
@@ -36,6 +38,11 @@ class Question extends Component
             $this->tags = [];
             foreach($this->question->tags as $tag) {
                 array_push($this->tags, $tag->tag);
+            }
+
+            $this->users = [];
+            foreach($this->question->users as $user) {
+                array_push($this->users, $user->username);
             }
         }
     }

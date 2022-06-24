@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/tags/search/{query}', [TagController::class, 'search'])->name('api.tags.search');
 Route::get('/questions/search/{query}', [QuestionController::class, 'search'])->name('api.questions.search');
+Route::get('/users/search/{query}', [UserController::class, 'search'])->name('api.users.search');

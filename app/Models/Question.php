@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 
 class Question extends Model
 {
@@ -42,6 +43,11 @@ class Question extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     public function date()
     {
         return $this->post->date();
@@ -50,13 +56,6 @@ class Question extends Model
     public function isAcceptedAnswer(Post $post)
     {
         return $this->acceptedAnswer && $post->id == $this->acceptedAnswer->id;
-    }
-
-    public function flattenTags()
-    {
-        return implode(',', $this->tags->map(function ($item, $key) {
-            return $item->tag;
-        })->toArray());
     }
 
     public function sortAnswers($type)

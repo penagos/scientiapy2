@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models;
 use App\Models\Question;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 class Post extends Component
@@ -13,6 +14,7 @@ class Post extends Component
     public Models\Question $question;
     public $editLink;
     public $tags;
+    public $users;
     public $showCommentPoster;
     public $showPostEditor;
     public $editorID;
@@ -22,7 +24,8 @@ class Post extends Component
     protected $rules = [
         'post.content' => 'required|min:12',
         'post.question_id' => 'nullable',
-        'tags' => 'nullable'
+        'tags' => 'nullable',
+        'users' => 'nullable'
     ];
 
     protected $messages = [
@@ -50,10 +53,17 @@ class Post extends Component
 
             if ($post->isQuestion()) {
                 $this->tags = [];
+                $this->users = [];
+
                 $tagsDB = $post->getQuestion()->tags;
+                $usersDB = $post->getQuestion()->users;
 
                 foreach($tagsDB as $tag) {
                     array_push($this->tags, $tag->tag);
+                }
+
+                foreach($usersDB as $user) {
+                    array_push($this->users, $user->username);
                 }
             }
         } else {
@@ -124,6 +134,7 @@ class Post extends Component
     
         if ($this->post->isQuestion()) {
             $this->saveTags();
+            $this->saveUsers();
         }
 
         $this->hideEditor();
@@ -141,6 +152,20 @@ class Post extends Component
         };
 
         $q->tags()->sync(array_map($getOrCreateTags, $this->tags));
+    }
+
+    public function saveUsers()
+    {
+        // TODO: generalize logic and single source with saveTags()
+        // TODO: error nicely on invalid usernames
+        $q = $this->post->getQuestion();
+        $this->users = explode(',', strtolower($this->users));
+
+        $getOrCreateUsers = function ($username) {
+            return User::where('username', $username)->firstOrFail()->id;
+        };
+
+        $q->users()->sync(array_map($getOrCreateUsers, $this->users));
     }
 
     public function hideEditor()

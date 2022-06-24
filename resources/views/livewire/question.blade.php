@@ -13,6 +13,7 @@
         <input id="editorContents" type="hidden" wire:model.defer="post.content">
         @error('post.content') @errorMessage($message) @enderror
 
+        <?php /* TODO: this should be single sourced with inline post editor for questions */ ?>
         <div class="mt-3">
             <div wire:ignore>
                 <input type="text" data-provide="typeahead" autocomplete="off" class="form-control post-tags " id="tags" aria-describedby="tagsHelp" wire:model.defer="tags" placeholder="Tags" onchange="this.dispatchEvent(new InputEvent('input'))">
@@ -21,8 +22,16 @@
             @error('question.tags') @errorMessage($message) @enderror
         </div>
 
+        <div class="mt-3">
+            <div wire:ignore>
+                <input type="text" data-provide="typeahead" autocomplete="off" class="form-control post-users " id="users" aria-describedby="usersHelp" wire:model.defer="users" placeholder="Users" onchange="this.dispatchEvent(new InputEvent('input'))">
+            </div>
+            <div id="usersHelp" class="form-text">Email these users with new activity. ENTER to confirm / add more.</div>
+            @error('users') @errorMessage($message) @enderror
+        </div>
+
         <div class="mt-3 text-center">
-            <input type="submit" value="{{ $post && $post->id ? 'Save' : 'Post' }}" class="btn btn-primary" onclick="window.syncEditorContents('editor', 'editorContents');">
+        <input type="submit" value="{{ $post && ($post->id ?? null) ? 'Save' : 'Post' }}" class="btn btn-primary" onclick="window.syncEditorContents('editor', 'editorContents');">
             <a class="btn btn-light" href="{{ url()->previous() }}">Cancel</a>
         </div>
 
