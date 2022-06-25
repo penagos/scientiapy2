@@ -143,7 +143,7 @@ class Post extends Component
     public function saveTags()
     {
         $q = $this->post->getQuestion();
-        $this->tags = explode(',', strtolower($this->tags));
+        $this->tags = is_string($this->tags) ? explode(',', strtolower($this->tags)) : $this->tags;
 
         $getOrCreateTags = function ($tag) {
             return Tag::firstOrCreate([
@@ -171,6 +171,7 @@ class Post extends Component
     public function hideEditor()
     {
         $this->showPostEditor = false;
+        $this->users = is_string($this->users) ? explode(',', strtolower($this->users)) : $this->users;
         if ($this->post) {
             $this->emit('renderPost', 'postContainer'.$this->post->id);
         }
