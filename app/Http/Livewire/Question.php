@@ -90,8 +90,17 @@ class Question extends Component
             $this->question->tags()->attach($questionTags, ['question_id' => $this->question->id]);
             $this->question->save();
         });
-        
+
+        $this->sendNotificationEmails();
         return redirect()->to(route('questions.view', $this->question->id));
+    }
+
+    private function sendNotificationEmails()
+    {
+        Mail::to(Auth::user())->send(new NewQuestion());
+        foreach ($this->question->users() as $user) {
+
+        }
     }
 
     public function render()
