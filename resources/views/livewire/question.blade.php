@@ -19,7 +19,7 @@
                 <input type="text" data-provide="typeahead" autocomplete="off" class="form-control post-tags " id="tags" aria-describedby="tagsHelp" wire:model.defer="tags" placeholder="Tags" onchange="this.dispatchEvent(new InputEvent('input'))">
             </div>
             <div id="tagsHelp" class="form-text">Limited to 5 tags, ENTER to confirm / add more.</div>
-            @error('question.tags') @errorMessage($message) @enderror
+            @error('tags') @errorMessage($message) @enderror
         </div>
 
         <div class="mt-3">
