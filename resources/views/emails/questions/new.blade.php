@@ -1,1 +1,1 @@
-A new question was posted.
+A new question "NAME" was posted by "USER" on <a href="{{ env('APP_URL') }}" target="_blank">{{ env('APP_NAME') }}</a>. Click <a href="#" target="_blank">here</a> to view the question.

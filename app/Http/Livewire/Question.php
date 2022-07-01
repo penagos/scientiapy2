@@ -97,7 +97,7 @@ class Question extends Component
 
     private function sendNotificationEmails()
     {
-        Mail::to(Auth::user())->send(new NewQuestion());
+        Mail::to(Auth::user())->send(new NewQuestion($this->question));
         foreach ($this->question->users() as $user) {
 
         }

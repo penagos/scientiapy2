@@ -58,4 +58,9 @@ class UserController extends Controller
             return $user->username;
         }));
     }
+
+    public function login()
+    {
+        return 'TODO';
+    }
 }

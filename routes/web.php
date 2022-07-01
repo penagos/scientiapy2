@@ -21,7 +21,7 @@ Route::get('/', [QuestionController::class, 'index'])->name('index');
 
 Route::prefix('questions')->name('questions.')->group(function () {
     Route::get('/', [QuestionController::class, 'index'])->name('index');
-    Route::get('ask', [QuestionController::class, 'ask'])->name('ask');
+    Route::get('ask', [QuestionController::class, 'ask'])->middleware('auth')->name('ask');
     Route::get('search', [QuestionController::class, 'search'])->name('search');
 
     Route::prefix('{id}')->group(function () {
@@ -55,3 +55,6 @@ Route::prefix('users')->name('users.')->group(function () {
         Route::get('/', [UserController::class, 'view'])->name('view');
     });
 });
+
+// TODO
+Route::get('login', [UserController::class, 'login'])->name('login');

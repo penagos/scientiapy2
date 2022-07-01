@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Question;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -16,7 +17,7 @@ class NewQuestion extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Question $question)
     {
         //
     }
