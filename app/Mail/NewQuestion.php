@@ -11,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 class NewQuestion extends Mailable
 {
     use Queueable, SerializesModels;
-
+    protected $question;
     /**
      * Create a new message instance.
      *
@@ -19,7 +19,7 @@ class NewQuestion extends Mailable
      */
     public function __construct(Question $question)
     {
-        //
+        $this->question = $question;
     }
 
     /**
@@ -29,6 +29,6 @@ class NewQuestion extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.questions.new');
+        return $this->subject($this->question->title)->view('emails.questions.new')->with(['question' => $this->question]);
     }
 }
