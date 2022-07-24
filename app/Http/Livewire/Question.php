@@ -21,7 +21,7 @@ class Question extends Component
 
     protected $rules = [
         'question.title' => 'required|min:12|max:255',
-        'tags' => 'required',
+        'tags' => 'nullable',
         'users' => 'nullable',
         'post.content' => 'required'
     ];
@@ -29,13 +29,13 @@ class Question extends Component
     protected $messages = [
         'question.title.required' => 'Please enter a question title longer than 12 characters.',
         'question.title.min' => 'Please enter a question title longer than 12 characters.',
-        'tags.required' => 'Please enter at least 1 tag.',
         'post.content.required' => 'Please enter a valid question.'
     ];
 
     public function mount() {
         if ($this->question->id) {
             $this->post = $this->question->post;
+            $this->users = [];
 
             // TODO: single source with livewire post mount logic
             $this->tags = [];
@@ -97,9 +97,9 @@ class Question extends Component
 
     private function sendNotificationEmails()
     {
-        Mail::to(Auth::user())->send(new NewQuestion($this->question));
-        foreach ($this->question->users() as $user) {
-
+        // Loop over notifylist and send emails
+        foreach ($this->question->users as $user) {
+            Mail::to($user)->send(new NewQuestion($this->question));
         }
     }
 

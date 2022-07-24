@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    const PAGINATION_FACTOR = 25;
+
     public function index()
     {
-        return view('tags.index', ['tags' => Tag::all()]);
+        return view('tags.index', ['tags' => Tag::with('questions')->paginate(self::PAGINATION_FACTOR)]);
     }
 
     public function search($query)

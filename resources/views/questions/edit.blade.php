@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', $question->id ? 'Edit Question' : 'Ask a New Question')
 
 @section('content')
 <div class="container mt-4">

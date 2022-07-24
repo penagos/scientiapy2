@@ -15,7 +15,7 @@
               @if ($post->question_id)
                 <h3 class="pb-3">
                   @if ($question->isAcceptedAnswer($post))
-                    <i class="bi bi-check-lg text-success"></i>
+                    <a href="#" wire:click.prevent="unaccept"><i class="bi bi-check-lg text-success"></i></a>
                   @else
                     <a href="#" wire:click.prevent="accept"><i class="bi bi-check-lg text-lightgray"></i></a>
                   @endif
@@ -29,7 +29,7 @@
             @if ($showPostEditor)
               <x-inline-post-editor :post="$post" :id="$editorID" :contents="$editorContents" :full-editor-link="$editLink" />
             @else
-                <div id="postContainer{{ $post->id }}" class="card-text">
+                <div id="postContainer{{ $post->id }}" class="card-text post-content">
                   {{ Illuminate\Mail\Markdown::parse($post->content) }}
                 </div>
 
@@ -37,7 +37,9 @@
                   @if ($tags)
                     <div class="pb-2">
                       @foreach ($tags as $tag)
-                        <span class="badge bg-lightblue fw-normal mr-2"><a href="{{ route('tags.search', $tag) }}">{{ $tag }}</a></span>
+                        @if ($tag !== '')
+                          <span class="badge bg-lightblue fw-normal mr-2"><a href="{{ route('tags.search', $tag) }}">{{ $tag }}</a></span>
+                        @endif
                       @endforeach
                     </div>
                   @endif

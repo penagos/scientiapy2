@@ -42,7 +42,7 @@
             <a href="{{ route('questions.ask') }}" class="btn btn-sm btn-primary"><nobr>Ask Question</nobr></a>
             <div class="btn-group pl-4">
               <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{{ asset('img/avatar-placeholder.svg') }}" width="32" height="32" class="rounded-circle d-inline mr-2" alt="{{ auth()->user()->username }}'s profile picture">
+                <img src="{{ Auth::user()->avatar ?? asset('img/avatar-placeholder.svg') }}" width="32" height="32" class="rounded-circle d-inline mr-2" alt="{{ auth()->user()->username }}'s profile picture">
                 {{ auth()->user()->username }}
               </button>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
@@ -78,7 +78,7 @@
         </div>
         <div class="row">
           <div class="col-lg-12 text-center text-muted">
-            <small>&copy; @php echo date('Y', time()); @endphp <a href="https://www.github.com/penagos/" target="_blank">Luis Penagos</a>. Licensed as open source software under the <a href="https://www.github.com/penagos/scientiapy/LICENSE.md">MIT License</a>.</small>
+            <small>&copy; @php echo date('Y', time()); @endphp <a href="https://www.github.com/penagos/" target="_blank">Luis Penagos</a>. Licensed as open source software under the <a href="https://github.com/penagos/scientiapy2/blob/master/LICENSE.md">MIT License</a>.</small>
           </div>
         </div>
       </div>
@@ -104,9 +104,13 @@
     });
 
     Livewire.on('renderPost', (postContainer) => {
-      document.querySelectorAll(`#${postContainer} code`).forEach((el) => {
-        hljs.highlightElement(el);
-      });
+      if (postContainer == '*') {
+        hljs.highlightAll();
+      } else {
+        document.querySelectorAll(`#${postContainer} code`).forEach((el) => {
+          hljs.highlightElement(el);
+        });
+      }
     });
 
     Livewire.on('initializeTypeAhead', () => {

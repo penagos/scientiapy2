@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 class QuestionController extends Controller
 {
@@ -33,9 +34,56 @@ class QuestionController extends Controller
 
     public function search(Request $request)
     {
-        // TODO: some fuzzy search capability would be preferred
-        $query = $request->input('q');
-        return view('questions.index', ['questions' => Question::where('title', 'LIKE', '%'.$query.'%')->paginate(self::PAGINATION_FACTOR)]);
+        $searchKeywords = $request->input('q');
+        $tag = $request->input('tag');
+        $titleSuffix = "";
+
+        if ($tag) {
+            // Attempt to find tag and pull questions with this tag. If the tag is
+            // non-existant, redirect to the homepage
+            try {
+                $questions = Tag::where('tag', $tag)->firstOrFail()->questions();
+            } catch (ModelNotFoundException $e) {
+                return redirect()->route('');
+            }
+        } else {
+            // TODO: this is an ugly query
+            $searchQuery =  preg_split('/\s+/', $searchKeywords, -1, PREG_SPLIT_NO_EMPTY);
+            $questions = Question::where(function ($q) use ($searchQuery) {
+                                foreach ($searchQuery as $value) {
+                                    $q->orWhere('title', 'LIKE', "%$value%");
+                                }
+                            })
+                            ->orWhereHas('post', function ($q) use ($searchQuery) {
+                                foreach ($searchQuery as $value) {
+                                    $q->where('content', 'LIKE', "%$value%");
+                                }
+                            })
+                            ->orWhereHas('tags', function ($q) use ($searchQuery) {
+                                foreach ($searchQuery as $value) {
+                                    $q->where('tag', $value);
+                                }
+                            });
+        }
+
+        // Append correct suffix to questions title for enhanced usability
+        if (!empty($searchQuery)) {
+            $titleSuffix = " matching \"$searchKeywords\"";
+        } else if (!empty($tag)) {
+            $titleSuffix = " tagged \"$tag\"";
+        }
+
+        return view('questions.index', [
+            'questions' => $questions->paginate(self::PAGINATION_FACTOR),
+            'titleSuffix' => $titleSuffix
+        ]);
+    }
+
+    public static function getEloquentSqlWithBindings($query)
+    {
+        return vsprintf(str_replace('?', '%s', $query->toSql()), collect($query->getBindings())->map(function ($binding) {
+            return is_numeric($binding) ? $binding : "'{$binding}'";
+        })->toArray());
     }
 
     public function view(Request $request, $id)

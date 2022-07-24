@@ -26,7 +26,7 @@ Route::prefix('questions')->name('questions.')->group(function () {
 
     Route::prefix('{id}')->group(function () {
         Route::get('/', [QuestionController::class, 'view'])->name('view');
-        Route::get('edit', [QuestionController::class, 'edit'])->name('edit');
+        Route::get('edit', [QuestionController::class, 'edit'])->middleware('auth')->name('edit');
     });
 });
 

@@ -4,7 +4,7 @@
         <div class="mb-3">
             <label for="title" class="form-label">Question Title</label><br>
 
-            <input type="text" class="form-control" id="title" aria-describedby="titleHelp" wire:model.defer="question.title" wire:ignore>
+            <input type="text" class="form-control" id="title" aria-describedby="titleHelp" wire:model="question.title">
 
             @error('question.title') @errorMessage($message) @enderror
             <div id="titleHelp" class="form-text">Limited to 255 characters.</div>

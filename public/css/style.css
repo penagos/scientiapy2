@@ -5,6 +5,9 @@ body {
 a {
     text-decoration: none;
 }
+.post-content ul, .post-content ol {
+    list-style: disc !important;
+}
 
 blockquote {
     background: #fafafa;
@@ -49,4 +52,25 @@ blockquote {
 
 .hljs {
     border: 1px solid #EDEDED;
+}
+
+.tag-card, .user-card {
+    float: left;
+    width: 300px;
+}
+
+.post-author {
+    width: 275px;
+}
+
+.post-content img {
+    display: inline-block;
+}
+
+.post-content img:hover {
+    transform:scale(1.5);
+    -ms-transform:scale(1.5); /* IE 9 */
+    -moz-transform:scale(1.5); /* Firefox */
+    -webkit-transform:scale(1.5); /* Safari and Chrome */
+    -o-transform:scale(1.5); /* Opera */
 }

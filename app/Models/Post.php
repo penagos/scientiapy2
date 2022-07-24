@@ -10,6 +10,7 @@ use App\Models\Vote;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Mail\Markdown;
 
 class Post extends Model
 {
@@ -27,7 +28,7 @@ class Post extends Model
 
     public function preview()
     {
-        return substr(strip_tags($this->content), 0, 250);
+        return substr(strip_tags(Markdown::parse($this->content)), 0, 250);
     }
 
     public function date()
@@ -59,6 +60,14 @@ class Post extends Model
         }
     }
 
+    public function unaccept()
+    {
+        if ($this->question) {
+            $this->question->accepted_post_id = null;
+            $this->question->save();
+        }
+    }
+
     public function getQuestion()
     {
         if ($this->isQuestion()) {
@@ -78,6 +87,11 @@ class Post extends Model
         return $this->edited_at ? true : false;
     }
 
+    public function editUser()
+    {
+        return $this->belongsTo(User::class, 'edit_user_id');
+    }
+
     public function isAuthor()
     {
         return Auth::check() && $this->user == Auth::user();
@@ -93,12 +107,6 @@ class Post extends Model
         Auth::user()->favorites()->toggle($this->id);
     }
 
-    /*
-    public function votes()
-    {
-        return $this->hasMany(Vote::class);
-    }*/
-
     public function upvote()
     {
         if ($this->vote) {
@@ -113,6 +121,9 @@ class Post extends Model
                 ['amount' => 1]
             );
             $this->increment('score', $vote->amount);
+
+            // Also update cached user reputation
+            $this->user->increment('reputation', $vote->amount);
         }
     }
 
@@ -131,6 +142,9 @@ class Post extends Model
             );
 
             $this->decrement('score', abs($vote->amount));
+
+            // Also update cached user reputation
+            $this->user->decrement('reputation', abs($vote->amount));
         }
     }
 
@@ -170,8 +184,10 @@ class Post extends Model
 
         if ($amount > 0) {
             $this->decrement('score', abs($amount));
+            $this->user->decrement('reputation', abs($amount));
         } else {
             $this->increment('score', abs($amount));
+            $this->user->increment('reputation', abs($amount));
         }
 
         return $amount;

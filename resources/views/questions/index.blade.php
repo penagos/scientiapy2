@@ -5,7 +5,7 @@
     <div class="row mt-4">
         <div class="col-lg-9">
             <div class="d-flex justify-content-between">
-                <h5 class="fw-light">{{ $questions->total() }} Questions</h5>
+            <h5 class="fw-light">{{ $questions->total() }} Questions{{ $titleSuffix ?? '' }}</h5>
 
                 <ul class="nav nav-pills bg-white border-1">
                     <li class="nav-item">

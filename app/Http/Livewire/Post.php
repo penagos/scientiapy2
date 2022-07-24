@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Mail\NewReply;
 use App\Models;
 use App\Models\Question;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 class Post extends Component
 {
@@ -105,6 +107,17 @@ class Post extends Component
         }
 
         $this->post->accept();
+
+        // TODO: Requiring a page refresh is heavy handed and sloppy, but it will do for now
+        return redirect(request()->header('Referer'));
+    }
+
+    public function unaccept()
+    {
+        $this->post->unaccept();
+
+        // TODO: Requiring a page refresh is heavy handed and sloppy, but it will do for now
+        return redirect(request()->header('Referer'));
     }
 
     public function acceptedAnswer($id)
@@ -112,6 +125,11 @@ class Post extends Component
         if ($this->post->id == $id) {
             $this->post->refresh();
         }
+    }
+
+    public function unacceptedAnswer()
+    {
+        $this->post->refresh();
     }
 
     public function delete()
@@ -128,13 +146,33 @@ class Post extends Component
     {
         $this->cachedPost = $this->post->content;
         $this->validate();
-        $this->post->edited_at = now();
-        $this->post->user_id = $this->post->user_id || Auth::user()->id;
+
+        $newReply = !$this->post->id;
+
+        if (!$newReply) {
+            $this->post->edited_at = now();
+            $this->post->edit_user_id = Auth::user()->id;
+        }
+
+        $this->post->user_id = $this->post->user_id ? $this->post->user_id : Auth::user()->id;
         $this->post->save();
-    
+
         if ($this->post->isQuestion()) {
+            // If we added new people to the notifylist, send out an email. We
+            // need to do this before saving the updated users so we can correctly
+            // compute the set difference
+            $newUsers = $this->computeNewUsers();
+
+            if (!empty($newUsers)) {
+                $this->sendNotificationEmails($newUsers);
+            }
+
             $this->saveTags();
             $this->saveUsers();
+        }
+
+        if ($newReply && $this->post->question_id) {
+            $this->sendNotificationEmails($this->question->users);
         }
 
         $this->hideEditor();
@@ -159,13 +197,16 @@ class Post extends Component
         // TODO: generalize logic and single source with saveTags()
         // TODO: error nicely on invalid usernames
         $q = $this->post->getQuestion();
-        $this->users = explode(',', strtolower($this->users));
 
-        $getOrCreateUsers = function ($username) {
-            return User::where('username', $username)->firstOrFail()->id;
-        };
+        if (!empty($this->users)) {
+            $this->users = explode(',', strtolower($this->users));
 
-        $q->users()->sync(array_map($getOrCreateUsers, $this->users));
+            $getOrCreateUsers = function ($username) {
+                return User::where('username', $username)->firstOrFail()->id;
+            };
+
+            $q->users()->sync(array_map($getOrCreateUsers, $this->users));
+        }
     }
 
     public function hideEditor()
@@ -184,11 +225,26 @@ class Post extends Component
      */
     public function render()
     {
+        // TODO: Hacky
+        $this->tags = is_string($this->tags) ? explode(',', strtolower($this->tags)) : $this->tags;
+
         return view('livewire.post');
     }
 
     private function showEditor($contents)
     {
         $this->emit('createEditor', $this->editorID, $contents);
+    }
+
+    private function sendNotificationEmails($users)
+    {
+        // TODO: see if this can be single sourced with Question livewire method
+        foreach ($users as $user) {
+            Mail::to($user)->send(new NewReply($this->post));
+        }
+    }
+
+    private function computeNewUsers() {
+        return [];
     }
 }
