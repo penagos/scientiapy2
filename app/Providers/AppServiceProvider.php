@@ -25,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // TODO: fix this hack
+        \URL::forceScheme('https');
+
         Schema::defaultStringLength(191);
         Blade::directive(
             'date', function ($date) {

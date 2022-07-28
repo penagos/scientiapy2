@@ -13,6 +13,7 @@ chmod
 cp .env.example .env
 sudo chmod -R 777 storage bootstrap/cache
 php artisan key:generate
+npm run dev
 ```
 
 ## Migrating from Scientiapy (legacy)

@@ -10,9 +10,9 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "Editor": () => (/* binding */ ToastUIEditor),
-/* harmony export */   "EditorCore": () => (/* binding */ ToastUIEditorCore)
+/* harmony export */   "EditorCore": () => (/* binding */ ToastUIEditorCore),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var prosemirror_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prosemirror-model */ "./node_modules/prosemirror-model/dist/index.es.js");
 /* harmony import */ var prosemirror_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prosemirror-view */ "./node_modules/prosemirror-view/dist/index.es.js");
@@ -24282,7 +24282,7 @@ axios.isAxiosError = __webpack_require__(/*! ./helpers/isAxiosError */ "./node_m
 module.exports = axios;
 
 // Allow use of default import syntax in TypeScript
-module.exports.default = axios;
+module.exports["default"] = axios;
 
 
 /***/ }),
@@ -24945,7 +24945,7 @@ module.exports = function transformData(data, headers, fns) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
+/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 var utils = __webpack_require__(/*! ./utils */ "./node_modules/axios/lib/utils.js");
@@ -25873,7 +25873,7 @@ var editors = new Map();
 
 window.createToastEditor = function createToastEditor(id) {
   var contents = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-  var editor = new _toast_ui_editor__WEBPACK_IMPORTED_MODULE_0__.default({
+  var editor = new _toast_ui_editor__WEBPACK_IMPORTED_MODULE_0__["default"]({
     el: document.getElementById(id),
     height: '500px',
     initialEditType: 'markdown',
@@ -44600,10 +44600,10 @@ Branch.prototype.compress = function compress (upto) {
       mapFrom--;
     }
   }, this.items.length, 0);
-  return new Branch(rope_sequence__WEBPACK_IMPORTED_MODULE_0__.default.from(items.reverse()), events)
+  return new Branch(rope_sequence__WEBPACK_IMPORTED_MODULE_0__["default"].from(items.reverse()), events)
 };
 
-Branch.empty = new Branch(rope_sequence__WEBPACK_IMPORTED_MODULE_0__.default.empty, 0);
+Branch.empty = new Branch(rope_sequence__WEBPACK_IMPORTED_MODULE_0__["default"].empty, 0);
 
 function cutOffEvents(items, n) {
   var cutPoint;
@@ -47511,8 +47511,8 @@ var Schema = function Schema(spec) {
   // (not raw objects).
   this.spec = {};
   for (var prop in spec) { this.spec[prop] = spec[prop]; }
-  this.spec.nodes = orderedmap__WEBPACK_IMPORTED_MODULE_0__.default.from(spec.nodes);
-  this.spec.marks = orderedmap__WEBPACK_IMPORTED_MODULE_0__.default.from(spec.marks);
+  this.spec.nodes = orderedmap__WEBPACK_IMPORTED_MODULE_0__["default"].from(spec.nodes);
+  this.spec.marks = orderedmap__WEBPACK_IMPORTED_MODULE_0__["default"].from(spec.marks);
 
   // :: Object<NodeType>
   // An object mapping the schema's node names to node type objects.
@@ -57199,11 +57199,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_toastui_editor_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_toastui_editor_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_toastui_editor_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_toastui_editor_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -57229,11 +57229,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_codemirror_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_codemirror_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_codemirror_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_codemirror_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -57526,8 +57526,8 @@ module.exports = function (list, options) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "base": () => (/* binding */ base),
-/* harmony export */   "shift": () => (/* binding */ shift),
-/* harmony export */   "keyName": () => (/* binding */ keyName)
+/* harmony export */   "keyName": () => (/* binding */ keyName),
+/* harmony export */   "shift": () => (/* binding */ shift)
 /* harmony export */ });
 var base = {
   8: "Backspace",
@@ -57827,7 +57827,7 @@ function keyName(event) {
 /******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
 /******/ 					installedChunks[chunkId][0]();
 /******/ 				}
-/******/ 				installedChunks[chunkIds[i]] = 0;
+/******/ 				installedChunks[chunkId] = 0;
 /******/ 			}
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
@@ -57835,6 +57835,11 @@ function keyName(event) {
 /******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/nonce */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nc = undefined;
 /******/ 	})();
 /******/ 	
 /************************************************************************/
