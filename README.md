@@ -1,6 +1,6 @@
 ## Scientiapy
 
-An spiritual successor to the Python-based [Scientiapy](https://github.com/penagos/scientiapy) (an open source Q&A website). Implemented as a Laravel application with Livewire for a responsive user experience.
+A spiritual successor to the Python-based [Scientiapy](https://github.com/penagos/scientiapy) (an open source Q&A website). Implemented as a Laravel application with Livewire for a responsive user experience.
 ## Installation
 
 You must have the following installed on your system:
