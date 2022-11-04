@@ -47,4 +47,4 @@ There will be a PHP script you can run to import your data from the Python Scien
 
 ## License
 
-This is open-sourced software licensed under t4he [MIT license](https://opensource.org/licenses/MIT).
+This is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
